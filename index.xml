@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>Kris_Wu的技术学习之路</title>
     <link>https://luciferseva.github.io/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on Kris_Wu的技术学习之路</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>Chinese——China</language>
     <lastBuildDate>Thu, 03 Oct 2019 11:22:07 +0800</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/index.xml" rel="self" type="application/rss+xml" />
