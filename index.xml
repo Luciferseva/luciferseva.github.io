@@ -23,10 +23,10 @@
     
     <item>
       <title>Getting started</title>
-      <link>https://luciferseva.github.io/post/getting-started/</link>
+      <link>https://luciferseva.github.io/post/qt_learm/getting-started/</link>
       <pubDate>Fri, 03 May 2019 09:37:55 +0200</pubDate>
       
-      <guid>https://luciferseva.github.io/post/getting-started/</guid>
+      <guid>https://luciferseva.github.io/post/qt_learm/getting-started/</guid>
       <description>&lt;p&gt;Here are some details to help you getting started with this theme.&lt;/p&gt;</description>
     </item>
     
@@ -67,10 +67,10 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
     
     <item>
       <title>Manage Your Menu</title>
-      <link>https://luciferseva.github.io/post/manage-your-menu/</link>
+      <link>https://luciferseva.github.io/post/qt_learm/manage-your-menu/</link>
       <pubDate>Thu, 02 May 2019 19:06:29 +0200</pubDate>
       
-      <guid>https://luciferseva.github.io/post/manage-your-menu/</guid>
+      <guid>https://luciferseva.github.io/post/qt_learm/manage-your-menu/</guid>
       <description>&lt;p&gt;Menu in the sidebar can be defined within the &lt;code&gt;config.toml&lt;/code&gt; or directly in the files.
 I prefer the config file approach, as this menu is pretty simple.&lt;/p&gt;</description>
     </item>

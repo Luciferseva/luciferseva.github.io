@@ -24,7 +24,14 @@
   </url>
   
   <url>
-    <loc>https://luciferseva.github.io/post/getting-started/</loc>
+    <loc>https://luciferseva.github.io/post/qt_learm/getting-started/</loc>
+    <lastmod>2019-05-03T09:37:55+02:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://luciferseva.github.io/post/qt_learm/</loc>
     <lastmod>2019-05-03T09:37:55+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -94,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://luciferseva.github.io/post/manage-your-menu/</loc>
+    <loc>https://luciferseva.github.io/post/qt_learm/manage-your-menu/</loc>
     <lastmod>2019-05-02T19:06:29+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
