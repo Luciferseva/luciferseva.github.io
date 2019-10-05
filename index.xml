@@ -22,15 +22,6 @@
     </item>
     
     <item>
-      <title>第一篇博客测试</title>
-      <link>https://luciferseva.github.io/post/blog/</link>
-      <pubDate>Thu, 03 Oct 2019 11:22:07 +0800</pubDate>
-      
-      <guid>https://luciferseva.github.io/post/blog/</guid>
-      <description>hello,hugo hello,world</description>
-    </item>
-    
-    <item>
       <title>Getting started</title>
       <link>https://luciferseva.github.io/post/getting-started/</link>
       <pubDate>Fri, 03 May 2019 09:37:55 +0200</pubDate>
@@ -41,10 +32,10 @@
     
     <item>
       <title>Portfolio Definition</title>
-      <link>https://luciferseva.github.io/post/portfolio-definition/</link>
+      <link>https://luciferseva.github.io/post/qt_learm/portfolio-definition/</link>
       <pubDate>Thu, 02 May 2019 19:49:05 +0200</pubDate>
       
-      <guid>https://luciferseva.github.io/post/portfolio-definition/</guid>
+      <guid>https://luciferseva.github.io/post/qt_learm/portfolio-definition/</guid>
       <description>&lt;p&gt;Here are some details about the portfolio settings.&lt;/p&gt;
 
 &lt;figure&gt;
@@ -86,10 +77,10 @@ I prefer the config file approach, as this menu is pretty simple.&lt;/p&gt;</des
     
     <item>
       <title>Config File</title>
-      <link>https://luciferseva.github.io/post/config-file/</link>
+      <link>https://luciferseva.github.io/post/qt_learm/config-file/</link>
       <pubDate>Sat, 20 Apr 2019 16:18:12 +0100</pubDate>
       
-      <guid>https://luciferseva.github.io/post/config-file/</guid>
+      <guid>https://luciferseva.github.io/post/qt_learm/config-file/</guid>
       <description>&lt;p&gt;Here is the basic config file used for personal-web.&lt;/p&gt;
 
 &lt;p&gt;You can use it as a base for your website.&lt;/p&gt;</description>
@@ -97,10 +88,10 @@ I prefer the config file approach, as this menu is pretty simple.&lt;/p&gt;</des
     
     <item>
       <title>Open Graph image</title>
-      <link>https://luciferseva.github.io/post/define-specific-og-image/</link>
+      <link>https://luciferseva.github.io/post/qt_learm/define-specific-og-image/</link>
       <pubDate>Sat, 20 Apr 2019 11:14:59 +0200</pubDate>
       
-      <guid>https://luciferseva.github.io/post/define-specific-og-image/</guid>
+      <guid>https://luciferseva.github.io/post/qt_learm/define-specific-og-image/</guid>
       <description>Within any page, you can add in the FrontMatter a images array that will be used to define a specific Open Graph image.
 For example, see content/_index.md page:</description>
     </item>
