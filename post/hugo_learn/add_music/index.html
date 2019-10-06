@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'><head>
-  <title>简单几步建立自己的web - The way to be a master</title>
-  <link rel='canonical' href='https://luciferseva.github.io/post/hugo_learn/first/' />
+  <title>添加网站音乐 - The way to be a master</title>
+  <link rel='canonical' href='https://luciferseva.github.io/post/hugo_learn/add_music/' />
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <meta name='description' content='' />
@@ -19,20 +19,20 @@
 <link rel="stylesheet" href="https://luciferseva.github.io/sass/style.min.8a1658d134a4b54730b66789206b2cf14c1b006a6de3f3fde6302f925b6e01f5.css" integrity="sha256-ihZY0TSktUcwtmeJIGss8UwbAGpt4/P95jAvkltuAfU=" media="screen">
 <link rel="stylesheet" href="https://luciferseva.github.io/syntax.min.css" integrity="" media="screen">
 
-  <meta property="og:title" content="简单几步建立自己的web" />
-<meta property="og:description" content="简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布" />
+  <meta property="og:title" content="添加网站音乐" />
+<meta property="og:description" content="通过html语言修改和网易云音乐，实现网站的背景音乐添加" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://luciferseva.github.io/post/hugo_learn/first/" />
-<meta property="article:published_time" content="2019-10-06T11:19:33+08:00" />
-<meta property="article:modified_time" content="2019-10-06T11:19:33+08:00" />
+<meta property="og:url" content="https://luciferseva.github.io/post/hugo_learn/add_music/" />
+<meta property="article:published_time" content="2019-10-06T23:19:33+08:00" />
+<meta property="article:modified_time" content="2019-10-06T23:19:33+08:00" />
 
-  <meta itemprop="name" content="简单几步建立自己的web">
-<meta itemprop="description" content="简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布">
+  <meta itemprop="name" content="添加网站音乐">
+<meta itemprop="description" content="通过html语言修改和网易云音乐，实现网站的背景音乐添加">
 
 
-<meta itemprop="datePublished" content="2019-10-06T11:19:33&#43;08:00" />
-<meta itemprop="dateModified" content="2019-10-06T11:19:33&#43;08:00" />
-<meta itemprop="wordCount" content="62">
+<meta itemprop="datePublished" content="2019-10-06T23:19:33&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-06T23:19:33&#43;08:00" />
+<meta itemprop="wordCount" content="28">
 
 
 
@@ -128,7 +128,7 @@
 
 
 <span  class="active">
-  <a href="https://luciferseva.github.io/post/hugo_learn/first/">简单几步建立自己的web</a>
+  <a href="https://luciferseva.github.io/post/hugo_learn/add_music/">添加网站音乐</a>
   
 </span>
 
@@ -138,7 +138,7 @@
     <main id="content" class="post">
       
 
-<h1>简单几步建立自己的web</h1>
+<h1>添加网站音乐</h1>
 <div class="reading-time">
   <div class="icon">
   <svg width="18px" height="18px" viewBox="0 0 115 115" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
@@ -163,47 +163,42 @@
   <span>October 6, 2019</span>
 </div>
 
-<p>简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布</p>
+<p>通过html语言修改和网易云音乐，实现网站的背景音乐添加</p>
 
-<h2 id="准备">准备</h2>
+<h3 id="1-查找音乐">1. 查找音乐</h3>
 
-<p>首先需要github账户，电脑安装git，及熟悉git bash的操作，如果不熟悉，或者没有以上条件，需要申请一下，然后进行安装</p>
+<p>网易云音乐的外链代码是自动生成的:</p>
 
-<h2 id="安装">安装</h2>
+<ul>
+<li>首先需要去网页版的<a href="https://music.163.com/" target="_blank">网易云音乐</a></li>
 
-<p>Windows 64位系统下安装Hugo
-a.Hugo框架下载地址,找到hugo_0.55.4_Windows-64bit.zip文件进行下载，下载后进行解压，即安装完成。
-b.查看是否安装成功Hugo：在D:\Hugo\hugo_0.55.4_Windows-64bit路径下，以管理员身份打开cmd控制台，然后输入hugo
-version，如果能显示hugo的版本号，及表示安装成功，这里需要强调一下的是，hugo安装目录添加到到环境变量中</p>
+<li><p>搜索想要添加的歌曲或者歌单</p>
 
-<h2 id="用hugo来生成个人博客">用Hugo来生成个人博客</h2>
+<pre><code>如果想添加自己的歌单，不要登陆账号，直接搜索就行，不然找
+不到生成外链的选项！没有版权的歌曲无法生成外链！
+如果歌单里有无法生成外链的歌曲，歌单无法循环播放，因此建议使
+单首歌的外链！
+</code></pre></li>
+</ul>
 
-<p>a.在D:\Hugo\hugo_0.55.4_Windows-64bit路径下，以管理员身份打开cmd控制台，然后输入hugo new site myblog(自定义的博客名)
-b.切换到生成的myblog(博客的根目录)文件夹目录下，进行下一步下载主题</p>
+<h3 id="2-生成html">2. 生成html</h3>
 
-<h2 id="下载并设置博客主题">下载并设置博客主题</h2>
+<ul>
+<li>在自己喜欢的歌曲下，查看是否有生成外连接播放器</li>
+<li>然后，根据自己的喜好，搭配自己的主题选择合适的尺寸样式：</li>
+<li>生成的iframe标签代码如下:</li>
+</ul>
 
-<p>a.Hugo主题下载地址,下面以主题m10c为例进行演示。
-b.确保自己电脑上已经安装好了Git，然后打开git bash,切换到生成的myblog(博客的根目录)文件夹目录下,执行git clone <a href="https://github.com/vaga/hugo-theme-m10c.git" target="_blank">https://github.com/vaga/hugo-theme-m10c.git</a> themes/m10c,下载好的主题在D:\Hugo\hugo_0.55.4_Windows-64bit\myblog\themes目录下。</p>
+<p><code>&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=110 src=&quot;//music.163.com/outchain/player?type=0&amp;id=2896870368&amp;auto=1&amp;height=90&quot;&gt;&lt;/iframe&gt;</code></p>
 
-<h2 id="在本地启动个人博客">在本地启动个人博客</h2>
+<h3 id="3-在网站中插入">3. 在网站中插入</h3>
 
-<p>a.切换到博客的根目录下，cmd中输入命令hugo server -t m10c &ndash;buildDrafts
-b.复制网址<a href="http://localhost:1313/到浏览器中，查看站点是否运行成功" target="_blank">http://localhost:1313/到浏览器中，查看站点是否运行成功</a></p>
+<p>代码可以插入在任何你想让播放器出现的任何位置，比如首页、文章页面、或者侧边栏。这里以插入到侧边栏为例，因为这样在任何一个标签都能随时调出侧边栏，方便播放。</p>
 
-<h2 id="将个人博客部署到远端服务器">将个人博客部署到远端服务器</h2>
-
-<p>a.上面的一系列操作，得到的博客网站的站点只能在自己的电脑上本地访问，要想别人能访问你的博客网站，必须将个人博客部署到远端服务器。首先，你要有一个github账号，然后创建一个仓库，注意：创建仓库的命名必须是你github的昵称且必须小写再加上.github.io。例如，你的github昵称是lucifer,因此创建的仓库名必须是lucifer.github.io。
-b.接着，切换到博客的根目录下，cmd中输入命令hugo &ndash;theme=m10c(主题名) &ndash;baseUrl=&ldquo;<a href="https://lucifer.github.io/(仓库地址)&quot;" target="_blank">https://lucifer.github.io/(仓库地址)&quot;</a> &ndash;buildDrafts</p>
-
-<h2 id="git-bash操作">git bash操作</h2>
-
-<p>c.然后会在博客的根目录myblog下生成一个public文件夹。在git bash中切换到public文件目录下，在git bash中输入命令git init,将此public文件夹变成git本地仓库，
-然后输入git add ., 将public文件夹下的所有文件放入暂存区中等待提交，
-接着输入git commit -m &ldquo;我的Hugo博客第一次提交&rdquo;，这样就将本地仓库中的文件提交到了远程仓库。
-输入git remote add origin <a href="https://github.com/lucifer/lucifer.github.io.git。" target="_blank">https://github.com/lucifer/lucifer.github.io.git。</a>
-最后，输入命令git push -u origin master,将本地仓库代码推送到远程库。
-d.最后，在浏览器中输入lucifer.github.io，即可访问自己的博客网站。</p>
+<blockquote>
+<p>在主题文件中找到相关布局的html文件，以我的为例：主题根目录/layouts/partials/sidebar.html，插入到合适的位置（根据我的主题的风格，我插入到了所有菜单栏的下边）
+在本地启动blog的预览，看外链播放器的效果，然后适当修改width和height两个参数的数值，以调整到合适的大小。</p>
+</blockquote>
 
     </main>
 

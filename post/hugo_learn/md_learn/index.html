@@ -32,11 +32,11 @@
 
 <meta itemprop="datePublished" content="2019-10-06T12:24:48&#43;08:00" />
 <meta itemprop="dateModified" content="2019-10-06T12:24:48&#43;08:00" />
-<meta itemprop="wordCount" content="96">
+<meta itemprop="wordCount" content="146">
 
 
 
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Hugo," />
 
 </head>
 <body>
@@ -48,7 +48,7 @@
   <div class="intro">
     <div class="logo-container">
       <a href="/">
-        <img src='https://luciferseva.github.io/images/kris-wu.jpg' alt="Profile HOME" class="rounded-logo">
+        <img src='https://luciferseva.github.io/images/kris-wu.jpg' alt="Profile HUGO-学习" class="rounded-logo">
       </a>
     </div>
     <h2>Hi, I'm kris wu👋</h2>
@@ -92,6 +92,8 @@
 </a>
   
 
+      <br/>
+  <iframe frameborder="no"  marginwidth="10" marginheight="0" width=260 height=52 src="//music.163.com/outchain/player?type=2&id=1374701060&auto=1&height=32"></iframe>
   </div>
 
 </header>
@@ -134,6 +136,7 @@
 
     
     <main id="content" class="post">
+      
 
 <h1>MD语法简单学习</h1>
 <div class="reading-time">
@@ -168,7 +171,7 @@
 
 <pre><code># OSCHINA.NET社区 一级标题
 
-### Header 3 三级标题，以此类推
+### Header 3 三级标题，以此类推（h1到h6）
 
 &gt; This is a blockquote.
 &gt; 
@@ -198,17 +201,19 @@
 
 <h2 id="3-区块引用">3：区块引用</h2>
 
-<p>比如说，你想对某个部分做的内容做一些说明或者引用某某的话等，可以用这个语句</p>
+<p>比如说，你想对某个部分做的内容做一些说明或者引用某某的话等，可以用这个语句
+使用 &gt; 表示文字引用。
+示例：</p>
 
-<ul>
-<li>表格
-&gt; hello</li>
+<blockquote>
+<p>野火烧不尽，春风吹又生。</p>
+</blockquote>
 
-<li><p>表格
-&gt;&gt; hello,loop</p>
+<p>使用 四个缩进空格 表示代码块。
+示例：
+    这是一个代码块，此行左侧有四个不可见的空格。</p>
 
-<h2 id="4-华丽的分割线">4：华丽的分割线</h2></li>
-</ul>
+<h2 id="4-华丽的分割线">4:华丽的分割线</h2>
 
 <p>分割线可以由* - _（星号，减号，底线）这3个符号的至少3个符号表示，注意至少要3个，且不需要连续，有空格也可以</p>
 
@@ -251,7 +256,8 @@
 
 <p><code>c=a+b</code></p>
 
-<p>多行用三个反引号，如果要写注释，可以在反引号后面写</p>
+<pre><code>多行用三个反引号，如果要写注释，可以在反引号后面写
+</code></pre>
 <div class="highlight"><pre class="chroma"><code class="language-_nihao_" data-lang="_nihao_">a=a+b;</code></pre></div>
 <h2 id="9-强调">9:强调</h2>
 
@@ -261,7 +267,48 @@
 
 <p>just like this <strong>hello</strong></p>
 
+<p>使用两个波浪线 ~标记 已删除文字
+Example:</p>
+
+<p>(就像 这样)</p>
+
+<p>Result:</p>
+
+<p>任何被两个波浪线包裹的(比如 <del>这样</del>这样)都会显示出删除线</p>
+
+<h2 id="10-代办事宜表">10:代办事宜表</h2>
+
+<p>使用带有 [ ] 或 [x] （未完成或已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用Markdown语法，例如：</p>
+
+<ul class="task-list">
+<li><p>[ ] <strong>Cmd Markdown 开发</strong></p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 支持以 PDF 格式导出文稿</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 新增Todo列表功能 <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments" target="_blank">语法参考</a></label></li>
+
+<li><p>[x] 改进 LaTex 功能</p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 修复 LaTex 公式渲染问题</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 新增 LaTex 公式编号功能 <a href="http://docs.mathjax.org/en/latest/tex.html#tex-eq-numbers" target="_blank">语法参考</a>
+<br /></label></li>
+</ul></li>
+</ul></li>
+
+<li><p>[ ] <strong>七月旅行准备</strong></p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> 准备邮轮上需要携带的物品</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 浏览日本免税店的物品</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 购买蓝宝石公主号七月一日的船票
+<br /></label></li>
+</ul></li>
+</ul>
+
     </main>
+
   </div>
   <footer>
     <div class="footer-wrapper">
@@ -270,6 +317,7 @@
     </div>
   </footer>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:500,600|Raleway:400,400i,600" rel="stylesheet">
+
   
 </body>
 </html>
