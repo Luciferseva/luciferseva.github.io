@@ -18,16 +18,17 @@
       <pubDate>Sun, 06 Oct 2019 23:19:33 +0800</pubDate>
       
       <guid>https://luciferseva.github.io/post/hugo_learn/add_music/</guid>
-      <description>&lt;p&gt;通过html语言修改和网易云音乐，实现网站的背景音乐添加&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>MD语法简单学习</title>
-      <link>https://luciferseva.github.io/post/hugo_learn/md_learn/</link>
-      <pubDate>Sun, 06 Oct 2019 12:24:48 +0800</pubDate>
-      
-      <guid>https://luciferseva.github.io/post/hugo_learn/md_learn/</guid>
-      <description>&lt;p&gt;学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅&lt;/p&gt;</description>
+      <description>&lt;!-- TOC --&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#1-查找音乐&#34;&gt;1. 查找音乐&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#2-生成html&#34;&gt;2. 生成html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#3-在网站中插入&#34;&gt;3. 在网站中插入&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /TOC --&gt;
+
+&lt;p&gt;通过html语言修改和网易云音乐，实现网站的背景音乐添加&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -36,7 +37,21 @@
       <pubDate>Sun, 06 Oct 2019 11:19:33 +0800</pubDate>
       
       <guid>https://luciferseva.github.io/post/hugo_learn/first/</guid>
-      <description>&lt;p&gt;简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布&lt;/p&gt;</description>
+      <description>&lt;!-- TOC --&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#准备&#34;&gt;准备&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#安装&#34;&gt;安装&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#用hugo来生成个人博客&#34;&gt;用Hugo来生成个人博客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#下载并设置博客主题&#34;&gt;下载并设置博客主题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#在本地启动个人博客&#34;&gt;在本地启动个人博客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#将个人博客部署到远端服务器&#34;&gt;将个人博客部署到远端服务器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#git-bash操作&#34;&gt;git bash操作&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /TOC --&gt;
+
+&lt;p&gt;简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布&lt;/p&gt;</description>
     </item>
     
     <item>

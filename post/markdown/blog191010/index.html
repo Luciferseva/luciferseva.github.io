@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <title>快速生成md文档目录及生成doc文档 - The way to be a master</title>
+  <link rel='canonical' href='https://luciferseva.github.io/post/markdown/blog191010/' />
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <meta name='description' content='通过vscode的toc插件快速生成md文档目录' />
+  <meta name='theme-color' content='#FD3519' />
+  
+
+  <meta name="generator" content="Hugo 0.58.3" />
+
+  
+
+
+
+
+
+<link rel="stylesheet" href="https://luciferseva.github.io/sass/style.min.8a1658d134a4b54730b66789206b2cf14c1b006a6de3f3fde6302f925b6e01f5.css" integrity="sha256-ihZY0TSktUcwtmeJIGss8UwbAGpt4/P95jAvkltuAfU=" media="screen">
+<link rel="stylesheet" href="https://luciferseva.github.io/syntax.min.css" integrity="" media="screen">
+
+  <meta property="og:title" content="快速生成md文档目录及生成doc文档" />
+<meta property="og:description" content="通过vscode的toc插件快速生成md文档目录" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://luciferseva.github.io/post/markdown/blog191010/" />
+<meta property="article:published_time" content="2019-10-10T22:39:27+08:00" />
+<meta property="article:modified_time" content="2019-10-10T22:39:27+08:00" />
+
+  <meta itemprop="name" content="快速生成md文档目录及生成doc文档">
+<meta itemprop="description" content="通过vscode的toc插件快速生成md文档目录">
+
+
+<meta itemprop="datePublished" content="2019-10-10T22:39:27&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-10T22:39:27&#43;08:00" />
+<meta itemprop="wordCount" content="110">
+
+
+
+<meta itemprop="keywords" content="" />
+
+</head>
+<body>
+
+  <header style="background-image:linear-gradient(
+      rgba(0,0,0,0.4),rgba(0,0,0,0.4)
+    ),url(&#39;https://luciferseva.github.io/images/default-sidebar.jpg&#39;)">
+
+  <div class="intro">
+    <div class="logo-container">
+      <a href="/">
+        <img src='https://luciferseva.github.io/images/kris-wu.jpg' alt="Profile ros-学习" class="rounded-logo">
+      </a>
+    </div>
+    <h2>Hi, I'm kris wu👋</h2>
+    <h3>Embedded Engineer ,specializing in networking and communication</h3>
+    <div class="menu">
+      
+
+        <p>
+            <a href="/about/">
+                关于我
+            </a>
+        </p>
+
+        <p>
+            <a href="/portfolio/">
+                项目
+            </a>
+        </p>
+
+        <p>
+            <a href="/post/">
+                博客
+            </a>
+        </p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="socials">
+      
+  
+    <a href="https://github.com/" class="social-link" target="_blank" rel="noopener" ><div class="icon">
+  <svg width="35px" height="35px" viewBox="0 0 115 115" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+  
+  <path d="M102.679 0H12.32C5.52 0 0 5.519 0 12.321v90.358C0 109.48 5.519 115 12.321 115h90.358c6.802 0 12.321-5.519 12.321-12.321V12.32C115 5.52 109.481 0 102.679 0zM71.182 98.494c-2.156.385-2.952-.95-2.952-2.053 0-1.386.051-8.471.051-14.195 0-4.005-1.335-6.546-2.9-7.881C74.878 73.313 84.89 72.003 84.89 55.6c0-4.671-1.669-7.007-4.39-10.01.436-1.105 1.9-5.648-.436-11.552-3.568-1.104-11.731 4.595-11.731 4.595-3.389-.95-7.06-1.438-10.679-1.438-3.62 0-7.29.488-10.679 1.438 0 0-8.163-5.699-11.73-4.595-2.337 5.878-.899 10.422-.437 11.551-2.72 3.004-4.004 5.34-4.004 10.011 0 16.326 9.574 17.712 19.072 18.765-1.232 1.104-2.336 3.003-2.72 5.724-2.44 1.104-8.677 3.004-12.4-3.568-2.335-4.056-6.545-4.39-6.545-4.39-4.159-.05-.282 2.619-.282 2.619 2.772 1.283 4.723 6.212 4.723 6.212 2.49 7.624 14.4 5.057 14.4 5.057 0 3.568.052 9.37.052 10.422 0 1.104-.77 2.438-2.952 2.053C27.21 92.821 15.35 76.701 15.35 57.86c0-23.564 18.02-41.456 41.585-41.456s42.663 17.892 42.663 41.456c.026 18.842-11.474 34.988-28.416 40.635zM46 82.81c-.488.103-.95-.102-1.001-.436-.051-.385.282-.719.77-.822.488-.05.95.154 1.001.488.077.334-.257.668-.77.77zm-2.439-.23c0 .333-.385.615-.898.615-.565.052-.95-.23-.95-.616 0-.333.385-.616.899-.616.487-.051.95.231.95.616zm-3.516-.283c-.103.334-.616.488-1.053.334-.488-.103-.821-.488-.719-.822.103-.334.617-.488 1.053-.385.513.154.847.54.719.873zm-3.158-1.386c-.23.282-.718.23-1.104-.154-.385-.334-.487-.822-.23-1.053.23-.282.718-.23 1.103.154.334.334.462.847.231 1.053zm-2.336-2.336c-.23.154-.667 0-.95-.385-.282-.385-.282-.822 0-1.001.283-.231.72-.052.95.333.283.385.283.847 0 1.053zm-1.668-2.49c-.231.23-.616.103-.899-.154-.282-.334-.333-.719-.102-.899.23-.23.616-.102.898.154.282.334.334.72.103.899zm-1.72-1.9c-.103.231-.436.283-.719.103-.334-.154-.488-.436-.385-.667.103-.154.385-.231.719-.103.334.18.488.462.385.667z"/>
+  
+  </svg>
+</div>
+</a>
+  
+
+      <br/>
+  <iframe frameborder="no"  marginwidth="10" marginheight="0" width=150 height=30 src="//music.163.com/outchain/player?type=2&id=1374701060&auto=1&height=32"></iframe>
+  </div>
+
+</header>
+
+  <div class="content-wrapper">
+    
+      <div class="breadcrumb">
+  
+
+
+
+
+
+
+
+<span >
+  <a href="https://luciferseva.github.io/">HOME</a>
+   / 
+</span>
+
+
+<span >
+  <a href="https://luciferseva.github.io/post/">博客</a>
+   / 
+</span>
+
+
+<span >
+  <a href="https://luciferseva.github.io/post/markdown/">markdown-学习</a>
+   / 
+</span>
+
+
+<span  class="active">
+  <a href="https://luciferseva.github.io/post/markdown/blog191010/">快速生成md文档目录及生成doc文档</a>
+  
+</span>
+
+</div>
+
+    
+    <main id="content" class="post">
+      
+
+<h1>快速生成md文档目录及生成doc文档</h1>
+<div class="reading-time">
+  <div class="icon">
+  <svg width="18px" height="18px" viewBox="0 0 115 115" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+  
+  <path d="M57.5 11C29.05 11 6 34.05 6 62.5S29.05 114 57.5 114 109 90.95 109 62.5 85.95 11 57.5 11zm0 93.032c-22.947 0-41.532-18.585-41.532-41.532 0-22.947 18.585-41.532 41.532-41.532 22.947 0 41.532 18.585 41.532 41.532 0 22.947-18.585 41.532-41.532 41.532zm12.833-21.68L52.703 69.54a2.508 2.508 0 0 1-1.018-2.015V33.427a2.5 2.5 0 0 1 2.492-2.492h6.646a2.5 2.5 0 0 1 2.492 2.492v29.426l13.871 10.092c1.122.81 1.35 2.368.54 3.49l-3.904 5.377a2.51 2.51 0 0 1-3.489.54z"/>
+  
+  </svg>
+</div>
+
+  <span>1 minutes</span>
+</div>
+
+<div class="published-date">
+  <div class="icon">
+  <svg width="18px" height="18px" viewBox="0 0 115 115" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+  
+  <path d="M77.577 51.23a1.807 1.807 0 0 0-2.2.342l-27.562 27.79a1.807 1.807 0 0 1-2.2.342l-14.008-9.702a1.807 1.807 0 0 0-2.2.342l-1.952 1.968c-.287.22-.456.568-.455.936.001.37.172.716.46.934L45.637 86.77a1.807 1.807 0 0 0 2.2-.342l31.709-31.97c.287-.22.456-.567.455-.936a1.175 1.175 0 0 0-.46-.933l-1.963-1.36z"/><path d="M97.304 20H80.512c-.041.34-.063.683-.064 1.026a5.986 5.986 0 0 0 1.256 4.1c.054.003.103.02.157.025a4.881 4.881 0 0 1 1.865-.025c3.05.562 4.984 3.907 4.32 7.47-.666 3.563-3.678 5.996-6.728 5.433a4.932 4.932 0 0 1-2.437-1.258c-6.018-1.378-10.445-7.795-10.445-15.745 0-.347.023-.685.04-1.026H34.579c-.041.34-.063.683-.064 1.026a5.986 5.986 0 0 0 1.256 4.1c.054.003.103.02.157.025a4.881 4.881 0 0 1 1.865-.025c3.05.562 4.984 3.907 4.32 7.47-.666 3.563-3.678 5.996-6.728 5.433a4.932 4.932 0 0 1-2.437-1.258c-6.018-1.378-10.445-7.795-10.445-15.745 0-.22.019-.434.025-.652a9.788 9.788 0 0 0-5.697 4.471 9.683 9.683 0 0 0-2.65 4.764L1.158 92.871c-.965 4.689 2.6 8.503 7.948 8.503h6.334v2.673c-.077 5.41 4.263 9.861 9.705 9.953h72.16c5.438-.095 9.774-4.546 9.694-9.953V29.953c.08-5.407-4.256-9.858-9.695-9.953zM10.078 96.653c-2.378 0-3.964-1.697-3.535-3.782L16.637 43.84h80.787L87.331 92.871a5.254 5.254 0 0 1-5.091 3.782H10.078zm91.535 7.394c.036 2.403-1.891 4.382-4.308 4.424h-72.16c-2.42-.04-4.352-2.018-4.32-4.424v-2.673h60.443c5.348 0 10.484-3.814 11.449-8.503l8.897-43.215v54.391z"/><path d="M34.814 33c1.243 0 2.251-1.057 2.251-2.36 0-1.305-1.008-2.362-2.25-2.362-2.04 0-4.313-3.194-4.313-7.778s2.272-7.778 4.312-7.778c1.227 0 2.536 1.163 3.386 3.084H43C41.716 11.19 38.578 8 34.814 8 29.871 8 26 13.49 26 20.5c0 7.009 3.871 12.5 8.814 12.5z"/>
+  
+  </svg>
+</div>
+
+  <span>October 10, 2019</span>
+</div>
+
+<hr />
+
+<p>学习md语言，快速生成md文档的目录及生成doc文档，及期间遇到一些问题</p>
+
+<!-- TOC -->
+
+<ul>
+<li><a href="#正文">正文</a>
+
+<ul>
+<li><a href="#如何生成目录">如何生成目录</a>
+
+<ul>
+<li><a href="#遇见的问题auto字样乱码">遇见的问题——auto字样乱码</a></li>
+</ul></li>
+<li><a href="#如何将md文档转为pdf">如何将md文档转为pdf</a>
+
+<ul>
+<li><a href="#利用pandoc">利用pandoc</a></li>
+<li><a href="#下载pandoc">下载pandoc</a></li>
+<li><a href="#安装pandoc">安装pandoc</a></li>
+<li><a href="#使用pandoc">使用pandoc</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<!-- /TOC -->
+
+<h1 id="正文">正文</h1>
+
+<h2 id="如何生成目录">如何生成目录</h2>
+
+<p>网上一堆教程说如何生成快速生成目录，但是其实都没有讲明白，今天在用vscode看代码的时候灵机一动，在vscode中的插件商城里搜索了关键字*TOC*，果然被我发现了，确实有相关的插件，按照插件页面的操作说明：</p>
+
+<ul>
+<li>首先先在插件商店里搜索到插件，然后安装</li>
+<li>安装完以后，在md文件里，要生成目录的地方，右键，出现了markdown TOC insert一些，看需求选择，然后就完成了目录生成</li>
+</ul>
+
+<h3 id="遇见的问题-auto字样乱码">遇见的问题——auto字样乱码</h3>
+
+<ul>
+<li><p>更新VSCode之后打开已经生成目录的Markdown文件，TOC标签格式异常出现auto的文字字样</p></li>
+
+<li><p>点击界面左下方的设置按钮，然后选择设置进入到用户设置界面</p></li>
+
+<li><p>打开用户设置之后在搜索设置里面搜索Eol</p></li>
+
+<li><p>找到文件的Eol可以看到默认行尾字符设置为auto
+点击选项框然后将auto更改为\n换行符即可。</p></li>
+
+<li><p>回到Markdown编辑界面然后重新生成Markdown目录就能显示正常了。</p>
+
+<h2 id="如何将md文档转为pdf">如何将md文档转为pdf</h2>
+
+<h3 id="利用pandoc">利用pandoc</h3>
+
+<p>这里就是主要记录一下最近在探索把markdown转为PDF时候的一些历程，以及最终找到的一种比较优雅的方式。</p>
+
+<p>pandoc是一个软件，是一个能把千奇百怪的文档格式互相转换的神器，是一把文档转换的瑞士军刀（swiss-army knife）</p>
+
+<h3 id="下载pandoc">下载pandoc</h3></li>
+
+<li><p><a href="https://github.com/jgm/pandoc/releases/tag/2.7" target="_blank">官网下载链接</a></p></li>
+
+<li><p>根据自己的操作系统位数下载合适的msi安装包,我下载的是：pandoc-2.7-windows-x86_64.msi</p></li>
+</ul>
+
+<h3 id="安装pandoc">安装pandoc</h3>
+
+<p>下载pandoc安装包之后，像安装普通软件一样点开安装就可以了。安装完成之后，打开cmd命令行，输入pandoc -v，如果正常显示出类似下面的信息就表明安装成功：</p>
+<div class="highlight"><pre class="chroma"><code class="language-C" data-lang="C"><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Administrator</span><span class="p">.</span><span class="n">PC</span><span class="o">-</span><span class="mi">20170728</span><span class="n">DWIF</span><span class="o">&gt;</span><span class="n">pandoc</span> <span class="o">-</span><span class="n">v</span>
+<span class="n">pandoc</span> <span class="mf">2.2</span>
+<span class="n">Compiled</span> <span class="n">with</span> <span class="n">pandoc</span><span class="o">-</span><span class="n">types</span> <span class="mf">1.17.4.2</span><span class="p">,</span> <span class="n">texmath</span> <span class="mf">0.10.1.2</span><span class="p">,</span> <span class="n">skylighting</span> <span class="mf">0.7.0.2</span>
+<span class="n">Default</span> <span class="n">user</span> <span class="n">data</span> <span class="nl">directory</span><span class="p">:</span> <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Administrator</span><span class="p">.</span><span class="n">PC</span><span class="o">-</span><span class="mi">20170728</span><span class="n">DWIF</span><span class="err">\</span><span class="n">AppData</span><span class="err">\</span><span class="n">Roaming</span><span class="err">\</span><span class="n">pandoc</span>
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2006</span><span class="o">-</span><span class="mi">2018</span> <span class="n">John</span> <span class="n">MacFarlane</span>
+<span class="nl">Web</span><span class="p">:</span>  <span class="nl">http</span><span class="p">:</span><span class="c1">//pandoc.org
+</span><span class="c1"></span><span class="n">This</span> <span class="n">is</span> <span class="n">free</span> <span class="n">software</span><span class="p">;</span> <span class="n">see</span> <span class="n">the</span> <span class="n">source</span> <span class="k">for</span> <span class="n">copying</span> <span class="n">conditions</span><span class="p">.</span>
+<span class="n">There</span> <span class="n">is</span> <span class="n">no</span> <span class="n">warranty</span><span class="p">,</span> <span class="n">not</span> <span class="n">even</span> <span class="k">for</span> <span class="n">merchantability</span> <span class="n">or</span> <span class="n">fitness</span>
+<span class="k">for</span> <span class="n">a</span> <span class="n">particular</span> <span class="n">purpose</span><span class="p">.</span></code></pre></div>
+<h3 id="使用pandoc">使用pandoc</h3>
+
+<ul>
+<li>在vscode的插件商店中，搜索pandoc，安装vscdoe-pandoc，然后在插件介绍页面下，阅读使用发法</li>
+<li>然后点击所需要转换的md文件，press F1 on Windows (shift+cmd+P on Mac), type pandoc, press Enter
+Or - press the key chord ctrl+K then P (cmd+K then P on Mac)，</li>
+<li>转换目标，先从md文件生成docx文档，再通过生成的docx文档，生成pdf文档，因为从md直接到odf需要安装一个文档渲染工具，里面有跟多坑，所以采用：md-&gt;docx-&gt;PDF，一试，发现这种方式很靠谱，</li>
+</ul>
+
+    </main>
+
+  </div>
+  <footer>
+    <div class="footer-wrapper">
+      <p>Made with ❤️ &mdash; Powered by <a href="https://gohugo.io/" target="_blank" rel="external">Hugo</a> and the <a href="https://github.com/bjacquemet/personal-web" target='_blank' rel="external">Personal Web</a> theme. Icons come from the great <a href="https://fontawesome.com/license" target="_blank" rel="external">Font Awesome</a> library</p>
+      <p>© kris wu,All rights reserved - 2019</p>
+    </div>
+  </footer>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:500,600|Raleway:400,400i,600" rel="stylesheet">
+
+  
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>markdown-学习 on The way to be a master</title>
+    <link>https://luciferseva.github.io/post/markdown/</link>
+    <description>Recent content in markdown-学习 on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© kris wu,All rights reserved - 2019</copyright>
+    <lastBuildDate>Thu, 10 Oct 2019 22:39:27 +0800</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/post/markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>快速生成md文档目录及生成doc文档</title>
+      <link>https://luciferseva.github.io/post/markdown/blog191010/</link>
+      <pubDate>Thu, 10 Oct 2019 22:39:27 +0800</pubDate>
+      
+      <guid>https://luciferseva.github.io/post/markdown/blog191010/</guid>
+      <description>&lt;hr /&gt;
+
+&lt;p&gt;学习md语言，快速生成md文档的目录及生成doc文档，及期间遇到一些问题&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MD语法简单学习</title>
+      <link>https://luciferseva.github.io/post/markdown/md_learn/</link>
+      <pubDate>Sun, 06 Oct 2019 12:24:48 +0800</pubDate>
+      
+      <guid>https://luciferseva.github.io/post/markdown/md_learn/</guid>
+      <description>&lt;p&gt;学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
