@@ -6,38 +6,44 @@
     <description>Recent content in HOME on The way to be a master</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>© kris wu,All rights reserved - 2019</copyright>
-    <lastBuildDate>Thu, 10 Oct 2019 22:39:27 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>中文測試</title>
+      <link>https://luciferseva.github.io/2019/10/%E4%B8%AD%E6%96%87%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/%E4%B8%AD%E6%96%87%E5%8D%9A%E5%AE%A2/</guid>
+      <description>&lt;p&gt;This is a chinese test post to show you how chinese is displayed.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>快速生成md文档目录及生成doc文档</title>
-      <link>https://luciferseva.github.io/post/markdown/blog191010/</link>
+      <link>https://luciferseva.github.io/2019/10/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</link>
       <pubDate>Thu, 10 Oct 2019 22:39:27 +0800</pubDate>
       
-      <guid>https://luciferseva.github.io/post/markdown/blog191010/</guid>
-      <description>&lt;hr /&gt;
-
-&lt;p&gt;学习md语言，快速生成md文档的目录及生成doc文档，及期间遇到一些问题&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2019/10/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</guid>
+      <description>&lt;p&gt;学习md语言，快速生成md文档的目录及生成doc文档，及期间遇到一些问题&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>ros的简单介绍</title>
-      <link>https://luciferseva.github.io/post/ros/1910.10/</link>
+      <link>https://luciferseva.github.io/2019/10/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</link>
       <pubDate>Thu, 10 Oct 2019 22:13:36 +0800</pubDate>
       
-      <guid>https://luciferseva.github.io/post/ros/1910.10/</guid>
+      <guid>https://luciferseva.github.io/2019/10/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</guid>
       <description>&lt;p&gt;最近工作中要用到ros，所以将所学到的东西，所看到的东西记录下来，方便以后的总结和回顾。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>添加网站音乐</title>
-      <link>https://luciferseva.github.io/post/hugo_learn/add_music/</link>
+      <link>https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</link>
       <pubDate>Sun, 06 Oct 2019 23:19:33 +0800</pubDate>
       
-      <guid>https://luciferseva.github.io/post/hugo_learn/add_music/</guid>
+      <guid>https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</guid>
       <description>&lt;!-- TOC --&gt;
 
 &lt;ul&gt;
@@ -53,19 +59,19 @@
     
     <item>
       <title>MD语法简单学习</title>
-      <link>https://luciferseva.github.io/post/markdown/md_learn/</link>
+      <link>https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</link>
       <pubDate>Sun, 06 Oct 2019 12:24:48 +0800</pubDate>
       
-      <guid>https://luciferseva.github.io/post/markdown/md_learn/</guid>
+      <guid>https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</guid>
       <description>&lt;p&gt;学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>简单几步建立自己的web</title>
-      <link>https://luciferseva.github.io/post/hugo_learn/first/</link>
+      <link>https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/</link>
       <pubDate>Sun, 06 Oct 2019 11:19:33 +0800</pubDate>
       
-      <guid>https://luciferseva.github.io/post/hugo_learn/first/</guid>
+      <guid>https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/</guid>
       <description>&lt;!-- TOC --&gt;
 
 &lt;ul&gt;
@@ -85,19 +91,19 @@
     
     <item>
       <title>Getting started</title>
-      <link>https://luciferseva.github.io/post/hugo_learn/getting-started/</link>
+      <link>https://luciferseva.github.io/2019/05/getting-started/</link>
       <pubDate>Sat, 04 May 2019 09:38:55 +0200</pubDate>
       
-      <guid>https://luciferseva.github.io/post/hugo_learn/getting-started/</guid>
+      <guid>https://luciferseva.github.io/2019/05/getting-started/</guid>
       <description>&lt;p&gt;Here are some details to help you getting started with this theme.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Portfolio Definition</title>
-      <link>https://luciferseva.github.io/post/hugo_learn/portfolio-definition/</link>
+      <link>https://luciferseva.github.io/2019/05/portfolio-definition/</link>
       <pubDate>Thu, 02 May 2019 19:49:05 +0200</pubDate>
       
-      <guid>https://luciferseva.github.io/post/hugo_learn/portfolio-definition/</guid>
+      <guid>https://luciferseva.github.io/2019/05/portfolio-definition/</guid>
       <description>&lt;p&gt;Here are some details about the portfolio settings.&lt;/p&gt;
 
 &lt;figure&gt;
@@ -129,29 +135,29 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
     
     <item>
       <title>Archetypes management</title>
-      <link>https://luciferseva.github.io/post/hugo_learn/archetypes/</link>
+      <link>https://luciferseva.github.io/2019/05/archetypes-management/</link>
       <pubDate>Thu, 02 May 2019 19:25:30 +0200</pubDate>
       
-      <guid>https://luciferseva.github.io/post/hugo_learn/archetypes/</guid>
+      <guid>https://luciferseva.github.io/2019/05/archetypes-management/</guid>
       <description>&lt;p&gt;The archetypes are defined in the &lt;code&gt;archetypes&lt;/code&gt; folder, for both post and portfolio.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Manage Your Menu</title>
-      <link>https://luciferseva.github.io/post/hugo_learn/manage-your-menu/</link>
+      <link>https://luciferseva.github.io/2019/05/manage-your-menu/</link>
       <pubDate>Thu, 02 May 2019 19:06:29 +0200</pubDate>
       
-      <guid>https://luciferseva.github.io/post/hugo_learn/manage-your-menu/</guid>
+      <guid>https://luciferseva.github.io/2019/05/manage-your-menu/</guid>
       <description>&lt;p&gt;Menu in the sidebar can be defined within the &lt;code&gt;config.toml&lt;/code&gt; or directly in the files.
 I prefer the config file approach, as this menu is pretty simple.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Config File</title>
-      <link>https://luciferseva.github.io/post/hugo_learn/config-file/</link>
+      <link>https://luciferseva.github.io/2019/04/config-file/</link>
       <pubDate>Sat, 20 Apr 2019 16:18:12 +0100</pubDate>
       
-      <guid>https://luciferseva.github.io/post/hugo_learn/config-file/</guid>
+      <guid>https://luciferseva.github.io/2019/04/config-file/</guid>
       <description>&lt;p&gt;Here is the basic config file used for personal-web.&lt;/p&gt;
 
 &lt;p&gt;You can use it as a base for your website.&lt;/p&gt;</description>
@@ -159,12 +165,13 @@ I prefer the config file approach, as this menu is pretty simple.&lt;/p&gt;</des
     
     <item>
       <title>Open Graph image</title>
-      <link>https://luciferseva.github.io/post/hugo_learn/define-specific-og-image/</link>
+      <link>https://luciferseva.github.io/2019/04/open-graph-image/</link>
       <pubDate>Sat, 20 Apr 2019 11:14:59 +0200</pubDate>
       
-      <guid>https://luciferseva.github.io/post/hugo_learn/define-specific-og-image/</guid>
+      <guid>https://luciferseva.github.io/2019/04/open-graph-image/</guid>
       <description>Within any page, you can add in the FrontMatter a images array that will be used to define a specific Open Graph image.
-For example, see content/_index.md page:</description>
+For example, see content/_index.md page:
+images: [&amp;quot;/images/sample.jpg&amp;quot;]  </description>
     </item>
     
     <item>

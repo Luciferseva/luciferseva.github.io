@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="">
+<meta name="description" content="最近工作中要用到ros，所以将所学到的东西，所看到的东西记录下来，方便以后的总结和回顾。">
+
+
+<meta property="og:description" content="最近工作中要用到ros，所以将所学到的东西，所看到的东西记录下来，方便以后的总结和回顾。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ros的简单介绍">
+<meta name="twitter:title" content="ros的简单介绍">
+<meta property="og:url" content="https://luciferseva.github.io/2019/10/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/10/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="最近工作中要用到ros，所以将所学到的东西，所看到的东西记录下来，方便以后的总结和回顾。">
+<meta name="twitter:description" content="最近工作中要用到ros，所以将所学到的东西，所看到的东西记录下来，方便以后的总结和回顾。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-10-10T22:13:36">
+  
+  
+    <meta property="article:modified_time" content="2019-10-10T22:13:36">
+  
+  
+  
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=640">
+
+
+    <title>ros的简单介绍</title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/10/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=90" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication <strong>COOL</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      ros的简单介绍
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-10-10T22:13:36&#43;08:00">
+        
+  
+  
+  
+  
+    2019年10月10日
+  
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>最近工作中要用到ros，所以将所学到的东西，所看到的东西记录下来，方便以后的总结和回顾。</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#大体印象">大体印象</a></li>
+<li><a href="#ros分级的">ROS分级的</a>
+<ul>
+<li><a href="#计算图级">计算图级</a></li>
+<li><a href="#文件系统级">文件系统级</a></li>
+<li><a href="#社区级">社区级</a></li>
+</ul></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<ul>
+<li><a href="#大体印象">大体印象</a></li>
+<li><a href="#ros分级的">ROS分级的</a>
+
+<ul>
+<li><a href="#计算图级">计算图级</a></li>
+<li><a href="#文件系统级">文件系统级</a></li>
+<li><a href="#社区级">社区级</a></li>
+</ul></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+
+<!-- /TOC -->
+
+<h2 id="大体印象">大体印象</h2>
+
+<p>ros给我的感觉，更像是一种通信框架，类似于mqtt的一种发布和订阅的消息传输方式，用c++或者python编写的，但又有所区别</p>
+
+<h2 id="ros分级的">ROS分级的</h2>
+
+<p>主要分为三个级别：</p>
+
+<hr />
+
+<ul>
+<li>计算图级:描述该程序是怎么实现的</li>
+<li>文件系统级：文件是如何组织和构建的</li>
+<li>社区级：程序的分布式管理
+***
+其实这样分级的主要目的，还是为了软件工程的一个很重要的思想（*高内聚，低耦合*），ros这样的分级，使得这个框架适用于高迸发的场景，感觉有点像类似于分布式的处理，研究不是很深，所以也只是感觉。
+下面分别总结以下这三个分级
+***</li>
+</ul>
+
+<h3 id="计算图级">计算图级</h3>
+
+<p>计算图其实就是ros在处理数据时的一种点对点的网络形式。程序运行时，所有进程以及他们所进行的数据处理，将会通过一种点对点的网络形式表现出来。这一级主要包括几个重要概念：
+* 节点（node）</p>
+
+<pre><code>节点就是一些*执行运算任务的进程*。
+ROS利用规模可增长的方式是代码模块化：
+一个系统就是典型的由很多节点组成的。在这里，节点也可以被称之为“软件模块”。
+使用**节点**使得基于ROS的系统在运行的时候更加形象化：当许多节点同时运行时，
+可以很方便的将端对端的通讯绘制成一个图表，在这个图表中，进程就是图中的节点，
+而端对端的连接关系就是其中弧线连接。
+</code></pre>
+
+<ul>
+<li><p>消息（message）</p>
+
+<p>节点之间是通过传送消息进行通讯的。每一个*消息*都是一个<strong>严格的数据结构</strong>。原来标准的数据类型（整型，浮点型，布尔型等等）都是支持的，同时也支持原始数组类型。消息可以包含任意的嵌套结构和数组（很类似于C语言的结构structs）。</p></li>
+
+<li><p>主题（topic）</p>
+
+<p>消息以一种*发布/订阅*的方式传递，这里有点像我之前接触到的*mqtt*的方式。一个节点可以在一个给定的主题中发布消息。一个节点针对某个主题关注与订阅特定类型的数据。可能同时有多个节点发布或者订阅同一个主题的消息。<strong>总体上，发布者和订阅者不了解彼此的存在</strong>,这里充分体现了ros通信机制的特点。</p></li>
+
+<li><p>服务（service）</p>
+
+<p>虽然基于话题的*发布/订阅模型*是很灵活的通讯模式，但是它广播式的路径规划对于可以简化节点设计的同步传输模式并不适合。在ROS中，我们称之为一个服务，用一个字符串和一对严格规范的消息定义：一个用于请求，一个用于回应。这类似于web服务器，web服务器是由URIs定义的，同时带有完整定义类型的请求和回复文档。需要注意的是，不像话题，只有一个节点可以以任意独有的名字广播一个服务：只有一个服务可以称之为“分类象征”，比如说，任意一个给出的URI地址只能有一个web服务器。</p>
+
+<p>在上面概念的基础上，需要有一个控制器可以使所有节点有条不紊的执行，这就是一个ROS的控制器（ROS Master）。ROS Master 通过RPC（Remote Procedure Call Protocol，远程过程调用）提供了登记列表和对其他计算图表的查找。没有控制器，节点将无法找到其他节点，交换消息或调用服务。</p>
+
+<p>ROS的控制器给ROS的节点存储了主题和服务的注册信  息。节点与控制器通信从而报告它们的注册信息。当这些节点与控制器通信的时候，它们可以接收关于其他以注册及节点的信息并且建立与其它以注册节点之间的联系。当这些注册信息改变时控制器也会回馈这些节点，同时允许节点动态创建与新节点之间的连接。</p>
+
+<p><strong>节点与节点之间的连接是直接的，控制器仅仅提供了查询信息</strong>，就像一个DNS服务器。节点订阅一个主题将会要求建立一个与出版该主题的节点的连接，并且将会在同意连接协议的基础上建立该连接。</p></li>
+</ul>
+
+<hr />
+
+<h3 id="文件系统级">文件系统级</h3>
+
+<p>ROS文件系统级指的是在硬盘上面查看的ROS源代码的组织形式。</p>
+
+<p>ROS中有无数的节点、消息、服务、工具和库文件，需要有效的结构去管理这些代码。在ROS的文件系统级，有以下几个重要概念：包（package）、堆（stack）、</p>
+
+<ul>
+<li><p>包</p>
+
+<p>ROS的软件以包的方式组织起来。包包含节点、ROS依赖库、数据套、配置文件、第三方软件、或者任何其他逻辑构成。包的目标是提供一种易于使用的结构以便于软件的重复使用。</p></li>
+
+<li><p>堆</p>
+
+<p>堆是包的集合，它提供一个完整的功能，像“navigation stack”。Stack与版本号关联，同时也是如何发行ROS软件方式的关键。ROS是一种分布式处理框架。这使可执行文件能被单独设计，并且在运行时松散耦合。这些过程可以封装到包（Packages）和堆（Stacks）中，以便于共享和分发。</p></li>
+</ul>
+
+<p><img src="https://luciferseva.github.io/images/ros/191010/2.png" alt="标题1" /></p>
+
+<p>   Manifests (manifest.xml)：提供关于Package元数据，包括它的许可信息和Package之间依赖关系，以及语言特性信息像编译旗帜（编译优化参数）。
+         Stack manifests (stack.xml)：提供关于Stack元数据，包括它的许可信息和Stack之间依赖关系。</p>
+
+<h3 id="社区级">社区级</h3>
+
+<p>ROS的社区级概念是ROS网络上进行代码发布的一种表现形式。结构如下图所示：</p>
+
+<p><img src="https://luciferseva.github.io/images/ros/191010/1.png" alt="test2" /></p>
+
+<h2 id="总结">总结</h2>
+
+<p>目前市面上有很多ros的版本，大部分都是先在pc上安装虚拟机，然后运行ubantu环境，然后在安装ros，与机器相连很不方便，接下来的工作，有时间可以探索一下树莓派的ros安装</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=110" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication <strong>COOL</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/10\/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D\/';
+          
+            this.page.identifier = '\/2019\/10\/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

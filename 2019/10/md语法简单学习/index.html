@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="">
+<meta name="description" content="学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅">
+
+
+<meta property="og:description" content="学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MD语法简单学习">
+<meta name="twitter:title" content="MD语法简单学习">
+<meta property="og:url" content="https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅">
+<meta name="twitter:description" content="学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-10-06T12:24:48">
+  
+  
+    <meta property="article:modified_time" content="2019-10-06T12:24:48">
+  
+  
+  
+  
+    
+      <meta property="article:tag" content="Hugo">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=640">
+
+
+    <title>MD语法简单学习</title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=90" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication <strong>COOL</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      MD语法简单学习
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-10-06T12:24:48&#43;08:00">
+        
+  
+  
+  
+  
+    2019年10月6日
+  
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅</p>
+
+<h1 id="正文">正文：</h1>
+
+<h2 id="1-标题">1：标题</h2>
+
+<pre><code># OSCHINA.NET社区 一级标题
+
+### Header 3 三级标题，以此类推（h1到h6）
+
+&gt; This is a blockquote.
+&gt; 
+&gt; This is the second paragraph in the blockquote.
+&gt;
+&gt; ## This is an H2 in a blockquote 
+</code></pre>
+
+<h1 id="2-列表">2：列表</h1>
+
+<p>我们都知道，列表分为有序列表和无序列表，下面直接展示2种列表的写法：</p>
+
+<ul>
+<li>1 *1</li>
+<li>2 *2</li>
+<li>3 *3</li>
+</ul>
+
+<p>可以看到，无序列表可以用* ， + ， — 来创建，用在线编辑器看，实际上是转换成了ul&gt;li ，所以使用哪个都可以，推荐使用*吧</p>
+
+<ol>
+<li>表1</li>
+<li>表2</li>
+</ol>
+
+<p>有序列表就相对简单一点，只有这一种方式，注意，数字后面的点只能是英文的点，特别注意，有序列表的序号是根据第一行列表的数字顺序来的，第一排后的顺序，不管是什么都是按照顺序来的</p>
+
+<h2 id="3-区块引用">3：区块引用</h2>
+
+<p>比如说，你想对某个部分做的内容做一些说明或者引用某某的话等，可以用这个语句
+使用 &gt; 表示文字引用。
+示例：</p>
+
+<blockquote>
+<p>野火烧不尽，春风吹又生。</p>
+</blockquote>
+
+<p>使用 四个缩进空格 表示代码块。
+示例：
+    这是一个代码块，此行左侧有四个不可见的空格。</p>
+
+<h2 id="4-华丽的分割线">4:华丽的分割线</h2>
+
+<p>分割线可以由* - _（星号，减号，底线）这3个符号的至少3个符号表示，注意至少要3个，且不需要连续，有空格也可以</p>
+
+<hr />
+
+<p>你好</p>
+
+<hr />
+
+<h2 id="5-链接">5：链接</h2>
+
+<p>支持2种链接方式：行内式和参数式，不管是哪一种，链接文字都是用 [方括号] 来标记。</p>
+
+<p>行内式的链接格式是：链接的文字放在[]中，链接地址放在随后的（）中，举一反三，经常出现的列表链接就应该这样写:</p>
+
+<ul>
+<li><a href="www.baidu.com">www.baidu.com</a></li>
+</ul>
+
+<p>链接还可以带title属性，好像也只能带title，带不了其他属性，注意，是链接地址后面空一格，然后用引号引起来，可用来连接到网站博客或者项目的节点上</p>
+
+<p><a href="https://luciferseva.github.io/post" title="博客">博客</a></p>
+
+<h2 id="6-图片">6: 图片</h2>
+
+<p>图片也有2种方式：行内式和参数式，
+用法跟链接的基本一样，唯一的不同就是，图片前面要写一个！（这是必须的），没什么好说的</p>
+
+<ul>
+<li><img src="https://luciferseva.github.io/images/sample.jpg" alt="picture" /></li>
+</ul>
+
+<hr />
+
+<h2 id="7-代码框">7:代码框</h2>
+
+<p>这个就比较重要了，很多时候都需要展示出一些代码</p>
+
+<p>如果代码量比较少，只有单行的话，可以用单反引号( ` )包起来，如下：</p>
+
+<p><code>c=a+b</code></p>
+
+<pre><code>多行用三个反引号，如果要写注释，可以在反引号后面写
+</code></pre>
+
+<pre><code class="language-_c_">a=a+b;
+</code></pre>
+
+<h2 id="9-强调">9:强调</h2>
+
+<p>一个星号或者是一个下划线包起来，会转换为<em>倾斜，如果是2个，会转换为<strong>加粗</p>
+
+<p>just like this <em>hello</em></p>
+
+<p>just like this <strong>hello</strong></p>
+
+<p>使用两个波浪线 ~标记 已删除文字
+Example:</p>
+
+<p>(就像 这样)</p>
+
+<p>Result:</p>
+
+<p>任何被两个波浪线包裹的(比如 <del>这样</del>这样)都会显示出删除线</p>
+
+<h2 id="10-代办事宜表">10:代办事宜表</h2>
+
+<p>使用带有 [ ] 或 [x] （未完成或已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用Markdown语法，例如：</p>
+
+<ul class="task-list">
+<li><p>[ ] <strong>Cmd Markdown 开发</strong></p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 支持以 PDF 格式导出文稿</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 新增Todo列表功能 <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">语法参考</a></label></li>
+
+<li><p>[x] 改进 LaTex 功能</p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 修复 LaTex 公式渲染问题</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 新增 LaTex 公式编号功能 <a href="http://docs.mathjax.org/en/latest/tex.html#tex-eq-numbers">语法参考</a>
+<br /></label></li>
+</ul></li>
+</ul></li>
+
+<li><p>[ ] <strong>七月旅行准备</strong></p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> 准备邮轮上需要携带的物品</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 浏览日本免税店的物品</label></li>
+<li><label><input type="checkbox" checked disabled class="task-list-item"> 购买蓝宝石公主号七月一日的船票
+<br /></label></li>
+</ul></li>
+</ul>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/hugo/">Hugo</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/" data-tooltip="快速生成md文档目录及生成doc文档">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/" data-tooltip="快速生成md文档目录及生成doc文档">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=110" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication <strong>COOL</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/10\/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0\/';
+          
+            this.page.identifier = '\/2019\/10\/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

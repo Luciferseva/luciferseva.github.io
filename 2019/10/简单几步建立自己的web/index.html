@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="">
+<meta name="description" content="
+
+
+准备
+安装
+用Hugo来生成个人博客
+下载并设置博客主题
+在本地启动个人博客
+将个人博客部署到远端服务器
+git bash操作
+
+
+
+
+简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布">
+
+
+<meta property="og:description" content="
+
+
+准备
+安装
+用Hugo来生成个人博客
+下载并设置博客主题
+在本地启动个人博客
+将个人博客部署到远端服务器
+git bash操作
+
+
+
+
+简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单几步建立自己的web">
+<meta name="twitter:title" content="简单几步建立自己的web">
+<meta property="og:url" content="https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="
+
+
+准备
+安装
+用Hugo来生成个人博客
+下载并设置博客主题
+在本地启动个人博客
+将个人博客部署到远端服务器
+git bash操作
+
+
+
+
+简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布">
+<meta name="twitter:description" content="
+
+
+准备
+安装
+用Hugo来生成个人博客
+下载并设置博客主题
+在本地启动个人博客
+将个人博客部署到远端服务器
+git bash操作
+
+
+
+
+简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-10-06T11:19:33">
+  
+  
+    <meta property="article:modified_time" content="2019-10-06T11:19:33">
+  
+  
+  
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=640">
+
+
+    <title>简单几步建立自己的web</title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=90" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication <strong>COOL</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      简单几步建立自己的web
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-10-06T11:19:33&#43;08:00">
+        
+  
+  
+  
+  
+    2019年10月6日
+  
+
+      </time>
+    
+    
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#准备">准备</a></li>
+<li><a href="#安装">安装</a></li>
+<li><a href="#用hugo来生成个人博客">用Hugo来生成个人博客</a></li>
+<li><a href="#下载并设置博客主题">下载并设置博客主题</a></li>
+<li><a href="#在本地启动个人博客">在本地启动个人博客</a></li>
+<li><a href="#将个人博客部署到远端服务器">将个人博客部署到远端服务器</a></li>
+<li><a href="#git-bash操作">git bash操作</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<ul>
+<li><a href="#准备">准备</a></li>
+<li><a href="#安装">安装</a></li>
+<li><a href="#用hugo来生成个人博客">用Hugo来生成个人博客</a></li>
+<li><a href="#下载并设置博客主题">下载并设置博客主题</a></li>
+<li><a href="#在本地启动个人博客">在本地启动个人博客</a></li>
+<li><a href="#将个人博客部署到远端服务器">将个人博客部署到远端服务器</a></li>
+<li><a href="#git-bash操作">git bash操作</a></li>
+</ul>
+
+<!-- /TOC -->
+
+<p>简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布</p>
+
+<h2 id="准备">准备</h2>
+
+<p>首先需要github账户，电脑安装git，及熟悉git bash的操作，如果不熟悉，或者没有以上条件，需要申请一下，然后进行安装</p>
+
+<h2 id="安装">安装</h2>
+
+<p>Windows 64位系统下安装Hugo
+a.Hugo框架下载地址,找到hugo_0.55.4_Windows-64bit.zip文件进行下载，下载后进行解压，即安装完成。
+b.查看是否安装成功Hugo：在D:\Hugo\hugo_0.55.4_Windows-64bit路径下，以管理员身份打开cmd控制台，然后输入hugo
+version，如果能显示hugo的版本号，及表示安装成功，这里需要强调一下的是，hugo安装目录添加到到环境变量中</p>
+
+<h2 id="用hugo来生成个人博客">用Hugo来生成个人博客</h2>
+
+<p>a.在D:\Hugo\hugo_0.55.4_Windows-64bit路径下，以管理员身份打开cmd控制台，然后输入hugo new site myblog(自定义的博客名)
+b.切换到生成的myblog(博客的根目录)文件夹目录下，进行下一步下载主题</p>
+
+<h2 id="下载并设置博客主题">下载并设置博客主题</h2>
+
+<p>a.Hugo主题下载地址,下面以主题m10c为例进行演示。
+b.确保自己电脑上已经安装好了Git，然后打开git bash,切换到生成的myblog(博客的根目录)文件夹目录下,执行git clone <a href="https://github.com/vaga/hugo-theme-m10c.git">https://github.com/vaga/hugo-theme-m10c.git</a> themes/m10c,下载好的主题在D:\Hugo\hugo_0.55.4_Windows-64bit\myblog\themes目录下。</p>
+
+<h2 id="在本地启动个人博客">在本地启动个人博客</h2>
+
+<p>a.切换到博客的根目录下，cmd中输入命令hugo server -t m10c &ndash;buildDrafts
+b.复制网址<a href="http://localhost:1313/到浏览器中，查看站点是否运行成功">http://localhost:1313/到浏览器中，查看站点是否运行成功</a></p>
+
+<h2 id="将个人博客部署到远端服务器">将个人博客部署到远端服务器</h2>
+
+<p>a.上面的一系列操作，得到的博客网站的站点只能在自己的电脑上本地访问，要想别人能访问你的博客网站，必须将个人博客部署到远端服务器。首先，你要有一个github账号，然后创建一个仓库，注意：创建仓库的命名必须是你github的昵称且必须小写再加上.github.io。例如，你的github昵称是lucifer,因此创建的仓库名必须是lucifer.github.io。
+b.接着，切换到博客的根目录下，cmd中输入命令hugo &ndash;theme=m10c(主题名) &ndash;baseUrl=&ldquo;<a href="https://lucifer.github.io/(仓库地址)&quot;">https://lucifer.github.io/(仓库地址)&quot;</a> &ndash;buildDrafts</p>
+
+<h2 id="git-bash操作">git bash操作</h2>
+
+<p>c.然后会在博客的根目录myblog下生成一个public文件夹。在git bash中切换到public文件目录下，在git bash中输入命令git init,将此public文件夹变成git本地仓库，
+然后输入git add ., 将public文件夹下的所有文件放入暂存区中等待提交，
+接着输入git commit -m &ldquo;我的Hugo博客第一次提交&rdquo;，这样就将本地仓库中的文件提交到了远程仓库。
+输入git remote add origin <a href="https://github.com/lucifer/lucifer.github.io.git。">https://github.com/lucifer/lucifer.github.io.git。</a>
+最后，输入命令git push -u origin master,将本地仓库代码推送到远程库。
+d.最后，在浏览器中输入lucifer.github.io，即可访问自己的博客网站。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/" data-tooltip="添加网站音乐">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/05/getting-started/" data-tooltip="Getting started">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/" data-tooltip="添加网站音乐">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/05/getting-started/" data-tooltip="Getting started">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=110" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication <strong>COOL</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/10\/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web\/';
+          
+            this.page.identifier = '\/2019\/10\/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

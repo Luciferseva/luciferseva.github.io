@@ -6,7 +6,6 @@
     <description>Recent content in ros-学习 on The way to be a master</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>© kris wu,All rights reserved - 2019</copyright>
     <lastBuildDate>Thu, 10 Oct 2019 22:13:36 +0800</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/post/ros/index.xml" rel="self" type="application/rss+xml" />
@@ -14,10 +13,10 @@
     
     <item>
       <title>ros的简单介绍</title>
-      <link>https://luciferseva.github.io/post/ros/1910.10/</link>
+      <link>https://luciferseva.github.io/2019/10/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</link>
       <pubDate>Thu, 10 Oct 2019 22:13:36 +0800</pubDate>
       
-      <guid>https://luciferseva.github.io/post/ros/1910.10/</guid>
+      <guid>https://luciferseva.github.io/2019/10/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</guid>
       <description>&lt;p&gt;最近工作中要用到ros，所以将所学到的东西，所看到的东西记录下来，方便以后的总结和回顾。&lt;/p&gt;</description>
     </item>
     
