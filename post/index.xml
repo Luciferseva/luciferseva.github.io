@@ -6,9 +6,84 @@
     <description>Recent content in 博客 on The way to be a master</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>USB初探</title>
+      <link>https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</guid>
+      <description>&lt;p&gt;最近工作中又要做linux的sdiowifi和usb设备了，之前说的ros学习暂时放一下，工作很难连续在一个项目上干的时间长久，不过毕竟小公司，能接触的东西也比较多，所以需要及时做好文档，以便日后的查找和阅读。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>中文測試</title>
+      <link>https://luciferseva.github.io/2019/10/%E4%B8%AD%E6%96%87%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/%E4%B8%AD%E6%96%87%E5%8D%9A%E5%AE%A2/</guid>
+      <description>&lt;p&gt;This is a chinese test post to show you how chinese is displayed.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>快速生成md文档目录及生成doc文档</title>
+      <link>https://luciferseva.github.io/2019/10/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Thu, 10 Oct 2019 22:39:27 +0800</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</guid>
+      <description>&lt;p&gt;学习md语言，快速生成md文档的目录及生成doc文档，及期间遇到一些问题&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>添加网站音乐</title>
+      <link>https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</link>
+      <pubDate>Sun, 06 Oct 2019 23:19:33 +0800</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</guid>
+      <description>&lt;p&gt;通过html语言修改和网易云音乐，实现网站的背景音乐添加&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MD语法简单学习</title>
+      <link>https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Sun, 06 Oct 2019 12:24:48 +0800</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>简单几步建立自己的web</title>
+      <link>https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/</link>
+      <pubDate>Sun, 06 Oct 2019 11:19:33 +0800</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/</guid>
+      <description>&lt;p&gt;简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Archetypes management</title>
+      <link>https://luciferseva.github.io/2019/05/archetypes-management/</link>
+      <pubDate>Thu, 02 May 2019 19:25:30 +0200</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/05/archetypes-management/</guid>
+      <description>&lt;p&gt;The archetypes are defined in the &lt;code&gt;archetypes&lt;/code&gt; folder, for both post and portfolio.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Open Graph image</title>
+      <link>https://luciferseva.github.io/2019/04/open-graph-image/</link>
+      <pubDate>Sat, 20 Apr 2019 11:14:59 +0200</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/04/open-graph-image/</guid>
+      <description>Within any page, you can add in the FrontMatter a images array that will be used to define a specific Open Graph image.
+For example, see content/_index.md page:
+images: [&amp;quot;/images/sample.jpg&amp;quot;]  </description>
+    </item>
     
   </channel>
 </rss>

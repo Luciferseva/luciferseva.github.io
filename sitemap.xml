@@ -13,12 +13,22 @@
   </url>
   
   <url>
-    <loc>https://luciferseva.github.io/post/hugo_learn/</loc>
+    <loc>https://luciferseva.github.io/categories/linux%E7%9B%B8%E5%85%B3/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://luciferseva.github.io/tags/</loc>
+    <lastmod>2019-10-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</loc>
+    <lastmod>2019-10-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://luciferseva.github.io/tags/usb%E9%A9%B1%E5%8A%A8/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
   
@@ -43,8 +53,13 @@
   </url>
   
   <url>
-    <loc>https://luciferseva.github.io/post/markdown/</loc>
-    <lastmod>2019-10-10T22:39:27+08:00</lastmod>
+    <loc>https://luciferseva.github.io/post/</loc>
+    <lastmod>2019-10-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://luciferseva.github.io/categories/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</loc>
+    <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -83,43 +98,8 @@
   </url>
   
   <url>
-    <loc>https://luciferseva.github.io/2019/05/getting-started/</loc>
-    <lastmod>2019-05-04T09:38:55+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luciferseva.github.io/2019/05/portfolio-definition/</loc>
-    <lastmod>2019-05-02T19:49:05+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luciferseva.github.io/portfolio/sample-project-copy/</loc>
-    <lastmod>2019-05-02T19:47:09+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luciferseva.github.io/portfolio/sample-project/</loc>
-    <lastmod>2019-05-02T19:47:09+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luciferseva.github.io/portfolio/</loc>
-    <lastmod>2019-05-02T19:47:09+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://luciferseva.github.io/2019/05/archetypes-management/</loc>
     <lastmod>2019-05-02T19:25:30+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luciferseva.github.io/2019/05/manage-your-menu/</loc>
-    <lastmod>2019-05-02T19:06:29+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://luciferseva.github.io/2019/04/config-file/</loc>
-    <lastmod>2019-04-20T16:18:12+01:00</lastmod>
   </url>
   
   <url>
@@ -133,10 +113,6 @@
   
   <url>
     <loc>https://luciferseva.github.io/post/qt_learm/</loc>
-  </url>
-  
-  <url>
-    <loc>https://luciferseva.github.io/post/</loc>
   </url>
   
   <url>

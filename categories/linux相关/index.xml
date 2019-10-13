@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux相关 on The way to be a master</title>
+    <link>https://luciferseva.github.io/categories/linux%E7%9B%B8%E5%85%B3/</link>
+    <description>Recent content in Linux相关 on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/categories/linux%E7%9B%B8%E5%85%B3/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>USB初探</title>
+      <link>https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</guid>
+      <description>&lt;p&gt;最近工作中又要做linux的sdiowifi和usb设备了，之前说的ros学习暂时放一下，工作很难连续在一个项目上干的时间长久，不过毕竟小公司，能接触的东西也比较多，所以需要及时做好文档，以便日后的查找和阅读。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

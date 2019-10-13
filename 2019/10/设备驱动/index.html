@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="">
+<meta name="description" content="最近工作中又要做linux的sdiowifi和usb设备了，之前说的ros学习暂时放一下，工作很难连续在一个项目上干的时间长久，不过毕竟小公司，能接触的东西也比较多，所以需要及时做好文档，以便日后的查找和阅读。">
+
+
+<meta property="og:description" content="最近工作中又要做linux的sdiowifi和usb设备了，之前说的ros学习暂时放一下，工作很难连续在一个项目上干的时间长久，不过毕竟小公司，能接触的东西也比较多，所以需要及时做好文档，以便日后的查找和阅读。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="USB初探">
+<meta name="twitter:title" content="USB初探">
+<meta property="og:url" content="https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="最近工作中又要做linux的sdiowifi和usb设备了，之前说的ros学习暂时放一下，工作很难连续在一个项目上干的时间长久，不过毕竟小公司，能接触的东西也比较多，所以需要及时做好文档，以便日后的查找和阅读。">
+<meta name="twitter:description" content="最近工作中又要做linux的sdiowifi和usb设备了，之前说的ros学习暂时放一下，工作很难连续在一个项目上干的时间长久，不过毕竟小公司，能接触的东西也比较多，所以需要及时做好文档，以便日后的查找和阅读。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-10-13T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-10-13T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="Linux相关">
+    
+      <meta property="article:section" content="设备驱动">
+    
+  
+  
+    
+      <meta property="article:tag" content="USB驱动">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/sample.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/sample.jpg">
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=640">
+
+
+    <title>USB初探</title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=90" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication <strong>COOL</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      USB初探
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-10-13T00:00:00Z">
+        
+  
+  
+  
+  
+    2019年10月13日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux%e7%9b%b8%e5%85%b3">Linux相关</a>, 
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/%e8%ae%be%e5%a4%87%e9%a9%b1%e5%8a%a8">设备驱动</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>最近工作中又要做linux的sdiowifi和usb设备了，之前说的ros学习暂时放一下，工作很难连续在一个项目上干的时间长久，不过毕竟小公司，能接触的东西也比较多，所以需要及时做好文档，以便日后的查找和阅读。</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#usb初探">usb初探</a>
+<ul>
+<li><a href="#linux启动流程">linux启动流程</a></li>
+<li><a href="#usb简单介绍">usb简单介绍</a>
+<ul>
+<li><a href="#usb通信架构">usb通信架构</a></li>
+<li><a href="#usb通信流程">usb通信流程</a></li>
+<li><a href="#一些参考">一些参考</a></li>
+</ul></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<ul>
+<li><a href="#usb初探">usb初探</a>
+
+<ul>
+<li><a href="#linux启动流程">linux启动流程</a></li>
+<li><a href="#usb简单介绍">usb简单介绍</a>
+
+<ul>
+<li><a href="#usb通信架构">usb通信架构</a></li>
+<li><a href="#usb通信流程">usb通信流程</a></li>
+<li><a href="#一些参考">一些参考</a></li>
+</ul></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+
+<!-- /TOC -->
+
+<h1 id="usb初探">usb初探</h1>
+
+<p>为什么要叫初探呢，因为之前本科毕业的时候毕设就是usb设备相关的内容，所以之前有所了解，而且之前的驱动是当时老师给的，且没有跑系统，所以这次在原来的基础上加深以下</p>
+
+<h2 id="linux启动流程">linux启动流程</h2>
+
+<p>之前没有发过liinux相关的，先简单介绍一下启动流程吧
+* 一. 内核镜像Izmage被bootloader装载到内存中。zImage的入口代码是自引导程序。包含一些初始化代码。第一条指令在head.S文件中。解压内核，然后调用call_kernel启动vmlinux（解压后在正确位置上的内核）</p>
+
+<ul>
+<li><p>二. vmlinux开始部分的代码对应的文件也叫head.S.这个是体系结构相关的代码，进行页表的初级初始化后打开MMU，跳转到start_kernel函数中去。</p></li>
+
+<li><p>三. start_kernel负责初始化内核的各个子系统，然后调用rest_init().</p></li>
+
+<li><p>四.reset_init 调用kernel_thread启动init内核线程，执行init函数，init函数负责挂载跟文件系统，初始化设备驱动程序，启动用户空间的init进程。这些工作是内核中最重要的过程</p></li>
+
+<li><p>五. 用户空间init进程执行,init程序在根文件系统的/sbin下，负责启动一系列程序与脚本文件。init进程是所有的进程的发起着与控制者。init进程有两种启动方式：</p></li>
+</ul>
+
+<p>       
+    1.system V启动流程，这是一般桌面版Linux的启动方式，如ubuntu。</p>
+
+<blockquote>
+<p>(1).执行的地一个脚本是/etc/rc.d/rc.sysinit,包含如下内容：检查磁盘，挂在其他的文件系统等</p>
+
+<p>(2).执行缺醒的运行级别，这个在/etc/inittab中确定</p>
+
+<p>(3).执行/etc/rc.c/rc.local脚本文件，用户可以在这个文件中添加启动后需要执行的命令</p>
+
+<p>(4).执行/bin/login程序，提示用户输入用户名与密码，如果吻合则初始化环境，并将控制权转交shell</p>
+</blockquote>
+
+<p>2.busybox 启动流程，这是嵌入式系统的启动流程，init程序在/sbin下面，这个是一个符号链接，链接到/bin/busybox上
+&gt;(1).为init进程设置信号处理程序</p>
+
+<blockquote>
+<p>(2).对控制台进行初始化（串口终端）</p>
+
+<p>(3).解析/etc/inittab文件</p>
+
+<p>(4).运行/etc/init.d/rcS脚本，这个脚本设置一些环境变量，运行启动时的程序</p>
+
+<h2 id="usb简单介绍">usb简单介绍</h2>
+
+<p>关于usb接口分类这里就不再赘述了，其实USB接口虽然简单，但是他的协议很复杂。但是再复杂的东西也是遵循一定规律的。USB系统分为USB主机和USB设备，USB所有的协议都是为了主机和设备高效地进行数据交换。</p>
+</blockquote>
+
+<h3 id="usb通信架构">usb通信架构</h3>
+
+<p>通信一定是双方面的，所以在usb通信中一定会存在两个方面，在USB世界里就是USB主机和USB设备，但这里有点像一夫多妻制，一个USB主机和一群USB设备。而且USB主机占据这绝对霸权的地位，所有的通信都是由他发起，USB设备几乎没有一点权利
+重要概念：
+* USB主机（host）</p>
+
+<pre><code>先说USB主机，说起他我们就会想起电脑上的USB插口，对没错他就是USB主机，更确切的说是USB主机对外的窗口。这里所说的主机其实是USB主机和ROOT HUB的结合体，什么是HUB，什么又是ROOT HUB。HUB就是分线器，其实也属于USB设备的范畴，他的作用有两个：一是检测设备，二是提供更多的接口来连接设备。而ROOT HUB有点特殊，生来就是和USB主机形影不离，难舍难分。USB主机的功能就是负责检测设备，并发起USB通信。话说这个USB 主机也有很多标准，最流行的就三种UHCI，EHCI和OHCI。UHCI是PC机上用的USB主机接口标准，OHCI一般用在嵌入式设备上，EHIC是为了支持USB2.0而开发的。标准虽然不同，但都是大同小异。
+</code></pre>
+
+<ul>
+<li><p>usb设备（message）</p>
+
+<p>首先被人烧进去了一些固件程序，这还好点，最起码有了生命。然后被人插到USB主机上，被主机检测，实现功能还的看主机的脸色。USB虽然地位很低，但是兄弟倒是不少，有好几大类。什么人机接口，大容量存储设备，还有各种符合设备。可以这么说几乎现在所有的可移动设备都有USB的身影。USB设备还有一种分类的方法就是纯种USB设备，和复合USB设备。复合的USB设备本身集成了HUB和多个设备，可以看作是几个设备的集合，纯种的就不用说了，就是一个USB设备了。下面来分析一下USB设备的构成。USB设备当然最大的就是设备这个概念了，设备下来就是配置，配置下来就是接口，接口下来就是设置和端点了。先说配置，就是设备的几种功能的集合，而接口正是一种功能的代名词，所以配置包括一个或多个接口。接口就代表一种功能，比如USB音箱包括一个喇叭和一组按键，这就代表两个接口。接口下面是端点和设置，这两个在地位上应该是平行的，但是代表两类东西。先说端点，名字很抽象，其实就是USB设备里的负责接收和发送数据一块缓冲区。每个接口包括一个或多个端点，比如喇叭接口最起码有一个接受音频数据的端点吧。最后说这个设置，设置是接口的设置，还是举USB音箱的例子，喇叭是一个接口，那么可能有几种放音模式，就是由这个设置决定。设备最重要的组成部分就是固件程序了，他是设备的灵魂，没有固件程序的设备是不会工作的设备。幸好设备厂商早就将固件烧写到了设备里，如果不是开发USB设备的人就不用管他了。</p></li>
+</ul>
+
+<hr />
+
+<h3 id="usb通信流程">usb通信流程</h3>
+
+<p>通信是怎么发起的吧。USB插上主机接口到USB实现自己的功能还是有很长一段路的。在这之前先说说USB硬件接口，一共四条线，一根电源线，一根地线，两根差分信号线，这就是他们通信的全部的桥梁，要说通信就是靠这这两根差分信号线，电源线和地底线都是给设备供电的。差分信号线当然是一正一反，同时传输，但是符号相反。我是0,你就得是1，这样设计好处多多，什么防止电磁干扰的就不用说了。这对差分信号线还有一个作用就是检测设备。既然说了检测设备了，那么就开始USB设备的慢慢人生路吧。
+        首先他从插上USB接口开始，本来接口的两根信号线在没有插上设备的时候都是处于低电平的状态，从USB设备插上接口的那一刹那，设备内的上拉电阻会使两根信号线的一根变高，这也许是USB设备唯一一次主动的时候。就像是对USB主机说，我来了，赶快接受我。然后敏感的USB主机收的这个信号后，就会给他一个回应&ndash;复位。话说主机可以接受那么多的设备，在这之前肯定有设备已经和USB主机建立起了通信关系，那么主机怎么找到这个新的USB设备。这里不得不谈到USB世界里的地址机制了。每个一个连接的USB的设备都会被主机分配一个八位的地址，至于怎么样分配后面再说，这个地址不能为0，因为0是给新设备的，也就是说所有新设备的地址都是0。USB主机检测设备的时候，在没有给设备配置地址的时候，就是和0地址的设备通信的，这个肯定就是刚插上的设备。你也许会说，我同时插上两个设备，那么主机不是分不清谁是谁了吗，也许你的手速像闪电一样，但是终究还是有个先后，最先插上的那个先服务，另外一个只有等的份了。
+        咱们先忽略通信的细节，重点在USB主机怎样识别这个设备的。话说USB设备一大堆，而主机就一个，主机怎样分清谁是谁，这确实是一个问题。山人自由妙计，USB主机自然有他的办法，当然这得USB设备来配合。说设备的时候说了一下端点，那么每个USB设备都有一个特殊的端点，代号零。这个是硬指标，没有这个端点就不是USB设备。USB主机就是通过这个端点，控制设备与识别设备的。这个过程有一下几步，这几步都需要USB设备配合，我让你返回啥，你就返回啥。如果返不回来，主机只好无奈的说：对不起不认识你。
+        第一步：发送标准请求获得设备描述符，得到端点0的最大数据长度。这里又有几个新名词，标准请求是什么？设备描述符又是什么？什么最大长度？先不管这些，带着疑问上路。
+        第二步：给设备配置的新地址。至于如何配置，后面在详说。
+        第三步：以新的地址，获得配置描述符。
+        第五步：根据配置描述符配置设备
+        第六步：根据配置描述符，识别设备的功能然后找到具体的USB驱动，然后就交给USB驱动处理。
+        经过以上几步USB主机就算是认识USB设备了，然后具体实现什么功能就由更了解他的驱动程序来完成了。上面我们提到了描述符还有标准请求。那么就不得不深入到USB通信的细节来了。USB设备可谓是千变万化，各种各样但是他们之所以叫做USB设备，说明他们都有一些相同的地方。统一的接口不用说了，他们还遵循USB协议，就像上面说的那样得配合主机。另外他们还得有识别自己的名片，要不就会分不请你我了。这个名片就是各种描述符。话说他们都在哪里，当然是保存在USB设备的特定存储区了。主机要求他返回什么么，他就从存储取读出这个描述符，传给主机。主要的USB描述符有四个，号称四大金刚。他们是设备描述符，配置描述符，接口描述符，端点描述符。还有其他的一些描述符但不是必须的，只有这四大金刚才是每个设备都具有的。这四大金刚就是USB设备的身份证，USB主机就是通过这几个描述符来认识设备的，步骤就是上面的那六步。</p>
+
+<h3 id="一些参考">一些参考</h3>
+
+<p>ROS的社区级概念是ROS网络上进行代码发布的一种表现形式。结构如下图所示：</p>
+
+<p><a href="https://blog.csdn.net/YAOZHENGUO2006/article/details/7405825">参考网站</a></p>
+
+<h2 id="总结">总结</h2>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/usb%E9%A9%B1%E5%8A%A8/">USB驱动</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E4%B8%AD%E6%96%87%E5%8D%9A%E5%AE%A2/" data-tooltip="中文測試">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E4%B8%AD%E6%96%87%E5%8D%9A%E5%AE%A2/" data-tooltip="中文測試">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/459ea7c4503170eb6dbed961f671e18a?s=110" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication <strong>COOL</strong></div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/10\/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8\/';
+          
+            this.page.identifier = '\/2019\/10\/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
