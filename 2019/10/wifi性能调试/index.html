@@ -8,31 +8,39 @@
 <meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Kris Wu">
 <meta name="keywords" content="">
-<meta name="description" content="学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅">
+<meta name="description" content="这几天一直在搞sdiowifi的联网相关的事情，期间遇到几个问题，简单总结一下。">
 
 
-<meta property="og:description" content="学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅">
+<meta property="og:description" content="这几天一直在搞sdiowifi的联网相关的事情，期间遇到几个问题，简单总结一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MD语法简单学习">
-<meta name="twitter:title" content="MD语法简单学习">
-<meta property="og:url" content="https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/">
-<meta property="twitter:url" content="https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/">
+<meta property="og:title" content="WIFI性能调试">
+<meta name="twitter:title" content="WIFI性能调试">
+<meta property="og:url" content="https://luciferseva.github.io/2019/10/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/10/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95/">
 <meta property="og:site_name" content="The way to be a master">
-<meta property="og:description" content="学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅">
-<meta name="twitter:description" content="学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅">
+<meta property="og:description" content="这几天一直在搞sdiowifi的联网相关的事情，期间遇到几个问题，简单总结一下。">
+<meta name="twitter:description" content="这几天一直在搞sdiowifi的联网相关的事情，期间遇到几个问题，简单总结一下。">
 <meta property="og:locale" content="zh-cn">
 
   
-    <meta property="article:published_time" content="2019-10-06T12:24:48">
+    <meta property="article:published_time" content="2019-10-14T00:00:00">
   
   
-    <meta property="article:modified_time" content="2019-10-06T12:24:48">
-  
+    <meta property="article:modified_time" content="2019-10-14T00:00:00">
   
   
   
     
-      <meta property="article:tag" content="Hugo">
+      <meta property="article:section" content="物联网">
+    
+      <meta property="article:section" content="wifi">
+    
+  
+  
+    
+      <meta property="article:tag" content="linux">
+    
+      <meta property="article:tag" content="wifi">
     
   
 
@@ -45,6 +53,9 @@
 
 
 
+  <meta property="og:image" content="//d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city-750.jpg">
+  <meta property="twitter:image" content="//d1u9biwaxjngwg.cloudfront.net/cover-image-showcase/city-750.jpg">
+
 
 
 
@@ -53,14 +64,14 @@
   <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
 
 
-    <title>MD语法简单学习</title>
+    <title>WIFI性能调试</title>
 
     <link rel="icon" href="images/cover.jpg">
     
 
     
 
-    <link rel="canonical" href="https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/">
+    <link rel="canonical" href="https://luciferseva.github.io/2019/10/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -200,176 +211,250 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      MD语法简单学习
+      WIFI性能调试
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-10-06T12:24:48&#43;08:00">
+      <time itemprop="datePublished" datetime="2019-10-14T00:00:00Z">
         
   
   
   
   
-    2019年10月6日
+    2019年10月14日
   
 
       </time>
     
     
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/%e7%89%a9%e8%81%94%e7%bd%91">物联网</a>, 
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/wifi">wifi</a>
+    
+  
+
   </div>
 
 </div>
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅</p>
+              <p>这几天一直在搞sdiowifi的联网相关的事情，期间遇到几个问题，简单总结一下。</p>
 
-<h1 id="正文">正文：</h1>
+<h1 id="前提">前提</h1>
 
-<h2 id="1-标题">1：标题</h2>
-
-<pre><code># OSCHINA.NET社区 一级标题
-
-### Header 3 三级标题，以此类推（h1到h6）
-
-&gt; This is a blockquote.
-&gt; 
-&gt; This is the second paragraph in the blockquote.
-&gt;
-&gt; ## This is an H2 in a blockquote 
-</code></pre>
-
-<h1 id="2-列表">2：列表</h1>
-
-<p>我们都知道，列表分为有序列表和无序列表，下面直接展示2种列表的写法：</p>
+<p>sdio wifi需要在对应使用的Linux生成的文件系统中加入一些工具，使得wifi模块能正常进入station模式，工具有：</p>
 
 <ul>
-<li>1 *1</li>
-<li>2 *2</li>
-<li>3 *3</li>
+<li>wireless_tools.29.tar.gz          // 用于提供操作WiFi的命令，如iwconfig iwlist</li>
+<li>wpa_supplicant-0.7.3.tar.gz   // 用于连接WPA/WPA2加密AP的无线网络工具</li>
+<li>openssl-0.9.8e.tar.gz         // 加密算法库，用于编译wpa_supplicant工具</li>
 </ul>
-
-<p>可以看到，无序列表可以用* ， + ， — 来创建，用在线编辑器看，实际上是转换成了ul&gt;li ，所以使用哪个都可以，推荐使用*吧</p>
-
-<ol>
-<li>表1</li>
-<li>表2</li>
-</ol>
-
-<p>有序列表就相对简单一点，只有这一种方式，注意，数字后面的点只能是英文的点，特别注意，有序列表的序号是根据第一行列表的数字顺序来的，第一排后的顺序，不管是什么都是按照顺序来的</p>
-
-<h2 id="3-区块引用">3：区块引用</h2>
-
-<p>比如说，你想对某个部分做的内容做一些说明或者引用某某的话等，可以用这个语句
-使用 &gt; 表示文字引用。
-示例：</p>
 
 <blockquote>
-<p>野火烧不尽，春风吹又生。</p>
+<p><a href="https://pan.baidu.com/s/1nwK2OeX">下载地址1</a> mima:8mt5</p>
+
+<p><a href="https://pan.baidu.com/s/1nwK2OeX">下载地址2</a></p>
 </blockquote>
 
-<p>使用 四个缩进空格 表示代码块。
-示例：
-    这是一个代码块，此行左侧有四个不可见的空格。</p>
+<h2 id="sdiowifi联网">sdiowifi联网</h2>
 
-<h2 id="4-华丽的分割线">4:华丽的分割线</h2>
-
-<p>分割线可以由* - _（星号，减号，底线）这3个符号的至少3个符号表示，注意至少要3个，且不需要连续，有空格也可以</p>
-
-<hr />
-
-<p>你好</p>
-
-<hr />
-
-<h2 id="5-链接">5：链接</h2>
-
-<p>支持2种链接方式：行内式和参数式，不管是哪一种，链接文字都是用 [方括号] 来标记。</p>
-
-<p>行内式的链接格式是：链接的文字放在[]中，链接地址放在随后的（）中，举一反三，经常出现的列表链接就应该这样写:</p>
+<p>从设备驱动加载开始，到设备的上点的过程，需要结合硬件和原理图进行实现，这里只说一个大概的流程：</p>
 
 <ul>
-<li><a href="www.baidu.com">www.baidu.com</a></li>
-</ul>
+<li><p>1：查看模块连接芯片对应的Linux中的mmc管脚的位置，在设备树中添加节点</p></li>
 
-<p>链接还可以带title属性，好像也只能带title，带不了其他属性，注意，是链接地址后面空一格，然后用引号引起来，可用来连接到网站博客或者项目的节点上</p>
+<li><p>2：修改完后，在 /sys/bus/platform/drivers/*****mmc/ 查看mmc是否被启用成功</p></li>
 
-<p><a href="https://luciferseva.github.io/post" title="博客">博客</a></p>
+<li><p>3：还需在内核中添加配置项</p>
 
-<h2 id="6-图片">6: 图片</h2>
+<pre><code class="language-linux">--Networking support 
+&lt;*&gt;RF switch subystem support  ----&gt;
 
-<p>图片也有2种方式：行内式和参数式，
-用法跟链接的基本一样，唯一的不同就是，图片前面要写一个！（这是必须的），没什么好说的</p>
+//否则，在使用hostapd命令时会报错：
 
-<ul>
-<li><img src="https://luciferseva.github.io/images/sample.jpg" alt="picture" /></li>
-</ul>
+rfkill:Cannot open RFKILL control device
+</code></pre></li>
 
-<hr />
+<li><p>4:修改makefile
+将下载的驱动解压后，修改其目录下的Makefile文件的配置：</p>
 
-<h2 id="7-代码框">7:代码框</h2>
+<pre><code class="language-linux">CONFIG_POWER_SAVING = n
+CONFIG_PLATFORM_ARM_SUNxI = y
+CROSS_COMPILE = ../tools/external-toolchain/bin/arm-linux-gnueabihf-
+KVER := 4.14.14
+KSRC = ../linux-4.14
+</code></pre></li>
 
-<p>这个就比较重要了，很多时候都需要展示出一些代码</p>
+<li><p>5：编译命令
+运行：</p>
 
-<p>如果代码量比较少，只有单行的话，可以用单反引号( ` )包起来，如下：</p>
-
-<p><code>c=a+b</code></p>
-
-<pre><code>多行用三个反引号，如果要写注释，可以在反引号后面写
+<pre><code class="language-linux">make -j4
 </code></pre>
 
-<pre><code class="language-_c_">a=a+b;
+<p>编译完成后，会在目录下生成8***fs.ko。在板上系统加载此驱动模块后，会有”wlan0”网络设备</p></li>
+
+<li><p>6：连接</p></li>
+</ul>
+
+<blockquote>
+<p>1) 激活无线网卡
+ifconfig wlan0 up</p>
+
+<p>2) 扫描热点
+iwlist wlan0 scanning ( iwlist wlan0 scanning | grep ESSID )</p>
+
+<p>3) 连接到开放热点
+iwconfig wlan0 essid &ldquo;s7edge&rdquo;
+udhcpc -i wlan0</p>
+
+<p>4) 连接到WPA/WPA2加密的热点
+    创建/etc/wpa_supplicant.conf网络配置文件,写入ssid和key</p>
+
+<p>5)连接到配置文件中指定的热点：
+wpa_supplicant -Dwext -B -iwlan0 -c/etc/wpa_supplicant.conf
+udhcpc -i wlan0</p>
+</blockquote>
+
+<h2 id="查看连接状态">查看连接状态</h2>
+
+<h3 id="iwconfig">iwconfig</h3>
+
+<p>iwconfig是LWE最主要的工具，可以对无线网卡的大部分参数进行配置
+通过这个命令查看相应的状态，其中需要知道</p>
+
+<blockquote>
+<p>dbm是无线信号的强度单位，通常用来表示无线信号强度的大小。dbm是一个表示功率绝对值的值，是以1mw为0dbm，公式dbm=10×lg（毫瓦数/1），所以为负值，同时这个值越大，表示信号越好。无线信号的dbm值即信号强度一般在-30~-120之间。-35已经很强了，基本上没什么衰减，是非常好的网络连接了。wifi正常信号强度应该是-40 dbm ~ -85 dbm之间。小于 -90 dbm 就很差了，几乎办法连接和使用。</p>
+</blockquote>
+
+<h3 id="常用命令">常用命令</h3>
+
+<blockquote>
+<p>1、iwlist 命令：用于对/proc/net/wireless文件进行分析，得出无线网卡相关信息</p>
+</blockquote>
+
+<pre><code>iwlist wlan0 scanning 搜索当前无线网络
+
+iwlist wlan0 frequen 显示频道信息
+
+iwlist wlan0 rate 显示连接速度
+
+iwlist wlan0 power 显示电源模式
+
+iwlist wlan0 txpower 显示功耗
+
+iwlist wlan0 retry 显示重试连接次数(网络不稳定查看)
+
+iwlist wlan0 ap 显示热点信息
+
+iwlist --help 显示帮助信息
+
+iwlist --version 显示版本信息
 </code></pre>
 
-<h2 id="9-强调">9:强调</h2>
+<blockquote>
+<p>2、iwconfig 系统配置无线网络设备或显示无线网络设备信息。iwconfig 命令类似于ifconfig命令，但是他配置对象是无线网卡，它对网络设备进行无线操作，如设置无线通信频段</p>
+</blockquote>
 
-<p>一个星号或者是一个下划线包起来，会转换为<em>倾斜，如果是2个，会转换为<strong>加粗</p>
+<pre><code>auto 自动模式
 
-<p>just like this <em>hello</em></p>
+essid 设置ESSID
 
-<p>just like this <strong>hello</strong></p>
+nwid 设置网络ID
 
-<p>使用两个波浪线 ~标记 已删除文字
-Example:</p>
+freq 设置无线网络通信频段
 
-<p>(就像 这样)</p>
+chanel 设置无线网络通信频段
 
-<p>Result:</p>
+sens 设置无线网络设备的感知阀值
 
-<p>任何被两个波浪线包裹的(比如 <del>这样</del>这样)都会显示出删除线</p>
+mode 设置无线网络设备的通信设备
 
-<h2 id="10-代办事宜表">10:代办事宜表</h2>
+ap 强迫无线网卡向给定地址的接入点注册
 
-<p>使用带有 [ ] 或 [x] （未完成或已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用Markdown语法，例如：</p>
+nick&lt;名字&gt; 为网卡设定别名
 
-<ul class="task-list">
-<li><p>[ ] <strong>Cmd Markdown 开发</strong></p>
+rate&lt;速率&gt; 设定无线网卡的速率
 
-<ul class="task-list">
-<li><label><input type="checkbox" disabled class="task-list-item"> 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</label></li>
-<li><label><input type="checkbox" disabled class="task-list-item"> 支持以 PDF 格式导出文稿</label></li>
-<li><label><input type="checkbox" checked disabled class="task-list-item"> 新增Todo列表功能 <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">语法参考</a></label></li>
+rts&lt;阀值&gt; 在传输数据包之前增加一次握手，确信信道在正常的
 
-<li><p>[x] 改进 LaTex 功能</p>
+power 无线网卡的功率设置
+</code></pre>
 
-<ul class="task-list">
-<li><label><input type="checkbox" checked disabled class="task-list-item"> 修复 LaTex 公式渲染问题</label></li>
-<li><label><input type="checkbox" checked disabled class="task-list-item"> 新增 LaTex 公式编号功能 <a href="http://docs.mathjax.org/en/latest/tex.html#tex-eq-numbers">语法参考</a>
-<br /></label></li>
-</ul></li>
-</ul></li>
+<blockquote>
+<p>3、iw 是一种新的基于 nl80211 的用于无线设备的CLI配置实用程序。它支持最近已添加到内核所有新的驱动程序。采用无线扩展接口的旧工具iwconfig已被废弃，强烈建议切换到 iw 和 nl80211。</p>
+</blockquote>
 
-<li><p>[ ] <strong>七月旅行准备</strong></p>
+<p>Linux内核的其余部分，iw 仍处于开发阶段。功能被随时添加。 iw 的唯一文档就是此页和“iw help”的输出。 请帮助扩大这个页面。</p>
 
-<ul class="task-list">
-<li><label><input type="checkbox" disabled class="task-list-item"> 准备邮轮上需要携带的物品</label></li>
-<li><label><input type="checkbox" disabled class="task-list-item"> 浏览日本免税店的物品</label></li>
-<li><label><input type="checkbox" checked disabled class="task-list-item"> 购买蓝宝石公主号七月一日的船票
-<br /></label></li>
-</ul></li>
-</ul>
+<p>有一个页面列出iwconfig和iw的用例：替换 iwconfig.</p>
+
+<pre><code>iw help  帮助
+
+iw ibss leave  查看WiFi是否打开状态
+
+iw list  获得所有设备的功能，如带宽信息（2.4GHz，和5GHz），和802.11n的信息
+
+iw dev wlan0 scan  扫描
+
+iw event  监听事件
+
+iw dev wlan0 link  获得链路状态
+
+iw wlan0 connect foo  连接到已禁用加密的AP，这里它的SSID是foo
+
+iw wlan0 connect foo 2432  假设你有两个AP SSID 都是 foo ，你知道你要连接的是在 2432 频道
+
+iw wlan0 connect foo keys 0:abcde d:1:0011223344  连接到使用WEP的AP
+
+iw dev wlan1 station dump  获取station 的统计信息
+
+iw dev wlan1 station get  获得station对应的peer统计信息
+
+iw wlan0 set bitrates legacy-2.4 12 18 24  修改传输比特率
+
+iw dev wlan0 set bitrates mcs-5 4  修改tx HT MCS的比特率
+
+iw dev wlan0 set bitrates mcs-2.4 10
+
+iw dev wlan0 set bitrates mcs-5  清除所有 tx 比特率和设置的东西来恢复正常
+
+iw dev set txpower [] 设置传输功率
+
+iw phy set txpower [] 设置传输功率
+
+iw dev wlan0 set power_save on 设置省电模式
+
+iw dev wlan0 get power_save 查询当前的节电设定
+
+iw phy phy0 interface add moni0 type monitor 添加一个 monitor 接口
+</code></pre>
+
+<h2 id="dns-resolver">DNS Resolver</h2>
+
+<p>　　一个域名 (Domain Name) 由一个或多个标签 (label) 组成，标签之间用点隔开。最右端的标签代表顶级域 (top-level domain，TLD)。DNS (Domain Name System, 域名解析系统) 是互联网的一项核心服务，它是一个分布式层次化的系统，能够将域名和IP地址相互映射。DNS通过允许一个域名服务器把它的一部分域名解析服务委托给子服务器而实现了一种层次化的域名空间。DNS由解析器 (Resolver) 和域名服务器两部分组成。</p>
+
+<p>　　DNS系统的客户端被称为DNS解析器 (DNS Resolver)。在Linux系统上，解析器并不是特指某个应用程序，而是指解析器库。这个库包含了标准C库中的一系列函数，最主要的两个函数是gethostbyname()和gethostbyaddr()。可以对DNS解析器进行配置，使得它们查找/etc/hosts中的信息、查询DNS服务器或者使用网络信息服务系统的配置信息。libc使用/etc/host.conf配置文件；glibc使用/etc/nsswitch.conf配置文件。</p>
+
+<p>　　/etc/host.conf中主要的选项有：(1) order指定域名解析的查找顺序，其中hosts表示/etc/hosts配置文件；bind表示查询DNS服务器；nis表示查询NIS系统的配置信息。(2) multi [on|off]指定/etc/hosts中的主机是否可以有多个IP地址。</p>
+
+<p>　　/etc/nsswitch.conf是名字服务开关 (name service switch) 的配置文件，其中对应DNS解析器的数据库名字是hosts:。它的主要选项有：(1) dns表示使用DNS解析地址 (2) files表示使用/etc/hosts和/etc/network配置文件 (3) nis或nisplus。</p>
+
+<p>　　<strong><em>DNS服务器在/etc/resolv.conf中配置。</em></strong></p>
+
+<p>ping</p>
+
+<p>　　ping命令用来测试网络上的一台主机是否能够连通。ping命令向目标主机发送ICMP (Internet Control Message Protocol) 回声请求消息然后等待目标主机的回应，与此同时计算消息从源主机到目标主机的往返时间 (round-trip time,RTT)。</p>
+
+<h2 id="小结">小结</h2>
+
+<p>进一步对linux网卡设备的操作，及wifi的性能指标，相关命令有了进一步的学习，这里还有一个问题，就是可能会出现能ping通ip，但是ping不通域名，这里发现是dns的相关脚本错误，未添加相关hostname的信息导致</p>
               
             </div>
           </div>
@@ -381,7 +466,9 @@ Example:</p>
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/hugo/">Hugo</a>
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/linux/">linux</a>
+
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/wifi/">wifi</a>
 
                   </div>
                 
@@ -389,12 +476,12 @@ Example:</p>
             
             <div class="post-actions-wrap">
   
-      <nav >
+      <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/" data-tooltip="添加网站音乐">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -402,7 +489,7 @@ Example:</p>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/" data-tooltip="简单几步建立自己的web">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/" data-tooltip="USB初探">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -457,12 +544,12 @@ Example:</p>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
         <div class="post-actions-wrap">
   
-      <nav >
+      <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/" data-tooltip="添加网站音乐">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -470,7 +557,7 @@ Example:</p>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/" data-tooltip="简单几步建立自己的web">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/" data-tooltip="USB初探">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -602,9 +689,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/10\/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0\/';
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/10\/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95\/';
           
-            this.page.identifier = '\/2019\/10\/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0\/'
+            this.page.identifier = '\/2019\/10\/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95\/'
           
         };
         (function() {

@@ -1,0 +1,33 @@
+.back-to-top {
+    right: 30px;
+    bottom: 45px;
+    font-size: 2em;
+}
+
+/* 加入animate css 动画 */
+.animate {
+    animation-duration: 2s;
+    animation-delay: 0s;
+    animation-iteration-count: 1;
+    display: block;
+  }
+  /* 设置文章目录字体大小 */
+.post .post-toc .post-toc-content {
+    font-size: 14px;
+}
+.post .post-header {
+    margin-bottom: 4px;
+}
+
+
+/* 去除顶部border */
+body {
+    border-top: 0;
+}
+
+/* 让阅读更多居中 */
+.read-more {
+    text-align: left;
+    padding: 0 0 5px;
+    display: inline;
+}
