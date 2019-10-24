@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络设备驱动 on The way to be a master</title>
+    <link>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</link>
+    <description>Recent content in 网络设备驱动 on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 24 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux 网络设备驱动开发（一）</title>
+      <link>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%80/</link>
+      <pubDate>Thu, 24 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%80/</guid>
+      <description>&lt;p&gt;Linux内核对网络驱动程序使用统一的接口，并且对于网络设备采用面向对象的思想设计。&lt;/p&gt;
+
+&lt;p&gt;Linux内核采用分层结构处理网络数据包。分层结构与网络协议的结构匹配，既能简化数据包处理流程，又便于扩展和维护。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

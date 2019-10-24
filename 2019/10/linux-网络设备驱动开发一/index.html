@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="网络设备框架, 第一步, 分层结构">
+<meta name="description" content="Linux内核对网络驱动程序使用统一的接口，并且对于网络设备采用面向对象的思想设计。
+
+Linux内核采用分层结构处理网络数据包。分层结构与网络协议的结构匹配，既能简化数据包处理流程，又便于扩展和维护。">
+
+
+<meta property="og:description" content="Linux内核对网络驱动程序使用统一的接口，并且对于网络设备采用面向对象的思想设计。
+
+Linux内核采用分层结构处理网络数据包。分层结构与网络协议的结构匹配，既能简化数据包处理流程，又便于扩展和维护。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 网络设备驱动开发（一）">
+<meta name="twitter:title" content="Linux 网络设备驱动开发（一）">
+<meta property="og:url" content="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%80/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%80/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="Linux内核对网络驱动程序使用统一的接口，并且对于网络设备采用面向对象的思想设计。
+
+Linux内核采用分层结构处理网络数据包。分层结构与网络协议的结构匹配，既能简化数据包处理流程，又便于扩展和维护。">
+<meta name="twitter:description" content="Linux内核对网络驱动程序使用统一的接口，并且对于网络设备采用面向对象的思想设计。
+
+Linux内核采用分层结构处理网络数据包。分层结构与网络协议的结构匹配，既能简化数据包处理流程，又便于扩展和维护。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-10-24T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-10-24T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+      <meta property="article:section" content="网络设备驱动">
+    
+  
+  
+    
+      <meta property="article:tag" content="网络设备驱动">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="//d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg">
+  <meta property="twitter:image" content="//d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg">
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>Linux 网络设备驱动开发（一）</title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%80/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('/images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Linux 网络设备驱动开发（一）
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-10-24T00:00:00Z">
+        
+  
+  
+  
+  
+    2019年10月24日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>, 
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/%e7%bd%91%e7%bb%9c%e8%ae%be%e5%a4%87%e9%a9%b1%e5%8a%a8">网络设备驱动</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Linux内核对网络驱动程序使用统一的接口，并且对于网络设备采用面向对象的思想设计。</p>
+
+<p>Linux内核采用分层结构处理网络数据包。分层结构与网络协议的结构匹配，既能简化数据包处理流程，又便于扩展和维护。</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#linux-网络设备驱动开发-一-linux内核网络分层结构">Linux 网络设备驱动开发（一） —— linux内核网络分层结构</a>
+<ul>
+<li><a href="#内核网络结构">内核网络结构</a></li>
+<li><a href="#与网络有关的数据结构">与网络有关的数据结构</a></li>
+<li><a href="#net-device结构">net_device结构</a></li>
+<li><a href="#数据包接收流程">数据包接收流程</a></li>
+<li><a href="#数据包发送流程">数据包发送流程</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="linux-网络设备驱动开发-一-linux内核网络分层结构">Linux 网络设备驱动开发（一） —— linux内核网络分层结构</h1>
+
+<h2 id="内核网络结构">内核网络结构</h2>
+
+<p><strong>分层体系设计</strong>  在Linux内核中，对网络部分按照网络协议层、网络设备层、设备驱动功能层和网络媒介层的分层体系设计。</p>
+
+<p>   网络驱动功能层主要通过网络驱动程序实现。</p>
+
+<p>   在Linux内核，所有的网络设备都被抽象为一个接口处理，该接口提供了所有的网络操作。</p>
+
+<p>   net_device结构表示网络设备在内核中的情况，也就是网络设备接口。网络设备接口既包括软件虚拟的网络设备接口，如环路设备，也包括了网络硬件设备，如以太网卡。</p>
+
+<p>   Linux内核有一个dev_base的全局指针，指向一个设备链表，包括了系统内的所有网络设备。该设备链表每个节点是一个网络设备。</p>
+
+<p>   在net_device结构中提供了许多供系统访问和协议层调用的设备方法，包括初始化、打开关闭设备、数据包发送和接收等。</p>
+
+<h2 id="与网络有关的数据结构">与网络有关的数据结构</h2>
+
+<p>内核对网络数据包的处理都是基于sk_buff结构的，该结构是内核网络部分最重要的数据结构。</p>
+
+<p>网络协议栈中各层协议都可以通过对该结构的操作实现本层协议数据的添加或者删除。使用sk_buff结构避免了网络协议栈各层来回复制数据导致的效率低下。
+    <img src="https://luciferseva.github.io/images/sk.png" alt="数据结构" /></p>
+
+<p>sk_buff结构可以分为两个部分，一部分是存储数据包缓存，在图中表示为PackertData，另一部分是由一组用于内核管理的指针组成。</p>
+
+<p>sk_buff管理的指针最主要的是下面4个：</p>
+
+<ul>
+<li>head指向数据缓冲(PackertData)的内核首地址；</li>
+<li>data指向当前数据包的首地址；</li>
+<li>tail指向当前数据包的尾地址；</li>
+<li>end 指向数据缓冲的内核尾地址。</li>
+</ul>
+
+<p>数据包的大小在内核网络协议栈的处理过程中会发生改变，因此data和tail指针也会不断变化，而head和tail指针是不会发生改变的。</p>
+
+<p>对于一个TCP数据包为例，sk_buff还提供了几个指针直接指向各层协议头。mac指针指向数据的mac头；nh指针指向网络协议头，一般是IP协议头；h指向传输层协议头，在本例中是TCP协议头。</p>
+
+<p><strong><em>对各层设置指针的是方便了协议栈对数据包的处理</em></strong></p>
+
+<h2 id="net-device结构">net_device结构</h2>
+
+<p><strong><em>Linux内核中网络设备最重要的数据结构就是net_device结构了</em></strong>，它是网络驱动程序最重要的部分。</p>
+
+<p>net_device结构保存在include/linux/netdevices.h头文件，理解该结构对理解网络设备驱动有很大帮助。</p>
+
+<p>内核中所有网络设备的信息和操作都在net_device设备中，无论是注册网络设备，还是设置网络设备参数，都用到该结构。</p>
+
+<p>下面是主要数据成员。</p>
+
+<ul>
+<li><p>设备名称</p></li>
+
+<li><p>总线参数</p></li>
+
+<li><p>协议参数</p></li>
+
+<li><p>链接层变量</p></li>
+
+<li><p>接口标志</p></li>
+</ul>
+
+<h2 id="数据包接收流程">数据包接收流程</h2>
+
+<p><strong>在Linux内核中，一个网络数据包从网卡接收到用户空间需要经过链路层、传输层和socket的处理，最终到达用户空间</strong></p>
+
+<p><img src="https://luciferseva.github.io/images/数据传输.png" alt="数据结构" /></p>
+
+<p>以比较通用的DM9000网卡为例，当网卡收到数据包以后，调用中断处理函数 <strong><em>dm9000_interrupt()</em></strong>，该函数检查中断处理类型，如果是接收数据包中断，则调用 <strong><em>dm9000_rx()</em></strong>*函数接收数据包到内核空间。</p>
+
+<p>dm9000_rx()函数收到数据包完成后，内核会继续调用 <strong><em>netif_rx()</em></strong>函数，函数的作用是把网卡接收到数据提交给协议栈处理。</p>
+
+<p>协议栈使用 <strong><em>net_rx_action()</em></strong>函数处理接收数据包队列，该函数处理数据包后如果是 IP数据包则提交给 <strong><em>ip_recv()</em></strong>函数处理。ip_recv()函数主要是检查一个数据包IP头的合法性，检查通过后交给 <strong><em>ip_local_deliver()</em></strong>和 <strong><em>ip_local_deliver_finish()</em></strong>函数处理，之所以分开处理是因为内核中有防火墙相关的代码需要动态加载到此处。</p>
+
+<p>IP头处理完毕后，以UDP数据包为例将交由 <strong><em>udp_recv()</em></strong>函数处理，与 <strong><em>ip_recv()</em></strong>函数类亿，该函数检查 UDP头的合法性，然后交给<strong><em>udp_queue_recv()</em></strong>函数处理，最后提交给<strong><em>sock_queue_recv()</em></strong>函数处理。</p>
+
+<p>数据包进入 socket部分的第一个函数是 <strong><em>skb_recv_datagram()</em></strong>，该函数从内核的 socket队列取出数据包，交给 socket部分的 <strong><em>udp_recvmsg()</em></strong>函数，该函数负责处理UDP的数据，sock_recvmsg()处理提交给 <strong><em>sock_read()</em></strong>函数。</p>
+
+<p>sock_read()函数读取接收到的数据缓冲，把数据返回给 <strong><em>sys_read()</em></strong>系统调用。sys_read()函数调用最终把数据复制到用户空间，供用户使得。</p>
+
+<h2 id="数据包发送流程">数据包发送流程</h2>
+
+<p><strong>以UDP数据包发送流程为例，在DM9000网卡上如何发送一个数据包:</strong>
+<img src="https://luciferseva.github.io/images/数据发送.png" alt="数据结构" /></p>
+
+<p>当用户空间的应用程序通过 socket函数 sento()发送一个UDP数据后，会调用内核空间的 sock_writev()函数，然后通过 sock_sendmsg()函数处理。sock_sendmsg()函数调用 inet_sendmsg()函数处理，inet_sendmsg()函数会把要发送的数据交给传输层的 udp_sendmsg()函数处理。</p>
+
+<p>udp_sendmsg()函数在数据前加入UDP头，然后把数据交给 ip_build_xmit()函数处理，该函数根据 socket提供的目的 IP和端口信息构造IP头，然后调用</p>
+
+<p>output_maybe_reroute()函数处理。out_maybe_reroute()函数检查数据包是否需要经过路由，最后交给 ip_output()函数写入到发送队列，写入完成后由ip_finish_output()函数处理后续工作。</p>
+
+<p>链路层的 dev_queue_xmit()函数处理发送队列，调用 DM9000网卡的发送数据包函数dm9000_xmit()发送数据包，发送完毕后，调用 dm9000_xmit_done函数处理发送结果。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">网络设备驱动</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95/" data-tooltip="WIFI性能调试">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95/" data-tooltip="WIFI性能调试">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/10\/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%80\/';
+          
+            this.page.identifier = '\/2019\/10\/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%80\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
