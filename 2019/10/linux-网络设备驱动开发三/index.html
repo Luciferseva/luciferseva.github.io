@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="基本原理, 驱动框架">
+<meta name="description" content="网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 四层的 Internet 模型">
+
+
+<meta property="og:description" content="网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 四层的 Internet 模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 网络设备驱动开发（三）">
+<meta name="twitter:title" content="Linux 网络设备驱动开发（三）">
+<meta property="og:url" content="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 四层的 Internet 模型">
+<meta name="twitter:description" content="网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 四层的 Internet 模型">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-10-25T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-10-25T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+      <meta property="article:section" content="网络设备驱动">
+    
+  
+  
+    
+      <meta property="article:tag" content="网络设备驱动">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="//d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg">
+  <meta property="twitter:image" content="//d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg">
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>Linux 网络设备驱动开发（三）</title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('/images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Linux 网络设备驱动开发（三）
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-10-25T00:00:00Z">
+        
+  
+  
+  
+  
+    2019年10月25日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>, 
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/%e7%bd%91%e7%bb%9c%e8%ae%be%e5%a4%87%e9%a9%b1%e5%8a%a8">网络设备驱动</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 <strong>四层</strong>的 Internet 模型</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#网络设备驱动基本原理和框架">网络设备驱动基本原理和框架</a>
+<ul>
+<li><a href="#协议栈层次对比">协议栈层次对比</a></li>
+<li><a href="#linux网络子系统">Linux网络子系统</a></li>
+<li><a href="#设备无关层到驱动层的体系结构">设备无关层到驱动层的体系结构</a>
+<ul>
+<li><a href="#网络协议接口层">网络协议接口层</a></li>
+<li><a href="#网络设备接口层">网络设备接口层</a>
+<ul>
+<li><a href="#主要全局成员">主要全局成员</a></li>
+<li><a href="#主要设备方法">主要设备方法</a></li>
+</ul></li>
+<li><a href="#设备驱动接口层">设备驱动接口层</a></li>
+<li><a href="#网络设备与媒介层">网络设备与媒介层</a></li>
+<li><a href="#网络设备的注册">网络设备的注册</a></li>
+</ul></li>
+<li><a href="#驱动的实现">驱动的实现</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="网络设备驱动基本原理和框架">网络设备驱动基本原理和框架</h1>
+
+<h2 id="协议栈层次对比">协议栈层次对比</h2>
+
+<p><strong>网络栈的Internet 模型</strong>  </p>
+
+<p><img src="https://luciferseva.github.io/images/tu1.jpg" alt="网络栈" /></p>
+
+<h2 id="linux网络子系统">Linux网络子系统</h2>
+
+<p>Linux网络子系统的顶部是系统调用接口层。它为用户空间提供的应用程序提供了一种访问内核网络子系统的方法（socket）。位于其下面是一个协议无关层，它提供一种通用的方法来使用传输层协议。然后是具体协议的实现，在Linux中包括内核的协议TCP,UDP，当然还有IP。然后是设备无关层，它提供了协议与设备驱动通信的通用接口，最下面是设备的驱动程序。</p>
+
+<p><img src="https://luciferseva.github.io/images/figure2.gif" alt="linux网络架构" /></p>
+
+<p>  设备无关接口将协议与各种网络驱动连接在一起，这一层提供一组通用函数供底层网络设备驱动使用，让它们可以对高层协议栈进行操作。需要从协议层向设备发生数据，需要调用dev_queue_xmit函数，这个函数对数据进行列队，然后交由底层驱动程序的hard_start_xmit方法最终完成传输。接收通常是使用netif_rx执行的。当底层设备程序接收到一个报文（发生中断）时，就会调用netif_rx将数据上传至设备无关层。</p>
+
+<h2 id="设备无关层到驱动层的体系结构">设备无关层到驱动层的体系结构</h2>
+
+<p>下图为设备无关层到驱动层的体系结构</p>
+
+<p><img src="https://luciferseva.github.io/images/设备无关层到驱动层.png" alt="设备无关层到驱动层的体系结构" /></p>
+
+<ul>
+<li><p>网络协议接口层向网络层协议提供提供统一的数据包收发接口，不论上层协议为ARP还是IP，都通过dev_queue_xmit()函数发送数据，并通过netif_rx()函数接受数据。这一层的存在使得上层协议独立于具体的设备。</p></li>
+
+<li><p>网络设备接口层向协议接口层提供统一的用于描述具体网络设备属性和操作的结构体net_device，该结构体是设备驱动功能层中各函数的容器。实际上，网络设备接口层从宏观上规划了具体操作硬件的设备驱动功能层的结构。</p></li>
+
+<li><p>设备驱动功能层各函数是网络设备接口层net_device数据结构的具体成员，是驱使网络设备硬件完成相应动作的程序，他通过hard_start_xmit()函数启动发送操作，并通过网络设备上的中断触发接受操作。</p></li>
+
+<li><p>网络设备与媒介层是完成数据包发送和接受的物理实体，包括网络适配器和具体的传输媒介，网络适配器被驱动功能层中的函数物理上驱动。对于Linux系统而言，网络设备和媒介都可以是虚拟的。</p></li>
+</ul>
+
+<h3 id="网络协议接口层">网络协议接口层</h3>
+
+<p>这里主要进行数据包的收发，使用函数原型为：</p>
+
+<pre><code>dev_queue_xmit(struct sk_buff *skb);int netif_rx(struct sk_buff *skb);  
+</code></pre>
+
+<p>这里使用了一个skb_buff结构体，定义于include/linux/skbuff.h中，它的含义为“套接字缓冲区”，用于在Linux网络子系统各层间传输数据。他是一个双向链表，在老的内核中会有一个list域指向sk_buff_head也就是链表头，但是在我研究的linux2.6.30.4内核中已经不存在了，如下图
+<img src="https://luciferseva.github.io/images/sk_buff.jpg" alt="sk_buff.jpg" />
+sk_buff中重要的数据成员</p>
+
+<p>struct device *dev;正在处理该包的设备</p>
+
+<p>__u32 sadd;r//IP元地址</p>
+
+<p>__u32 daddr;//IP目的地址</p>
+
+<p>__u32 raddr;//IP路由器地址</p>
+
+<p>unsigned char *head;//分配空间的开始</p>
+
+<p>unsigned char *data;//有效数据的开始</p>
+
+<p>unsigned char *tail;//有效数据的结束</p>
+
+<p>unsigned char *end;//分配空间的结束</p>
+
+<p>unsigned long len;//有效数据的长度</p>
+
+<p>sk_buff操作：</p>
+
+<ul>
+<li><p>a &ndash; 分配:分配一个sk_buff结构，供协议栈代码使用</p>
+
+<p>struct sk_buff *alloc_skb(unsigned int len, int priority);
+struct sk_buff *dev_alloc_skb(unsigned int len);</p></li>
+</ul>
+
+<p>分配一个缓冲区。alloc_skb函数分配一个缓冲区并初始化skb-&gt;data和skb-&gt;tail为skb-&gt;head。参数len为数据缓冲区的空间大小，通常以L1_CACHE_BYTES字节(对ARM为32)对齐，参数priority为内存分配的优先级。dev_alloc_skb()函数以GFP_ATOMIC优先级进行skb的分配。</p>
+
+<ul>
+<li><p>b &ndash; 释放:Linux内核内部使用kfree_skb()函数，而网络设备驱动程序中则最好使用dev_kfree_skb()。</p>
+
+<pre><code class="language-c">void kfree_skb(struct sk_buff *skb);
+
+void dev_kfree_skb(struct sk_buff *skb);
+</code></pre></li>
+</ul>
+
+<p>sk_buff中比较重要的成员是指向数据包中数据的指针，如下图所示：</p>
+
+<p><img src="https://luciferseva.github.io/images/sk_buff2.jpg" alt="sk_buff2.jpg" /></p>
+
+<p>用于寻址数据包中数据的指针，head指向已分配空间开头，data指向有效的octet开头，tail指向有效的octet结尾，而end指向tail可以到达的最大地址。如果不这样做而分配一个大小固定的缓冲区，如果buffer不够用，则要申请一个更大的buffer，拷贝进去再增加，这样降低了性能。</p>
+
+<ul>
+<li><p>c &ndash; 变更</p>
+
+<pre><code class="language-c">unsigned char *skb_put(struct sk_buff *skb, int len);将taill指针向后移动len长度，并返回tail移动之前的值。用于向skb有效数据区域末尾添加数据。
+unsigned char *skb_push(struct sk_buff *skb, int len);将data指针向前移动len长度。并返回移动之后的值。用于向skb有效数据区域前端添加数据（包头）。
+unsigned char *skb_pull(struct sk_buff *skb, int len);
+void skb_reserve(struct sk_buff ×skb, int len);
+</code></pre>
+
+<p>下图分别对应了这四个函数，看了这张图应该对这4个函数的作用了然于胸。
+<img src="https://luciferseva.github.io/images/skb变更.jpg" alt="skb变更.jpg" /></p></li>
+</ul>
+
+<h3 id="网络设备接口层">网络设备接口层</h3>
+
+<p>网络设备接口层的主要功能是为千变万化的网络设备定义了统一，抽象的数据结构net_device结构体，以不变应万变，实现多种硬件在软件层次上的统一。</p>
+
+<pre><code>//每一个网络设备都由struct net_device来描述，该结构可使用如下内核函数进行动态分配
+struct net_device *alloc_netdev(int sizeof_priv, const char *mask, void(*setup)(struct net_device *))
+</code></pre>
+
+<p>sizeof_priv是私有数据区大小；mask是设备名,setup是初始化函数，在注册该设备时，该函数被调用。也就是net_deivce的init成员。</p>
+
+<pre><code>struct net_device *alloc_etherdev(intsizeof_priv)
+</code></pre>
+
+<p>这个函数和上面的函数不同之处在于内核知道会将该设备做一个以太网设备看待并做一些相关的初始化。
+net_device结构可分为</p>
+
+<ul>
+<li><a href="#主要全局成员">全局成员</a></li>
+<li>硬件相关成员</li>
+<li>接口相关成员</li>
+<li><a href="#主要设备方法">设备方法成员</a></li>
+<li>公用成员</li>
+</ul>
+
+<h4 id="主要全局成员">主要全局成员</h4>
+
+<pre><code class="language-c">char name[INFAMSIZ]    设备名，如：eh%d
+unsigned long state  设备状态
+unsigned long base_addr  I/O基地址
+unsigned int irq   中断号
+</code></pre>
+
+<h4 id="主要设备方法">主要设备方法</h4>
+
+<pre><code class="language-c">//首先看打开和关闭网络设备的函数：
+ 
+int (*open)(struct net_device *dev);
+//打开接口。ifconfig激活时，接口将被打开
+ 
+int (*stop)(struct net_device *dev);  
+//停止接口，ifconfig eth% down时调用
+//要注意的是ifconfig是interface config的缩写，通常我们在用户空间输入:
+//ifconfig eth0 up  会调用这里的open函数。
+//在用户空间输入:
+//ifconfig eth0 down  会调用这里的stop函数。
+//在使用ifconfig向接口赋予地址时，要执行两个任务。首先，它通过ioctl(SIOCSIFADDR)(Socket I/O Control Set Interface Address)赋予地址，然后通过ioctl(SIOCSIFFLAGS)(Socket I/O Control Set Interface Flags)设置dev-&gt;flag中的IFF_UP标志以打开接口。这个调用会使得设备的open方法得到调用。类似的，在接口关闭时，ifconfig使用ioctl(SIOCSIFFLAGS)来清理IFF_UP标志，然后调用stop函数。
+ 
+int  (*init)(struct  net_device *dev)
+//初始化函数，该函数在register_netdev时被调用来完成对net_device结构的初始化
+ 
+int (*hard_start_xmit)(struct sk_buf*skb，struct net_device *dev)
+//数据发送函数
+ 
+int (*hard_header)(struct sk_buff *skb, struct net_device *dev, unsigned short type, void *daddr, void *saddr, unsigned len); 
+//该方法根据先前检索到的源和目的硬件地址建立硬件头
+ 
+int (*rebuild_header)(struct sk_buff *skb);
+//以太网的mac地址是固定的，为了高效，第一个包去询问mac地址，得到对应的mac地址后就会作为cache把mac地址保存起来。以后每次发包不用询问了，直接把包的地址拷贝出来。
+ 
+void (*tx_timeout)(struct net_device *dev);  
+//如果数据包发送在超时时间内失败，这时该方法被调用，这个方法应该解决失败的问题，并重新开始发送数据。
+ 
+struct net_device_stats *(*get_stats)(struct net_device *dev);  
+//当应用程序需要获得接口的统计信息时，这个方法被调用。
+ 
+int (*set_config)(struct net_device *dev, struct ifmap *map);  
+//改变接口的配置，比如改变I/O端口和中断号等，现在的驱动程序通常无需该方法。
+ 
+int (*do_ioctl)(struct net_device *dev, struct ifmap *map);  
+//用来实现自定义的ioctl命令，如果不需要可以为NULL。
+ 
+void (*set_multicast_list)(struct net_device *dev)；  
+//当设备的组播列表改变或设备标志改变时，该方法被调用。
+ 
+int (*set_mac_address)(struct net_device *dev, void *addr);  
+//如果接口支持mac地址改变，则可以实现该函数。&lt;/span&gt;
+</code></pre>
+
+<h3 id="设备驱动接口层">设备驱动接口层</h3>
+
+<p>net_device结构体的成员(属性和函数指针)需要被设备驱动功能层的具体数值和函数赋予。对具体的设置xxx，工程师应该编写设备驱动功能层的函数，这些函数型如</p>
+
+<pre><code class="language-c">xxx_open(),xxx_stop(),xxx_tx(),xxx_hard_header(),xxx_get_stats(),xxx_tx_timeout()
+</code></pre>
+
+<p>等。</p>
+
+<h3 id="网络设备与媒介层">网络设备与媒介层</h3>
+
+<p>网络设备与媒介层直接对应于实际的硬件设备。</p>
+
+<h3 id="网络设备的注册">网络设备的注册</h3>
+
+<p>网络设备注册方式与字符驱动不同之处在于它没有主次设备号，并使用:</p>
+
+<pre><code class="language-c">函数注册
+int register_netdev(struct net_deivce*dev)
+网络设备的注销
+void unregister_netdev(struct net_device*dev)
+</code></pre>
+
+<h2 id="驱动的实现">驱动的实现</h2>
+
+<ul>
+<li><p>初始化（init）:
+设备探测工作在init方法中进行，一般调用一个称之为probe方法的函数
+初始化的主要工作时检测设备，配置和初始化硬件，最后向系统申请这些资源。此外填充该设备的dev结构，我们调用内核提供的ether_setup方法来设置一些以太网默认的设置。</p></li>
+
+<li><p>打开(open):
+open这个方法在网络设备驱动程序里是网络设备被激活时被调用（即设备状态由down变成up）
+实际上很多在初始化的工作可以放到这里来做。比如说资源的申请，硬件的激活。如果dev-&gt;open返回非0，则硬件状态还是down，注册中断、DMA等；设置寄存器，启动设备；启动发送队列一般注册中断都在init中做，但在网卡驱动程序中，注册中断大部分都是放在open中注册，因为要经常关闭和重启网卡</p></li>
+
+<li><p>关闭(stop):
+stop方法做和open相反的工作
+可以释放某些资源以减少系统负担
+stop是在设备状态由up转为down时被调用</p></li>
+
+<li><p>发送（hard_start_xmit）:
+在系统调用的驱动程序的hard_start_xmit时，发送的数据放在一个sk_buff结构中。一般的驱动程序传给硬件发出去。也有一些特殊的设备比如说loopback把数据组成一个接收数据在传送给系统或者dummy设备直接丢弃数据。
+如果发送成功,hard_start_xmit方法释放sk_buff。如果设备暂时无法处理，比如硬件忙，则返回1。</p></li>
+
+<li><p>接收:
+驱动程序并存在一个接受方法。当有数据收到时驱动程序调用netif_rx函数将skb交交给设备无关层。
+一般设备收到数据后都会产生一个中断，在中断处理程序中驱动程序申请一块sk_buff(skb)从硬件中读取数据位置到申请号的缓冲区里。</p></li>
+</ul>
+
+<p>接下来填充sk_buff中的一些信息。</p>
+
+<p>中断有可能是收到数据产生也可能是发送完成产生，中断处理程序要对中断类型进行判断，如果是收到数据中断则开始接收数据，如果是发送完成中断，则处理发送完成后的一些操作，比如说重启发送队列。
+接收流程：</p>
+
+<ul>
+<li>1、分配skb=dev_alloc_skb(pkt-&gt;datalen+2)</li>
+<li>2、从硬件中读取数据到skb</li>
+<li>3、调用netif_rx将数据交给协议栈</li>
+</ul>
+
+<p><strong>中断处理</strong></p>
+
+<p>网络接口通常支持3种类型的中断：新报文到达中断、报文发送完成中断和出错中断。中断处理程序可通过查看网卡的中断状态寄存器，来分辨出中断类型。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/">网络设备驱动</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%BA%8Clist_head%E7%BB%93%E6%9E%84%E4%BD%93/" data-tooltip="Linux 网络协议栈开发（二）list_head结构体">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%BA%8C/" data-tooltip="Linux 网络设备驱动开发（二）">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%BA%8Clist_head%E7%BB%93%E6%9E%84%E4%BD%93/" data-tooltip="Linux 网络协议栈开发（二）list_head结构体">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%BA%8C/" data-tooltip="Linux 网络设备驱动开发（二）">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/10\/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89\/';
+          
+            this.page.identifier = '\/2019\/10\/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

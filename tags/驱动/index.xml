@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>驱动 on The way to be a master</title>
+    <link>https://luciferseva.github.io/tags/%E9%A9%B1%E5%8A%A8/</link>
+    <description>Recent content in 驱动 on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/tags/%E9%A9%B1%E5%8A%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>sdio-wifi详解</title>
+      <link>https://luciferseva.github.io/2019/10/sdio-wifi%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/sdio-wifi%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;p&gt;SDIO-Wifi模块是基于SDIO接口的符合wifi无线网络标准的嵌入式模块，内置无线网络协议IEEE802.11协议栈以及TCP/IP协议栈，能够实现用户主平台数据通过SDIO口到无线网络之间的转换。SDIO具有传输数据快，兼容SD、MMC接口等特点。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

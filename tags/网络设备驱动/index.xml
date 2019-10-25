@@ -6,10 +6,28 @@
     <description>Recent content in 网络设备驱动 on The way to be a master</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/tags/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux 网络设备驱动开发（三）</title>
+      <link>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89/</guid>
+      <description>&lt;p&gt;网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 &lt;strong&gt;四层&lt;/strong&gt;的 Internet 模型&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 网络设备驱动开发（二）</title>
+      <link>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%BA%8C/</link>
+      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%BA%8C/</guid>
+      <description>&lt;p&gt;网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 &lt;strong&gt;四层&lt;/strong&gt;的 Internet 模型&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Linux 网络设备驱动开发（一）</title>

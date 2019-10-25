@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="list_head结构体, linux网络协议栈">
+<meta name="description" content="在Linux内核中，提供了一个用来创建双向循环链表的结构 list_head。虽然linux内核是用C语言写的，但是list_head的引入，使得内核数据结构也可以拥有面向对象的特性，通过使用操作list_head 的通用接口很容易实现代码的重用，有点类似于C&#43;&#43;的继承机制（希望有机会写篇文章研究一下C语言的面向对象机制）。">
+
+
+<meta property="og:description" content="在Linux内核中，提供了一个用来创建双向循环链表的结构 list_head。虽然linux内核是用C语言写的，但是list_head的引入，使得内核数据结构也可以拥有面向对象的特性，通过使用操作list_head 的通用接口很容易实现代码的重用，有点类似于C&#43;&#43;的继承机制（希望有机会写篇文章研究一下C语言的面向对象机制）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 网络协议栈开发（二）list_head结构体">
+<meta name="twitter:title" content="Linux 网络协议栈开发（二）list_head结构体">
+<meta property="og:url" content="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%BA%8Clist_head%E7%BB%93%E6%9E%84%E4%BD%93/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%BA%8Clist_head%E7%BB%93%E6%9E%84%E4%BD%93/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="在Linux内核中，提供了一个用来创建双向循环链表的结构 list_head。虽然linux内核是用C语言写的，但是list_head的引入，使得内核数据结构也可以拥有面向对象的特性，通过使用操作list_head 的通用接口很容易实现代码的重用，有点类似于C&#43;&#43;的继承机制（希望有机会写篇文章研究一下C语言的面向对象机制）。">
+<meta name="twitter:description" content="在Linux内核中，提供了一个用来创建双向循环链表的结构 list_head。虽然linux内核是用C语言写的，但是list_head的引入，使得内核数据结构也可以拥有面向对象的特性，通过使用操作list_head 的通用接口很容易实现代码的重用，有点类似于C&#43;&#43;的继承机制（希望有机会写篇文章研究一下C语言的面向对象机制）。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-10-25T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-10-25T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+      <meta property="article:section" content="网络协议栈">
+    
+  
+  
+    
+      <meta property="article:tag" content="网络协议栈">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="//d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg">
+  <meta property="twitter:image" content="//d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg">
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>Linux 网络协议栈开发（二）list_head结构体</title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%BA%8Clist_head%E7%BB%93%E6%9E%84%E4%BD%93/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('/images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Linux 网络协议栈开发（二）list_head结构体
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-10-25T00:00:00Z">
+        
+  
+  
+  
+  
+    2019年10月25日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>, 
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/%e7%bd%91%e7%bb%9c%e5%8d%8f%e8%ae%ae%e6%a0%88">网络协议栈</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>在Linux内核中，提供了一个用来创建双向循环链表的结构 list_head。虽然linux内核是用C语言写的，但是list_head的引入，使得内核数据结构也可以拥有面向对象的特性，通过使用操作list_head 的通用接口很容易实现代码的重用，有点类似于C++的继承机制（希望有机会写篇文章研究一下C语言的面向对象机制）。</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#list-head结构体">list_head结构体</a>
+<ul>
+<li><a href="#offsetof">offsetof</a></li>
+<li><a href="#container-of">container_of</a></li>
+<li><a href="#list-entry">list_entry</a></li>
+<li><a href="#例子总结">例子总结</a>
+<ul>
+<li><a href="#其中常用函数">其中常用函数</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="list-head结构体">list_head结构体</h1>
+
+<p>kernel中的list_head结构定义：</p>
+
+<pre><code class="language-c">struct list_head {
+        struct list_head *next, *prev;
+};
+#define LIST_HEAD_INIT(name) { &amp;(name), &amp;(name) } 
+</code></pre>
+
+<p>需要注意的一点是，头结点head是不使用的，这点需要注意。</p>
+
+<p>使用list_head组织的链表的结构如下图所示：</p>
+
+<p><img src="https://luciferseva.github.io/images/linux/list_head/list_head.jfif" alt="list_head" /></p>
+
+<p>通过上图我们不难发现，上图的结构体中缺少数据域，其实，list_head结构体一般不单独拿出来使用，一般嵌入到其他结构体中,如：</p>
+
+<pre><code class="language-c">struct file_node{
+　　char c;
+　　struct list_head node;
+};
+</code></pre>
+
+<p>此时list_head就作为它的父结构中的一个成员了，当我们知道list_head的地址（指针）时，我们可以通过list.c提供的宏 list_entry 来获得它的父结构的地址。</p>
+
+<p>下面我们来看看list_entry的实现:</p>
+
+<pre><code class="language-c">#define list_entry(ptr,type,member)\
+　　container_of(ptr,type,member)
+ 
+#define offsetof(TYPE,MEMBER) ((size_t)&amp;((TYPE *)0)-&gt;MEMBER)
+ 
+#define container_of(ptr,type,member) ( {\
+　　const typeof( ((type*)0)-&gt;member ) *__mptr=(ptr);\
+　　(type*)( (char*)__mptr - offsetof(type,member) );} )
+</code></pre>
+
+<p>这里涉及到三个宏:</p>
+
+<ul>
+<li><a href="#offsetof">offsetof</a></li>
+<li><a href="#container_of">container_of</a></li>
+<li><a href="#list_entry">list_entry</a></li>
+</ul>
+
+<h2 id="offsetof">offsetof</h2>
+
+<pre><code>#define offsetof(TYPE,MEMBER) ( (size_t)&amp; ((TYPE *)0）-&gt; MEMBER )
+</code></pre>
+
+<p>我们知道 0 地址内容是不能访问的，但 0地址的地址我们还是可以访问的， 这里用到一个取址运算符(TYPE *)0 它表示将 0地址强制转换为TYPE类型，((TYPE *)0）-&gt; MEMBER 也就是从0址址找到TYPE 的成员MEMBER 。</p>
+
+<p>我们结合上面的结构来看</p>
+
+<pre><code class="language-c">    struct file_node{
+　　char c;
+　　struct list_head node;
+    };
+</code></pre>
+
+<p>将实参代入<strong>offset( struct file_node, node )</strong></p>
+
+<p>最终将变成这样：<strong>( (size_t) &amp; ((struct file_node*)0）-&gt; node )</strong></p>
+
+<p>这样看的还是不很清楚，我们再变变：</p>
+
+<p>struct file_node *p = NULL;</p>
+
+<p>&amp;p-&gt;node;</p>
+
+<p>这样应该比较清楚了，即求 p 的成员 node的地址，只不过p 为0地址，从0地址开始算成员node的地址，也就是成员 node 在结构体 struct file_node中的偏移量。offset宏就是算MEMBER在TYPE中的偏移量的。</p>
+
+<h2 id="container-of">container_of</h2>
+
+<pre><code class="language-c">#define container_of(ptr,type,member) ( {\
+
+const typeof( ((type*)0)-&gt;member ) *__mptr=(ptr);\
+
+(type*)( (char*)__mptr - offsetof(type,member) );} )
+</code></pre>
+
+<p>这个宏是由两个语句组成，最后container_of返回的结果就是第二个表达式的值。这里__mptr为中间变量，这就是list_head指针类型，它被初始化为ptr的值，而ptr就是当前所求的结构体中list_head节点的地址。为什么要用中间变量，这是考虑到安全性因素，如果传进来一个ptr++，所有ptr++放在一个表达式中会有副作用，像 (p++)+(p++)之类。</p>
+
+<p>(char*)<strong>mptr 之所以要强制类型转化为char是因为地址是以字节为单位的，而char的长度就是一个字节。container_of的值是两个地址相减，刚说了</strong>mptr是结构体中list_head节点的地址，offset宏求的是list_head节点MEMBER在结构体TYPE中的偏移量，那么__mptr减去它所在结构体中的偏移量，就是结构体的地址。</p>
+
+<h2 id="list-entry">list_entry</h2>
+
+<p>list_entry(ptr,type,member)宏的功能就是，由结构体成员地址求结构体地址。其中ptr 是所求结构体中list_head成员指针,type是所求结构体类型,member是结构体list_head成员名.
+通过下图来总结一下：
+<img src="https://luciferseva.github.io/images/linux/list_head/list_head2.jfif" alt="list_head2" /></p>
+
+<h2 id="例子总结">例子总结</h2>
+
+<pre><code class="language-c">#include &quot;list.h&quot; 
+#include &lt;stdio.h&gt; 
+#include &lt;string.h&gt;
+ 
+#define MAX_NAME_LEN 32
+#define MAX_ID_LEN 10
+ 
+typedef struct stud
+{
+    struct list_head list;
+    char name[MAX_NAME_LEN];
+    char stu_number[MAX_ID_LEN];
+}num_n_stu;
+ 
+int main(void)
+{
+    struct list_head head;
+    num_n_stu stu_1;
+    num_n_stu stu_2;
+    num_n_stu *entry;
+ 
+    struct list_head *p;
+    INIT_LIST_HEAD(&amp;head);
+    strcpy(stu_1.name,&quot;lisi&quot;);
+    strcpy(stu_1.stu_number,&quot;10000000&quot;);
+ 
+    strcpy(stu_2.name,&quot;zhangsan&quot;);
+    strcpy(stu_2.stu_number,&quot;10000001&quot;);
+    list_add(&amp;stu_1.list,&amp;head);
+    list_add(&amp;stu_2.list,&amp;head);
+    list_del(&amp;stu_2.list);
+    list_for_each(p,&amp;head)
+    {
+        entry=list_entry(p,struct stud,list);
+        printf(&quot;name: %s\n&quot;,entry-&gt;name);
+        printf(&quot;stu_number: %s\n&quot;,entry-&gt;stu_number);
+    }
+    list_del(&amp;stu_1.list);
+    return 0;
+}
+在Linux内核中可以使用这个以类似驱动模块的形式加载到内核：（这里就不用使用自定义的list.h了）
+
+#include &lt;linux/list.h&gt;
+#include &lt;linux/init.h&gt;
+#include &lt;linux/module.h&gt;
+ 
+MODULE_LICENSE(&quot;GPL&quot;);
+ 
+#define MAX_NAME_LEN 32
+#define MAX_ID_LEN 10
+ 
+ 
+typedef struct stud
+{
+    struct list_head list;
+    char name[MAX_NAME_LEN];
+    char stu_number[MAX_ID_LEN];
+}num_n_stu;
+ 
+static int my_main(void)
+{
+ 
+    struct list_head head;
+    num_n_stu stu_1;
+    num_n_stu stu_2;
+    num_n_stu *entry;
+ 
+    struct list_head *p;
+    INIT_LIST_HEAD(&amp;head);
+ 
+    strcpy(stu_1.name,&quot;lisi&quot;);
+    strcpy(stu_1.stu_number,&quot;10000000&quot;);
+ 
+    strcpy(stu_2.name,&quot;zhangsan&quot;);
+    strcpy(stu_2.stu_number,&quot;10000001&quot;);
+ 
+    list_add(&amp;stu_1.list,&amp;head);
+    list_add(&amp;stu_2.list,&amp;head);
+ 
+    list_del(&amp;stu_2.list);
+ 
+    list_for_each(p,&amp;head)
+    {
+ 
+        entry=list_entry(p,struct stud,list);
+ 
+        printk(&quot;name: %s\n&quot;,entry-&gt;name);
+ 
+        printk(&quot;stu_number: %s\n&quot;,entry-&gt;stu_number);
+ 
+    }
+    
+    list_del(&amp;stu_1.list);
+    
+    return 0;
+ 
+}
+ 
+static void my_exit(void)
+{
+    printk(&quot;my_exit ! \n&quot;);
+}
+ 
+ 
+module_init(my_main);
+module_exit(my_exit);
+</code></pre>
+
+<h3 id="其中常用函数">其中常用函数</h3>
+
+<pre><code class="language-c">//* 1 双向链表的遍历——list_for_each
+
+//注：这里prefetch 是gcc的一个优化选项，也可以不要
+#define list_for_each(pos, head) \
+         for (pos = (head)-&gt;next; prefetch(pos-&gt;next), pos != (head); \
+                 pos = pos-&gt;next)
+
+//* 2 生成双向链表的头结点——LIST_HEAD()
+
+ LIST_HEAD() -- 生成一个名为name的双向链表头节点
+
+#define LIST_HEAD(name) \
+struct list_head name = LIST_HEAD_INIT(name)
+static inline void INIT_LIST_HEAD(struct list_head *list)
+{
+　　list-&gt;next = list;
+　　list-&gt;prev = list;
+}
+
+//* 3 双向链表的插入操作 -- list_add()
+
+将new所代表的结构体插入head所管理的双向链表的头节点head之后: （即插入表头）
+
+static inline void list_add(struct list_head *new, struct list_head *head)
+{
+　　__list_add(new, head, head-&gt;next);
+}
+ 
+static inline void __list_add( struct list_head *new, struct list_head *prev, struct list_head *next)
+{
+　　next-&gt;prev = new;
+　　new-&gt;next = next;
+　　new-&gt;prev = prev;
+　　prev-&gt;next = new;
+}
+
+//* 4 从list中删除结点——list_del()
+
+static inline void list_del(struct list_head *entry)
+{
+　　__list_del(entry-&gt;prev, entry-&gt;next);
+　　entry-&gt;next = LIST_POISON1;
+　　entry-&gt;prev = LIST_POISON2;
+}
+ 
+static inline void __list_del(struct list_head * prev, struct list_head * next)
+{
+　　next-&gt;prev = prev;
+　　prev-&gt;next = next;
+}
+
+//* 5 判断链表是否为空（如果双向链表head为空则返回真，否则为假）——list_empty()
+
+static inline int list_empty(const struct list_head *head)
+{
+　　return head-&gt;next == head;
+}
+</code></pre>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88/">网络协议栈</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/" data-tooltip="Linux 网络协议栈开发（一）ping命令">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89/" data-tooltip="Linux 网络设备驱动开发（三）">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/" data-tooltip="Linux 网络协议栈开发（一）ping命令">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89/" data-tooltip="Linux 网络设备驱动开发（三）">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/10\/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%BA%8Clist_head%E7%BB%93%E6%9E%84%E4%BD%93\/';
+          
+            this.page.identifier = '\/2019\/10\/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%BA%8Clist_head%E7%BB%93%E6%9E%84%E4%BD%93\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
