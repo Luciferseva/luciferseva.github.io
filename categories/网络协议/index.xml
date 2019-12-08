@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络协议 on The way to be a master</title>
+    <link>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</link>
+    <description>Recent content in 网络协议 on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux 网络协议栈开发（一）ping命令</title>
+      <link>https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/</guid>
+      <description>&lt;p&gt;linux网络开发中比较常用的命令之一是ping，我们通常使用了ping命令加上要ping通的ip地址来进行分析，通过能否ping通指定ip或域名来检测网络连接是否成功，和连接质量。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

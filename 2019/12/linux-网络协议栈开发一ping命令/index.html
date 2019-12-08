@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="ping命令">
+<meta name="description" content="linux网络开发中比较常用的命令之一是ping，我们通常使用了ping命令加上要ping通的ip地址来进行分析，通过能否ping通指定ip或域名来检测网络连接是否成功，和连接质量。">
+
+
+<meta property="og:description" content="linux网络开发中比较常用的命令之一是ping，我们通常使用了ping命令加上要ping通的ip地址来进行分析，通过能否ping通指定ip或域名来检测网络连接是否成功，和连接质量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 网络协议栈开发（一）ping命令">
+<meta name="twitter:title" content="Linux 网络协议栈开发（一）ping命令">
+<meta property="og:url" content="https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="linux网络开发中比较常用的命令之一是ping，我们通常使用了ping命令加上要ping通的ip地址来进行分析，通过能否ping通指定ip或域名来检测网络连接是否成功，和连接质量。">
+<meta name="twitter:description" content="linux网络开发中比较常用的命令之一是ping，我们通常使用了ping命令加上要ping通的ip地址来进行分析，通过能否ping通指定ip或域名来检测网络连接是否成功，和连接质量。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-12-08T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-12-08T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="Linux">
+    
+      <meta property="article:section" content="网络协议">
+    
+  
+  
+    
+      <meta property="article:tag" content="Linux">
+    
+      <meta property="article:tag" content="网络协议栈">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="//d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg">
+  <meta property="twitter:image" content="//d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg">
+
+
+  <meta property="og:image" content="//images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="//images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>Linux 网络协议栈开发（一）ping命令</title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('//images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Linux 网络协议栈开发（一）ping命令
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-12-08T00:00:00Z">
+        
+  
+  
+  
+  
+    2019年12月8日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">Linux</a>, 
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/%e7%bd%91%e7%bb%9c%e5%8d%8f%e8%ae%ae">网络协议</a>
+    
+  
+
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>linux网络开发中比较常用的命令之一是ping，我们通常使用了ping命令加上要ping通的ip地址来进行分析，通过能否ping通指定ip或域名来检测网络连接是否成功，和连接质量。</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#ping命令详解">ping命令详解</a>
+<ul>
+<li><a href="#ping命令介绍">ping命令介绍</a></li>
+<li><a href="#同一网段内">同一网段内</a></li>
+<li><a href="#不同网段内">不同网段内</a></li>
+<li><a href="#总结">总结：</a>
+<ul>
+<li><a href="#重要知识点">重要知识点：</a></li>
+<li><a href="#其他概念">其他概念：</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="ping命令详解">ping命令详解</h1>
+
+<h2 id="ping命令介绍">ping命令介绍</h2>
+
+<p>如图所示：
+<img src="https://luciferseva.github.io/images/linux/ping/ping1.jpg" alt="图一" />
+ping一般可以分两种状态，ping同一网段的，另一种是ping不同网段的；</p>
+
+<h2 id="同一网段内">同一网段内</h2>
+
+<p>首先，如果主机A，要去ping主机B，那么主机A就要封装二层报文，他会先查自己的MAC地址表，如果没有B的MAC地址，就会向外发送一个ARP广播包，如图:
+<img src="https://luciferseva.github.io/images/linux/ping/ping2.jpg" alt="图二" />
+其中ARP报文格式如下:
+<img src="https://luciferseva.github.io/images/linux/ping/ping3.jpg" alt="图三" />
+其中OP</p>
+
+<ol>
+<li><p>表示ARP请求</p></li>
+
+<li><p>表示ARP应答</p></li>
+
+<li><p>表示RARP请求</p></li>
+
+<li><p>表示RARP应答</p></li>
+</ol>
+
+<p>首先，交换机会收到这个报文后，交换机有学习MAC地址的功能，所以他会检索自己有没有保存主机B的MAC地址，如果有，就返回给主机A，如果没有，就会向所有端口发送ARP广播，其它主机收到后，发现不是在找自己，就纷纷丢弃了该报文，不去理会。直到主机B收到了报文后，就立即响应，我的MAC地址是多少，同时学到主机A的MAC地址，并按同样的ARP报文格式返回给主机A。如图：</p>
+
+<p><img src="https://luciferseva.github.io/images/linux/ping/ping4.jpg" alt="图四" /></p>
+
+<p>ARP报文格式为：</p>
+
+<p><img src="https://luciferseva.github.io/images/linux/ping/ping5.jpg" alt="图五" /></p>
+
+<p>这时候主机A学到了主机B的MAC地址，就把这个MAC地址封装到ICMP协议的二层报文中向主机B发送，报文格式如下：</p>
+
+<p><img src="https://luciferseva.github.io/images/linux/ping/ping6.jpg" alt="图六" /></p>
+
+<p>当主机B收到了这个报文后，发现是主机A 的ICMP回显请求，就按同样的格式，返回一个值给主机A，这样就完成了同一网段内的ping过程。</p>
+
+<p><img src="https://luciferseva.github.io/images/linux/ping/ping7.jpg" alt="图七" /></p>
+
+<p>在这里，讲了这么久的局域网内的PING，实际过程的发生不到1毫秒</p>
+
+<blockquote>
+<p>总结</p>
+</blockquote>
+
+<ol>
+<li><p>主机A上执行“Ping 1.1.1.3”后，Ping会通知系统建立一个固定格式的ICMP请求数据包，然后由ICMP协议打包这个数据包和地  址“,1.1.1.3”转交给IP层协议（一组后台运行的进程，与ICMP类似）；</p></li>
+
+<li><p>IP层协议将以地址“1.1.1.3”作为目的地址，本机IP地址（1.1.1.1）作为源地址，加上一些其他的控制信息，构建一个IP数据包，并想办法得到1.1.1.3的MAC地址（物理地址，这是数据链路层协议构建数据链路层的传输单元——帧所必需的），以便交给数据链路层构建一个数据帧；</p></li>
+
+<li><p>IP层协议通过主机B的IP地址和自己的子网掩码，发现它跟自己属同一网络，就直接在本网络内查找这台机器的MAC；</p></li>
+
+<li><p>如果以前两机有过通信，在A机的ARP缓存表应该有B机IP与其MAC的映射关系，如果没有，就发一个ARP请求广播，得到主机B的MAC，一并交给数据链路层。</p></li>
+
+<li><p>数据链路层构建一个数据帧，目的地址是IP层传过来的物理地址，源地址则是本机的物理地址，还要附加上一些控制信息，依据以太网的介质访问规则，将它们传送出去。</p></li>
+
+<li><p>主机B收到这个数据帧后，先检查它的目的地址，并和本机的物理地址对比，如符合，则接收；否则丢弃。接收后检查该数据帧，将IP数据包从帧中提取出来，交给本机的IP层协议。</p></li>
+
+<li><p>IP层检查后，将有用的信息提取后交给ICMP协议，后者处理后，马上构建一个ICMP应答包，发送给主机A，其过程和主机A发送ICMP请求包到主机B一模一样。</p></li>
+</ol>
+
+<h2 id="不同网段内">不同网段内</h2>
+
+<p><img src="https://luciferseva.github.io/images/linux/ping/ping8.jpg" alt="图八" /></p>
+
+<p>如果主机A要ping主机C，那么主机A发现主机C的IP和自己不是同一网段，他就去找网关转发，但是他也不知道网关的MAC地址情况下呢？他就会向之前那个步骤一样先发送一个ARP广播，学到网关的MAC地址，再发封装ICMP报文给网关路由器。报文格式如下：</p>
+
+<p><img src="https://luciferseva.github.io/images/linux/ping/ping9.jpg" alt="图九" /></p>
+
+<p>当路由器收到主机A发过来的ICMP报文，发现目的地址是其本身MAC地址，根据目的的IP2.1.1.1，查路由表，发现2.1.1.1/24的路由表项，得到一个出口指针，去掉原来的MAC头部，加上自己的MAC地址向主机C转发。(如果网关也没有主机C的MAC地址，还是要向前面一个步骤一样，ARP广播一下即可相互学到。路由器2端口能学到主机C的MAC地址，主机C也能学到路由器2端口的MAC地址。)报文格式如下：</p>
+
+<p><img src="https://luciferseva.github.io/images/linux/ping/ping10.jpg" alt="图十" /></p>
+
+<p>最后，在主机C已学到路由器2端口MAC地址，路由器2端口转发给路由器1端口，路由1端口学到主机A的MAC地址的情况下，他们就不需要再做ARP解析，就将ICMP的回显请求回复过来。报文格式大致如下:</p>
+
+<p><img src="https://luciferseva.github.io/images/linux/ping/ping11.jpg" alt="图十一" /></p>
+
+<h2 id="总结">总结：</h2>
+
+<ol>
+<li><p>两台主机不在同一子网内，主机A要与主机C通信，主机A要向“缺省网关”发出ARP包，而“缺省网关”的IP地址已经在主机A系统软件中设置。这个IP地址实际上对应路由器1端口的IP地址（1.1.1.2）。所以主机A对“缺省网关”的IP地址广播出一个ARP请求时，路由器的1端口的MAC回复给主机A，此时主机A数据包的目的MAC替换为路由器1端口MAC。</p></li>
+
+<li><p>MAC替换后，经物理层，传输到交换机物理层，再传到交换机数据链路层，再经数据数据链路层到物理层。</p></li>
+
+<li><p>经bit流传到路由器的物理层，然后传到数据链路层，二层解封装，目的IP与路由器三层IP路由表比较，若匹配正确，交给上层处理，否则会缓存数据包内容，然后根据目标地址查找路由表找到相关表项，得到NEXT HOP及出接口的MAC地址，用这两个地址作为新的目的及源MAC地址封装事先缓存的数据包，然后转发，这个过程称为帧的重写（REWRITE）。</p></li>
+
+<li><p>重复进行MAC替换后， 在路由器中，找到与目的IP匹配表项，若路由器中存在主机C对应的MAC表项，则数据传输到C网络层，否则路由器发送ARP广播请求主机C的MAC。</p></li>
+
+<li><p>当主机C收到主机A的数据包后，再从主机C到主机A进行一次反向MAC替换过程。反向过程中，每一步省略掉ARP请求NEXT HOP的MAC，因为MAC表已经建立起来</p></li>
+</ol>
+
+<h3 id="重要知识点">重要知识点：</h3>
+
+<p>在数据包端到端的传输过程中，逻辑地址始终不会发生改变，而MAC地址则随着具体链路的不同而不同。</p>
+
+<p>路由器在某一个入接口上接收到数据帧后，先检测目的地是否是自己。若是，则交给上层处理，否则会缓存数据包内容，然后根据目标地址查找路由表找到相关表项，得到NEXT HOP及出接口的MAC地址，用这两个地址作为新的目的及源MAC地址封装事先缓存的数据包，然后转发，这个过程称为帧的重写（REWRITE）。</p>
+
+<p>ARP（Address Resolution Protocol，地址解析协议）有以下特点：</p>
+
+<ol>
+<li>ARP由ARP Request(广播)与ARP Reply（单播）组成。</li>
+<li>只有当发送方认为目标主机与自己位于同一逻辑网络（同一网段），ARP Request才会发出。</li>
+<li>属于本地的MAP（不同于FR MAP）IP地址与MAC地址均属于同一个设备（接口）。</li>
+</ol>
+
+<h3 id="其他概念">其他概念：</h3>
+
+<ol>
+<li><p>封装 　  所谓封装是指在发送方发生的自上而下的过程——在每一层为应用数据添加上特定的头部/尾部信息（PDU，Protocol Data Unit，协议数据单元）Application（应用程序）→segment（数据段）→packet（数据包）→frame（数据帧）→bit（比特，二进制位）</p></li>
+
+<li><p>解封装     所谓解封装是指在接收方发生的自下而上的过程——逐层的去掉头部以及尾部信息</p></li>
+</ol>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/linux/">Linux</a>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+    <script type="text/javascript">
+    var gitalk = new Gitalk({
+
+    
+        clientID: `d03385102b7ff900376b`,
+        clientSecret: `c4214e80ec3c0d5a2397e05d2efbc53b1d974098`,
+        repo: `luciferseva.github.io`,
+        owner: 'Luciferseva',
+        admin: ['Luciferseva'],
+        id: 'window.location.pathname',
+        distractionFreeMode: true,
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+  
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88/">网络协议栈</a>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+    <script type="text/javascript">
+    var gitalk = new Gitalk({
+
+    
+        clientID: `d03385102b7ff900376b`,
+        clientSecret: `c4214e80ec3c0d5a2397e05d2efbc53b1d974098`,
+        repo: `luciferseva.github.io`,
+        owner: 'Luciferseva',
+        admin: ['Luciferseva'],
+        id: 'window.location.pathname',
+        distractionFreeMode: true,
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+  
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/12/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A82/" data-tooltip="linux网络设备驱动2 ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/12/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A82/" data-tooltip="linux网络设备驱动2 ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/12\/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4\/';
+          
+            this.page.identifier = '\/2019\/12\/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

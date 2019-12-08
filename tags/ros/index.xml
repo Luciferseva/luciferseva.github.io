@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ros on The way to be a master</title>
+    <link>https://luciferseva.github.io/tags/ros/</link>
+    <description>Recent content in ros on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/tags/ros/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ros话题的发布和订阅</title>
+      <link>https://luciferseva.github.io/2019/12/ros%E8%AF%9D%E9%A2%98%E7%9A%84%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/12/ros%E8%AF%9D%E9%A2%98%E7%9A%84%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/</guid>
+      <description>&lt;p&gt;两个或者多个ros之间的信息通信&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>树莓派摄像头安装和使用 </title>
+      <link>https://luciferseva.github.io/2019/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;p&gt;motion是Linux下一款开源的摄像头监控软件，用命名行运行，只保存有运动物体的图像。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ros&#43;vins环境安装 </title>
+      <link>https://luciferseva.github.io/2019/11/ros-vins%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/ros-vins%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;p&gt;ros环境安装和vins搭建，快折腾两个星期了，再不出成果，估计。。。。
+准备材料：网线，sd卡，读卡器，树莓派3b，pc电脑，路由器，鼠标，显示器，键盘，电源&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ros的简单介绍</title>
+      <link>https://luciferseva.github.io/2019/11/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</guid>
+      <description>&lt;p&gt;最近工作中要用到ros，所以将所学到的东西，所看到的东西记录下来，方便以后的总结和回顾。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

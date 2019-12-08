@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo建站 on The way to be a master</title>
+    <link>https://luciferseva.github.io/categories/hugo%E5%BB%BA%E7%AB%99/</link>
+    <description>Recent content in hugo建站 on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/categories/hugo%E5%BB%BA%E7%AB%99/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MD语法简单学习</title>
+      <link>https://luciferseva.github.io/2019/11/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>快速生成md文档目录及生成doc文档</title>
+      <link>https://luciferseva.github.io/2019/11/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</guid>
+      <description>&lt;p&gt;学习md语言，快速生成md文档的目录及生成doc文档，及期间遇到一些问题&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>添加网站音乐</title>
+      <link>https://luciferseva.github.io/2019/11/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</guid>
+      <description>&lt;p&gt;通过html语言修改和网易云音乐，实现网站的背景音乐添加&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

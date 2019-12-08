@@ -1,172 +1,163 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>博客 on The way to be a master</title>
+    <title>Posts on The way to be a master</title>
     <link>https://luciferseva.github.io/post/</link>
-    <description>Recent content in 博客 on The way to be a master</description>
+    <description>Recent content in Posts on The way to be a master</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Linux 网络协议栈开发（一）ping命令</title>
-      <link>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <link>https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/</guid>
       <description>&lt;p&gt;linux网络开发中比较常用的命令之一是ping，我们通常使用了ping命令加上要ping通的ip地址来进行分析，通过能否ping通指定ip或域名来检测网络连接是否成功，和连接质量。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Linux 网络协议栈开发（二）list_head结构体</title>
-      <link>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%BA%8Clist_head%E7%BB%93%E6%9E%84%E4%BD%93/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <title>linux网络设备驱动2 </title>
+      <link>https://luciferseva.github.io/2019/12/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A82/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%BA%8Clist_head%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
-      <description>&lt;p&gt;在Linux内核中，提供了一个用来创建双向循环链表的结构 list_head。虽然linux内核是用C语言写的，但是list_head的引入，使得内核数据结构也可以拥有面向对象的特性，通过使用操作list_head 的通用接口很容易实现代码的重用，有点类似于C++的继承机制（希望有机会写篇文章研究一下C语言的面向对象机制）。&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2019/12/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A82/</guid>
+      <description>&lt;p&gt;网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 四层的 Internet 模型&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Linux 网络设备驱动开发（三）</title>
-      <link>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <title>ros话题的发布和订阅</title>
+      <link>https://luciferseva.github.io/2019/12/ros%E8%AF%9D%E9%A2%98%E7%9A%84%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%89/</guid>
-      <description>&lt;p&gt;网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 &lt;strong&gt;四层&lt;/strong&gt;的 Internet 模型&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2019/12/ros%E8%AF%9D%E9%A2%98%E7%9A%84%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/</guid>
+      <description>&lt;p&gt;两个或者多个ros之间的信息通信&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Linux 网络设备驱动开发（二）</title>
-      <link>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%BA%8C/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <title>github查找技巧</title>
+      <link>https://luciferseva.github.io/2019/11/github%E6%9F%A5%E6%89%BE%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%BA%8C/</guid>
-      <description>&lt;p&gt;网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 &lt;strong&gt;四层&lt;/strong&gt;的 Internet 模型&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2019/11/github%E6%9F%A5%E6%89%BE%E6%8A%80%E5%B7%A7/</guid>
+      <description>&lt;p&gt;比如需要寻找国产软件，首先想到的应该是在 GituHub 上找国内开发者，搜索时设置 location 为 China，如果你要寻找使用 javascript 语言开发者，则再增加 language 为 javascript，整个搜索条件就是：language:javascript location:china，&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>sdio-wifi详解</title>
-      <link>https://luciferseva.github.io/2019/10/sdio-wifi%E8%AF%A6%E8%A7%A3/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <title>树莓派摄像头安装和使用 </title>
+      <link>https://luciferseva.github.io/2019/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/sdio-wifi%E8%AF%A6%E8%A7%A3/</guid>
-      <description>&lt;p&gt;SDIO-Wifi模块是基于SDIO接口的符合wifi无线网络标准的嵌入式模块，内置无线网络协议IEEE802.11协议栈以及TCP/IP协议栈，能够实现用户主平台数据通过SDIO口到无线网络之间的转换。SDIO具有传输数据快，兼容SD、MMC接口等特点。&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2019/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;p&gt;motion是Linux下一款开源的摄像头监控软件，用命名行运行，只保存有运动物体的图像。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>进程、线程区别</title>
-      <link>https://luciferseva.github.io/2019/10/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%8C%BA%E5%88%AB/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <title>ros&#43;vins环境安装 </title>
+      <link>https://luciferseva.github.io/2019/11/ros-vins%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Thu, 21 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%8C%BA%E5%88%AB/</guid>
-      <description>&lt;p&gt;进程（process）和线程（thread）是操作系统的基本概念，但是它们比较抽象，不容易掌握。
-最近，我读到一篇博客，发现有一个很好的类比，可以把它们解释地清晰易懂。&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2019/11/ros-vins%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</guid>
+      <description>&lt;p&gt;ros环境安装和vins搭建，快折腾两个星期了，再不出成果，估计。。。。
+准备材料：网线，sd卡，读卡器，树莓派3b，pc电脑，路由器，鼠标，显示器，键盘，电源&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Linux 网络设备驱动开发（一）</title>
-      <link>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%80/</link>
-      <pubDate>Thu, 24 Oct 2019 00:00:00 +0000</pubDate>
+      <title>linux网络设备驱动1 </title>
+      <link>https://luciferseva.github.io/2019/11/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A81/</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/linux-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E4%B8%80/</guid>
+      <guid>https://luciferseva.github.io/2019/11/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A81/</guid>
       <description>&lt;p&gt;Linux内核对网络驱动程序使用统一的接口，并且对于网络设备采用面向对象的思想设计。&lt;/p&gt;
 
 &lt;p&gt;Linux内核采用分层结构处理网络数据包。分层结构与网络协议的结构匹配，既能简化数据包处理流程，又便于扩展和维护。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>WIFI性能调试</title>
-      <link>https://luciferseva.github.io/2019/10/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95/</link>
-      <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
+      <title>sdio-wifi详解 </title>
+      <link>https://luciferseva.github.io/2019/11/sdio-wifi%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95/</guid>
+      <guid>https://luciferseva.github.io/2019/11/sdio-wifi%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;p&gt;SDIO-Wifi模块是基于SDIO接口的符合wifi无线网络标准的嵌入式模块，内置无线网络协议IEEE802.11协议栈以及TCP/IP协议栈，能够实现用户主平台数&lt;/p&gt;
+
+&lt;p&gt;据通过SDIO口到无线网络之间的转换。SDIO具有传输数据快，兼容SD、MMC接口等特点。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>进程、线程区别 </title>
+      <link>https://luciferseva.github.io/2019/11/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%8C%BA%E5%88%AB/</guid>
+      <description>&lt;p&gt;进程（process）和线程（thread）是操作系统的基本概念，但是它们比较抽象，不容易掌握。 最近，我读到一篇博客，发现有一个很好的类比，可以把它们解释地清晰易懂&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>WIFI性能调试</title>
+      <link>https://luciferseva.github.io/2019/11/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95/</link>
+      <pubDate>Tue, 12 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/wifi%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95/</guid>
       <description>&lt;p&gt;这几天一直在搞sdiowifi的联网相关的事情，期间遇到几个问题，简单总结一下。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>USB初探</title>
-      <link>https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</link>
-      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      <title>MD语法简单学习</title>
+      <link>https://luciferseva.github.io/2019/11/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</guid>
-      <description>&lt;p&gt;最近工作中又要做linux的sdiowifi和usb设备了，之前说的ros学习暂时放一下，工作很难连续在一个项目上干的时间长久，不过毕竟小公司，能接触的东西也比较多，所以需要及时做好文档，以便日后的查找和阅读。&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2019/11/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>中文測試</title>
-      <link>https://luciferseva.github.io/2019/10/%E4%B8%AD%E6%96%87%E5%8D%9A%E5%AE%A2/</link>
-      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      <title>ros的简单介绍</title>
+      <link>https://luciferseva.github.io/2019/11/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/%E4%B8%AD%E6%96%87%E5%8D%9A%E5%AE%A2/</guid>
-      <description>&lt;p&gt;This is a chinese test post to show you how chinese is displayed.&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2019/11/ros%E7%9A%84%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</guid>
+      <description>&lt;p&gt;最近工作中要用到ros，所以将所学到的东西，所看到的东西记录下来，方便以后的总结和回顾。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>快速生成md文档目录及生成doc文档</title>
-      <link>https://luciferseva.github.io/2019/10/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</link>
-      <pubDate>Thu, 10 Oct 2019 22:39:27 +0800</pubDate>
+      <link>https://luciferseva.github.io/2019/11/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</guid>
+      <guid>https://luciferseva.github.io/2019/11/%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90md%E6%96%87%E6%A1%A3%E7%9B%AE%E5%BD%95%E5%8F%8A%E7%94%9F%E6%88%90doc%E6%96%87%E6%A1%A3/</guid>
       <description>&lt;p&gt;学习md语言，快速生成md文档的目录及生成doc文档，及期间遇到一些问题&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>添加网站音乐</title>
-      <link>https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</link>
-      <pubDate>Sun, 06 Oct 2019 23:19:33 +0800</pubDate>
+      <link>https://luciferseva.github.io/2019/11/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</guid>
+      <guid>https://luciferseva.github.io/2019/11/%E6%B7%BB%E5%8A%A0%E7%BD%91%E7%AB%99%E9%9F%B3%E4%B9%90/</guid>
       <description>&lt;p&gt;通过html语言修改和网易云音乐，实现网站的背景音乐添加&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>MD语法简单学习</title>
-      <link>https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</link>
-      <pubDate>Sun, 06 Oct 2019 12:24:48 +0800</pubDate>
+      <title>usb初探</title>
+      <link>https://luciferseva.github.io/2019/11/usb%E5%88%9D%E6%8E%A2/</link>
+      <pubDate>Tue, 05 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/md%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/</guid>
-      <description>&lt;p&gt;学习简单建站，在写技术博客的时候，难免用到md语言，这里简单记录一下，方便以后查阅&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2019/11/usb%E5%88%9D%E6%8E%A2/</guid>
+      <description>&lt;p&gt;最近工作中又要做linux的sdiowifi和usb设备了，之前说的ros学习暂时放一下，工作很难连续在一个项目上干的时间长久，不过毕竟小公司，能接触的东西也比较多，所以需要及时做好文档，以便日后的查找和阅读。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>简单几步建立自己的web</title>
-      <link>https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/</link>
-      <pubDate>Sun, 06 Oct 2019 11:19:33 +0800</pubDate>
+      <title>Hidden social section showcase</title>
+      <link>https://luciferseva.github.io/2014/08/hidden-social-section-showcase/</link>
+      <pubDate>Sun, 17 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/2019/10/%E7%AE%80%E5%8D%95%E5%87%A0%E6%AD%A5%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84web/</guid>
-      <description>&lt;p&gt;简单几步，通过hugo的安装和github的配置，通过cmd命令及git bash的操作，实现网站的建立和发布&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Archetypes management</title>
-      <link>https://luciferseva.github.io/2019/05/archetypes-management/</link>
-      <pubDate>Thu, 02 May 2019 19:25:30 +0200</pubDate>
-      
-      <guid>https://luciferseva.github.io/2019/05/archetypes-management/</guid>
-      <description>&lt;p&gt;The archetypes are defined in the &lt;code&gt;archetypes&lt;/code&gt; folder, for both post and portfolio.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Open Graph image</title>
-      <link>https://luciferseva.github.io/2019/04/open-graph-image/</link>
-      <pubDate>Sat, 20 Apr 2019 11:14:59 +0200</pubDate>
-      
-      <guid>https://luciferseva.github.io/2019/04/open-graph-image/</guid>
-      <description>Within any page, you can add in the FrontMatter a images array that will be used to define a specific Open Graph image.
-For example, see content/_index.md page:
-images: [&amp;quot;/images/sample.jpg&amp;quot;]  </description>
-    </item>
-    
-    <item>
-      <title>Welcome to Tranquilpeak 0.4.7-BETA</title>
-      <link>https://luciferseva.github.io/2015/06/welcome-to-tranquilpeak-0.4.7-beta/</link>
-      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://luciferseva.github.io/2015/06/welcome-to-tranquilpeak-0.4.7-beta/</guid>
-      <description>&lt;p&gt;Tranquilpeak is a gorgeous responsive theme for Hugo blog framework. It has many features and integrated services to improve user experience.&lt;/p&gt;</description>
+      <guid>https://luciferseva.github.io/2014/08/hidden-social-section-showcase/</guid>
+      <description>&lt;p&gt;This post is used to show how a site looks if the social section is hidden.&lt;/p&gt;</description>
     </item>
     
   </channel>

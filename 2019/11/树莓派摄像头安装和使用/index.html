@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="树莓派, 采集图像">
+<meta name="description" content="motion是Linux下一款开源的摄像头监控软件，用命名行运行，只保存有运动物体的图像。">
+
+
+<meta property="og:description" content="motion是Linux下一款开源的摄像头监控软件，用命名行运行，只保存有运动物体的图像。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派摄像头安装和使用 ">
+<meta name="twitter:title" content="树莓派摄像头安装和使用 ">
+<meta property="og:url" content="https://luciferseva.github.io/2019/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="motion是Linux下一款开源的摄像头监控软件，用命名行运行，只保存有运动物体的图像。">
+<meta name="twitter:description" content="motion是Linux下一款开源的摄像头监控软件，用命名行运行，只保存有运动物体的图像。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-11-22T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-11-22T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="树莓派">
+    
+      <meta property="article:section" content="摄像头">
+    
+  
+  
+    
+      <meta property="article:tag" content="linux">
+    
+      <meta property="article:tag" content="ros">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+  <meta property="og:image" content="//images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="//images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>树莓派摄像头安装和使用 </title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('//images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      树莓派摄像头安装和使用 
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-11-22T00:00:00Z">
+        
+  
+  
+  
+  
+    2019年11月22日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/%e6%a0%91%e8%8e%93%e6%b4%be">树莓派</a>, 
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/%e6%91%84%e5%83%8f%e5%a4%b4">摄像头</a>
+    
+  
+
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>motion是Linux下一款开源的摄像头监控软件，用命名行运行，只保存有运动物体的图像。</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#安装树莓派摄像头模块">安装树莓派摄像头模块</a></li>
+<li><a href="#通过摄像头模块拍照">通过摄像头模块拍照</a></li>
+<li><a href="#motion使用">motion使用</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h2 id="安装树莓派摄像头模块">安装树莓派摄像头模块</h2>
+
+<p>按照以下步骤来将树莓派摄像头模块连接搭配树莓派：</p>
+
+<p>找到 CSI 接口(CSI接口在以太网接口旁边)，掀起深色胶带。</p>
+
+<p>拉起 CSI 接口挡板。</p>
+
+<p>拿起你的摄像头模块，将贴在镜头上的塑料保护膜撕掉。确保黄色部分的PCB(有字的一面)是安装完美的（可以轻轻按一下黄色的部分来保证安装完美）。</p>
+
+<p>将排线插入CSI接口。记住，有蓝色胶带的一面应该面向以太网接口方向。同样，这时也确认一下排线安装好了之后，将挡板拉下。</p>
+
+<p>好了，现在你的 Pi Cam 已经准备就绪，可以拍摄照片或视频了
+在树莓派上启用摄像头模块
+在安装完摄像头模块之后，首先要确认你已经升级了树莓派系统并应用了最新的固件。可以输入以下命令来操作：</p>
+
+<pre><code class="language-c">$ sudo apt-get update
+$ sudo apt-get upgrade 
+</code></pre>
+
+<p>运行树莓派配置工具来激活摄像头模块：</p>
+
+<pre><code class="language-c">$ sudo raspi-config 
+</code></pre>
+
+<p>移动光标至菜单中的 &ldquo;Enable Camera（启用摄像头）&rdquo;，将其设为Enable（启用状态）。完成之后重启树莓派。</p>
+
+<h2 id="通过摄像头模块拍照">通过摄像头模块拍照</h2>
+
+<p>在重启完树莓派后，我们就可以使用Pi Cam了。要用它来拍摄照片的话，可以从命令行运行raspistill：</p>
+
+<pre><code class="language-c">$ raspistill -o keychain.jpg -t 2000 
+</code></pre>
+
+<p>这句命令将在 2000ms 后拍摄一张照片，然后保存为 keychain.jpg。是一张由 Pi Cam 随便拍摄的照片。</p>
+
+<h2 id="motion使用">motion使用</h2>
+
+<p>motion是Linux下一款开源的摄像头监控软件，用命名行运行，只保存有运动物体的图像。</p>
+
+<ol>
+<li><p>安装
+sudo apt install motion</p></li>
+
+<li><p>配置
+备份配置文件</p></li>
+</ol>
+
+<p>sudo cp/etc/motion/motion.conf/etc/motion/motion.conf.bak</p>
+
+<ol>
+<li>打开配置文档</li>
+</ol>
+
+<p>sudo vim /etc/motion/motion.conf</p>
+
+<ol>
+<li>更改文档中以下内容</li>
+</ol>
+
+<p>width640 #图像的宽</p>
+
+<p>height480 #图像的高</p>
+
+<p>target_dir /home/pi/motion-images #图片保存的路径</p>
+
+<p>stream_localhost off #允许通过网页查看摄像头</p>
+
+<p>stream_auth_method2 #开启密码认证</p>
+
+<p>stream_authentication 用户名:密码 #网页查看摄像头的用户名和密码4</p>
+
+<ol>
+<li>创建一个目录来存储Motion拍下的照片</li>
+</ol>
+
+<p>mkdir ~/motion-images
+6. 运行
+sudo motion</p>
+
+<p>用浏览器登陆树莓派的网址192.168.1.105:8081，会弹出用户名和密码的对话框，输入用户名和密码后看到图像就成功了。</p>
+
+<p>设置为开机运行
+sudo vim /etc/rc.local</p>
+
+<p>在exit 0前添加 motion , 保存，就会开机自动运行了。</p>
+
+<p>部分详细配置选项的翻译
+本人英语渣，有翻译不对的地方请指出</p>
+
+<p>选项Range/Values Default说明</p>
+
+<p>auto_brightnessValues: on,off</p>
+
+<p>Default: off让motion自动调节视频的的亮度，只适用于不带有自动亮度调节的摄像机</p>
+
+<p>brightnessValues: 0-255</p>
+
+<p>Default: 0 (disabled)调整摄像机的亮度</p>
+
+<p>saturationValues: 0 - 255</p>
+
+<p>Default: 0 (disabled)调整摄像机的颜色饱和度</p>
+
+<p>hueValues: 0 - 255</p>
+
+<p>Default: 0 (disabled)调整摄像机的色调</p>
+
+<p>contrastValues: 0-255</p>
+
+<p>Default: 0 (disabled)调整摄像机的对比度</p>
+
+<p>daemonValues: on,off</p>
+
+<p>Default: off以守护进程在后台运行。这个选项只能放在motion.conf，不能放在 thread config file</p>
+
+<p>emulate_motionValues: on, off</p>
+
+<p>Default: off即使没有运动物体也要保存图像</p>
+
+<p>ffmpeg_output_moviesValues: on, off Default: off是否保存视频</p>
+
+<p>ffmpeg_bpsValues: 0 - 9999999</p>
+
+<p>Default: 400000视频比特率</p>
+
+<p>ffmpeg_variable_bitrateValues: 0, 2 - 31</p>
+
+<p>Default: 0 (disabled)动态比特率，如果开启这个功能ffmpeg_bps将被忽略，0为关闭，2为最好质量，31为最差质量</p>
+
+<p>ffmpeg_duplicate_framesValues: on, off</p>
+
+<p>Default: on为了达到每秒的帧数要求，会复制一下帧填充空白时间，关掉这个功能后每个帧都紧接下一个帧，看起来像快进</p>
+
+<p>ffmpeg_output_debug_moviesValues: on, off</p>
+
+<p>Default: off调试模式，只看到变化的图像</p>
+
+<p>ffmpeg_video_codecValues: mpeg4, msmpeg4, swf, flv, ffv1, mov, ogg, mp4, mkv, hevc</p>
+
+<p>Default: mpeg4视频格式</p>
+
+<p>framerateValues: 2 - 100</p>
+
+<p>Default: 100 (no limit)帧速率，每秒多少帧</p>
+
+<p>frequencyValues: 0 - 999999</p>
+
+<p>Default: 0 (Not set)频率协调 Hz，（不清楚作用）</p>
+
+<p>lightswitchValues: 0 - 100</p>
+
+<p>Default: 0 (disabled)忽略光照强度改变引起的变化</p>
+
+<p>locate_motion_modeValues: on, off, preview</p>
+
+<p>Default: off给运动物体用方框标出</p>
+
+<p>locate_motion_styleValues: box, redbox, cross, redcross</p>
+
+<p>Default: box标记风格</p>
+
+<p>max_movie_timeValues: 0 (infinite) - 2147483647</p>
+
+<p>Default: 3600最大视频时间</p>
+
+<p>minimum_frame_timeValues: 0 - 2147483647</p>
+
+<p>Default: 0最小帧间隔，设置为0表示采用摄像头的帧率</p>
+
+<p>minimum_motion_framesValues: 1 - 1000s</p>
+
+<p>Default: 1捕捉持续至少指定时间的运动帧</p>
+
+<p>movie_filenameValues: Max 4095 characters</p>
+
+<p>Default: %v-%Y%m%d%H%M%S视频的文件名</p>
+
+<p>ffmpeg_timelapseValues: 0-2147483647</p>
+
+<p>Default: 0 (disabled)间隔时间，拍摄延时视频</p>
+
+<p>ffmpeg_timelapse_modeValues: hourly, daily, weekly-sunday, weekly-monday, monthly, manual</p>
+
+<p>Default: daily延时拍摄模式</p>
+
+<p>timelapse_filenameValues: Max 4095 characters</p>
+
+<p>Default: %v-%Y%m%d-timelapse延时拍摄的文件名</p>
+
+<p>output_picturesValues: on,off,first,best,center</p>
+
+<p>Default: on是否保存图片和模式设置</p>
+
+<p>output_debug_picturesValues: on,off</p>
+
+<p>Default: off图片调试模式，只输出运动物体</p>
+
+<p>picture_filenameValues: Max 4095 characters</p>
+
+<p>Default: %v-%Y%m%d%H%M%S-%q图片文件名</p>
+
+<p>picture_typeValues: jpeg,ppm</p>
+
+<p>Default: jpeg图片类型</p>
+
+<p>post_captureValues: 0 - 2147483647</p>
+
+<p>Default: 0 (disabled)运动在持续多少帧之后才被捕捉</p>
+
+<p>pre_captureValues: 0 - 100s</p>
+
+<p>Default: 0 (disabled)输出图像包括捕捉到运动的前几秒</p>
+
+<p>qualityValues: 1 - 100</p>
+
+<p>Default: 75jpg图像的质量</p>
+
+<p>quietValues: on, off</p>
+
+<p>Default: off安静模式，检测到运动不输出哔</p>
+
+<p>rotateValues: 0, 90, 180, 270</p>
+
+<p>Default: 0 (not rotated)旋转图像角度</p>
+
+<p>stream_auth_methodValues: 0,1,2</p>
+
+<p>Default: 0网页监控身份认证方法：0-无，1-基本，2-MD5</p>
+
+<p>stream_authenticationValues: username:password</p>
+
+<p>Default: Not defined网页监控用户名和密码</p>
+
+<p>stream_limitValues: 0 - 2147483647</p>
+
+<p>Default: 0 (unlimited)限制帧的数量</p>
+
+<p>stream_localhostValues: on, off</p>
+
+<p>Default: on是否只能本地访问网络摄像头</p>
+
+<p>stream_maxrateValues: 1 - 100</p>
+
+<p>Default: 1限制网络摄像头帧速率</p>
+
+<p>stream_portValues: 0 - 65535</p>
+
+<p>Default: 0 (disabled)网络摄像头端口</p>
+
+<p>stream_qualityValues: 1 - 100</p>
+
+<p>Default: 50网络摄像头传输质量</p>
+
+<p>switchfilterValues: on, off</p>
+
+<p>Default: off过滤器开关，过滤器用来区分真正的运动和噪声</p>
+
+<p>target_dirValues: Max 4095 characters</p>
+
+<p>Default: Not defined = current working directory视频和图片的保存路径</p>
+
+<p>videodeviceValues: Max 4095 characters</p>
+
+<p>Default: /dev/video0摄像头设备名</p>
+
+<p>heightValues: Device Dependent</p>
+
+<p>Default: 288图像高度，范围跟摄像机相关</p>
+
+<p>widthValues: Device Dependent</p>
+
+<p>Default: 352图像宽度，范围跟摄像机相关</p>
+
+<p>process_id_fileValues: Max 4095 characters</p>
+
+<p>Default: Not defined保存PID的文件，推荐/var/run/motion.pid</p>
+
+<p>database_busy_timeoutValues: 0 … positive integer</p>
+
+<p>Default: 0数据库等待超时时间，毫秒</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/linux/">linux</a>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+    <script type="text/javascript">
+    var gitalk = new Gitalk({
+
+    
+        clientID: `d03385102b7ff900376b`,
+        clientSecret: `c4214e80ec3c0d5a2397e05d2efbc53b1d974098`,
+        repo: `luciferseva.github.io`,
+        owner: 'Luciferseva',
+        admin: ['Luciferseva'],
+        id: 'window.location.pathname',
+        distractionFreeMode: true,
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+  
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/ros/">ros</a>
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+    <script type="text/javascript">
+    var gitalk = new Gitalk({
+
+    
+        clientID: `d03385102b7ff900376b`,
+        clientSecret: `c4214e80ec3c0d5a2397e05d2efbc53b1d974098`,
+        repo: `luciferseva.github.io`,
+        owner: 'Luciferseva',
+        admin: ['Luciferseva'],
+        id: 'window.location.pathname',
+        distractionFreeMode: true,
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+  
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/11/github%E6%9F%A5%E6%89%BE%E6%8A%80%E5%B7%A7/" data-tooltip="github查找技巧">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/11/ros-vins%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" data-tooltip="ros&#43;vins环境安装 ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/11/github%E6%9F%A5%E6%89%BE%E6%8A%80%E5%B7%A7/" data-tooltip="github查找技巧">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/11/ros-vins%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" data-tooltip="ros&#43;vins环境安装 ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/11\/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8\/';
+          
+            this.page.identifier = '\/2019\/11\/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

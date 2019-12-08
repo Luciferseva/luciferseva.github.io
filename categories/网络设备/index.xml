@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络设备 on The way to be a master</title>
+    <link>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/</link>
+    <description>Recent content in 网络设备 on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>linux网络设备驱动2 </title>
+      <link>https://luciferseva.github.io/2019/12/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A82/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/12/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A82/</guid>
+      <description>&lt;p&gt;网络上对于网络层协议的介绍一般都是七层的 OSI（Open Systems Interconnection）模型，但是其实在linux网络应用开发中，对 Linux 中基本网络栈的介绍可以分为 四层的 Internet 模型&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>linux网络设备驱动1 </title>
+      <link>https://luciferseva.github.io/2019/11/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A81/</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/linux%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A81/</guid>
+      <description>&lt;p&gt;Linux内核对网络驱动程序使用统一的接口，并且对于网络设备采用面向对象的思想设计。&lt;/p&gt;
+
+&lt;p&gt;Linux内核采用分层结构处理网络数据包。分层结构与网络协议的结构匹配，既能简化数据包处理流程，又便于扩展和维护。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>sdio-wifi详解 </title>
+      <link>https://luciferseva.github.io/2019/11/sdio-wifi%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/sdio-wifi%E8%AF%A6%E8%A7%A3/</guid>
+      <description>&lt;p&gt;SDIO-Wifi模块是基于SDIO接口的符合wifi无线网络标准的嵌入式模块，内置无线网络协议IEEE802.11协议栈以及TCP/IP协议栈，能够实现用户主平台数&lt;/p&gt;
+
+&lt;p&gt;据通过SDIO口到无线网络之间的转换。SDIO具有传输数据快，兼容SD、MMC接口等特点。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>github on The way to be a master</title>
+    <link>https://luciferseva.github.io/categories/github/</link>
+    <description>Recent content in github on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/categories/github/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>github查找技巧</title>
+      <link>https://luciferseva.github.io/2019/11/github%E6%9F%A5%E6%89%BE%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/github%E6%9F%A5%E6%89%BE%E6%8A%80%E5%B7%A7/</guid>
+      <description>&lt;p&gt;比如需要寻找国产软件，首先想到的应该是在 GituHub 上找国内开发者，搜索时设置 location 为 China，如果你要寻找使用 javascript 语言开发者，则再增加 language 为 javascript，整个搜索条件就是：language:javascript location:china，&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

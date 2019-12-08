@@ -6,7 +6,7 @@
     <description>Recent content in Categories on The way to be a master</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,115 +14,106 @@
     <item>
       <title>linux</title>
       <link>https://luciferseva.github.io/categories/linux/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://luciferseva.github.io/categories/linux/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>sdio-wifi</title>
-      <link>https://luciferseva.github.io/categories/sdio-wifi/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <title>网络协议</title>
+      <link>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</link>
+      <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/categories/sdio-wifi/</guid>
+      <guid>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>基础知识</title>
-      <link>https://luciferseva.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <title>ros学习</title>
+      <link>https://luciferseva.github.io/categories/ros%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+      <guid>https://luciferseva.github.io/categories/ros%E5%AD%A6%E4%B9%A0/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>网络协议栈</title>
-      <link>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <title>网络设备</title>
+      <link>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88/</guid>
+      <guid>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>网络设备驱动</title>
-      <link>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</link>
-      <pubDate>Fri, 25 Oct 2019 00:00:00 +0000</pubDate>
+      <title>github</title>
+      <link>https://luciferseva.github.io/categories/github/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</guid>
+      <guid>https://luciferseva.github.io/categories/github/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>wifi</title>
+      <title>摄像头</title>
+      <link>https://luciferseva.github.io/categories/%E6%91%84%E5%83%8F%E5%A4%B4/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/categories/%E6%91%84%E5%83%8F%E5%A4%B4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>树莓派</title>
+      <link>https://luciferseva.github.io/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WIFI</title>
       <link>https://luciferseva.github.io/categories/wifi/</link>
-      <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 12 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://luciferseva.github.io/categories/wifi/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>物联网</title>
-      <link>https://luciferseva.github.io/categories/%E7%89%A9%E8%81%94%E7%BD%91/</link>
-      <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
+      <title>hugo建站</title>
+      <link>https://luciferseva.github.io/categories/hugo%E5%BB%BA%E7%AB%99/</link>
+      <pubDate>Mon, 11 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/categories/%E7%89%A9%E8%81%94%E7%BD%91/</guid>
+      <guid>https://luciferseva.github.io/categories/hugo%E5%BB%BA%E7%AB%99/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Linux相关</title>
-      <link>https://luciferseva.github.io/categories/linux%E7%9B%B8%E5%85%B3/</link>
-      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      <title>usb</title>
+      <link>https://luciferseva.github.io/categories/usb/</link>
+      <pubDate>Tue, 05 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/categories/linux%E7%9B%B8%E5%85%B3/</guid>
+      <guid>https://luciferseva.github.io/categories/usb/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>主题测试</title>
-      <link>https://luciferseva.github.io/categories/%E4%B8%BB%E9%A2%98%E6%B5%8B%E8%AF%95/</link>
-      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      <title>features</title>
+      <link>https://luciferseva.github.io/categories/features/</link>
+      <pubDate>Sun, 17 Aug 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://luciferseva.github.io/categories/%E4%B8%BB%E9%A2%98%E6%B5%8B%E8%AF%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>博客</title>
-      <link>https://luciferseva.github.io/categories/%E5%8D%9A%E5%AE%A2/</link>
-      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://luciferseva.github.io/categories/%E5%8D%9A%E5%AE%A2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>设备驱动</title>
-      <link>https://luciferseva.github.io/categories/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</link>
-      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://luciferseva.github.io/categories/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>releases</title>
-      <link>https://luciferseva.github.io/categories/releases/</link>
-      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://luciferseva.github.io/categories/releases/</guid>
+      <guid>https://luciferseva.github.io/categories/features/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tranquilpeak</title>
       <link>https://luciferseva.github.io/categories/tranquilpeak/</link>
-      <pubDate>Mon, 15 Jun 2015 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 17 Aug 2014 00:00:00 +0000</pubDate>
       
       <guid>https://luciferseva.github.io/categories/tranquilpeak/</guid>
       <description></description>

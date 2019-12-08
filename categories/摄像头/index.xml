@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>摄像头 on The way to be a master</title>
+    <link>https://luciferseva.github.io/categories/%E6%91%84%E5%83%8F%E5%A4%B4/</link>
+    <description>Recent content in 摄像头 on The way to be a master</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://luciferseva.github.io/categories/%E6%91%84%E5%83%8F%E5%A4%B4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>树莓派摄像头安装和使用 </title>
+      <link>https://luciferseva.github.io/2019/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 22 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/11/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%91%84%E5%83%8F%E5%A4%B4%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;p&gt;motion是Linux下一款开源的摄像头监控软件，用命名行运行，只保存有运动物体的图像。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
