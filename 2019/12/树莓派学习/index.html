@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="介绍, gpio">
+<meta name="description" content="最近学习linux，嵌入式硬件中，树莓派是比较好的一个linux开发和学习平台，记下来进行总结">
+
+
+<meta property="og:description" content="最近学习linux，嵌入式硬件中，树莓派是比较好的一个linux开发和学习平台，记下来进行总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派学习 ">
+<meta name="twitter:title" content="树莓派学习 ">
+<meta property="og:url" content="https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="最近学习linux，嵌入式硬件中，树莓派是比较好的一个linux开发和学习平台，记下来进行总结">
+<meta name="twitter:description" content="最近学习linux，嵌入式硬件中，树莓派是比较好的一个linux开发和学习平台，记下来进行总结">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-12-28T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-12-28T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+  
+  
+    
+      <meta property="article:tag" content="树莓派">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+  <meta property="og:image" content="//images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="//images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>树莓派学习 </title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('//images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      树莓派学习 
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-12-28T00:00:00Z">
+        
+  
+  
+  
+  
+    2019年12月28日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>
+    
+  
+
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>最近学习linux，嵌入式硬件中，树莓派是比较好的一个linux开发和学习平台，记下来进行总结</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#树莓派学习">树莓派学习</a>
+<ul>
+<li><a href="#linux目录">Linux目录</a>
+<ul>
+<li><a href="#linux系统目录说明">Linux系统目录说明</a></li>
+<li><a href="#根路径">“/” 根路径</a></li>
+<li><a href="#boot">/boot</a></li>
+<li><a href="#sys">/sys</a></li>
+<li><a href="#sbin">/sbin</a></li>
+<li><a href="#bin">/bin</a></li>
+<li><a href="#lib">/lib</a></li>
+<li><a href="#dev">/dev</a></li>
+<li><a href="#etc">/etc</a></li>
+<li><a href="#home">/home</a></li>
+<li><a href="#media">/media</a></li>
+<li><a href="#mnt">/mnt</a></li>
+<li><a href="#opt">/opt</a></li>
+<li><a href="#usr">/usr</a></li>
+<li><a href="#usr-sbin">/usr/sbin</a></li>
+<li><a href="#usr-bin">/usr/bin</a></li>
+<li><a href="#usr-lib">/usr/lib</a></li>
+<li><a href="#usr-share">/usr/share</a></li>
+<li><a href="#usr-local">/usr/local</a></li>
+<li><a href="#var">/var</a></li>
+<li><a href="#tmp">/tmp</a></li>
+<li><a href="#proc">/proc</a></li>
+</ul></li>
+<li><a href="#linux系统目录结构图">LINUX系统目录结构图</a></li>
+<li><a href="#树莓派gpio结构">树莓派gpio结构</a>
+<ul>
+<li><a href="#控制gpio">控制GPIO</a></li>
+<li><a href="#导入rpi-gpio模块">导入RPi.GPIO模块</a></li>
+<li><a href="#针脚编号">针脚编号</a></li>
+<li><a href="#引脚设置">引脚设置</a></li>
+<li><a href="#释放">释放</a></li>
+<li><a href="#输出">输出</a></li>
+<li><a href="#读取">读取</a></li>
+<li><a href="#wait-for-edge-函数">wait_for_edge() 函数。</a></li>
+<li><a href="#add-event-detect-函数">add_event_detect() 函数</a></li>
+</ul></li>
+<li><a href="#综合例子-点亮led灯">综合例子：点亮LED灯</a></li>
+<li><a href="#结语">结语</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="树莓派学习">树莓派学习</h1>
+
+<h2 id="linux目录">Linux目录</h2>
+
+<p>显著区别之一就是其不同的目录结构，并不仅仅是格式上的不同，而是不同位置上保存的东西区别很大。</p>
+
+<p>在Windows中，典型的路径可能是这样的 D:\Folder\subfolder\file.txt，而在Linux中，路径则是这样的 /Folder/subfolder/file.txt。</p>
+
+<p>斜线倾斜的方向不同，并且，在Linux中，也没有C盘D盘的概念，Linux系统启动之后，根分区 就”挂载”在了在了 / 的位置，并且所有的文件、文件夹、设备以及不同的硬盘光驱之类的，也都挂载在了 /。</p>
+
+<p>虽然可能在下面这个例子中并不明显，但是Linux系统对文件或者文路径的名称中的大小写字符是敏感的。</p>
+
+<p>比如 /Folder/subfolder/file.txt 与 /folder/subfolder/file.txt并不是同一个文件。</p>
+
+<h3 id="linux系统目录说明">Linux系统目录说明</h3>
+
+<p>Linux的目录结构是一个统一的目录结构，所有的目录和文件最终都统一到”/“根文件系统下。文件系统是无论是不是挂载过来的，最终都分层排列到以”/“为起始的文件系统之下。
+Linux目录结构遵循”文件系统层次结构（Filesystem Hierarchy Structure，FHS)”，这标准是由“自由标准组织（Free Standards Group）”进行维护的，然而大多数LINUX发行版都有意或者无意的与这一规范背离。</p>
+
+<h3 id="根路径">“/” 根路径</h3>
+
+<p>这是Linux系统的“根”目录，也是所有目录结构的最底层。在UNIX以及和它兼容的系统中，”/“是一个单独的目录。</p>
+
+<h3 id="boot">/boot</h3>
+
+<p>这个目录下包含系统启动文件（boot loader），例如Grub，Lilo或者Kernel，以及initrd，system.map等配置文件。</p>
+
+<p>Initrd ramdisk或者””initrd””是指一个临时文件系统，它在启动阶段被Linux内核调用。initrd主要用于当“根”文件系统被挂载之前，进行准备工作。</p>
+
+<h3 id="sys">/sys</h3>
+
+<p>这个目录下包含内核、固件以及系统相关文件。</p>
+
+<h3 id="sbin">/sbin</h3>
+
+<p>包含系统操作和运作所必需的二进制文件以及管理工具，主要就是可执行文件。类似WINDOWS下的EXE文件。</p>
+
+<h3 id="bin">/bin</h3>
+
+<p>包含单用户模式下的二进制文件以及工具程序，比如cat，ls，cp这些命令。</p>
+
+<h3 id="lib">/lib</h3>
+
+<p>包含/sbin和/bin目录下二进制文件运行所需要的库文件。</p>
+
+<h3 id="dev">/dev</h3>
+
+<p>内含必需的系统文件和驱动器。</p>
+
+<h3 id="etc">/etc</h3>
+
+<p>内含系统配置文件，其下的目录，比如 /etc/hosts, /etc/resolv.conf, nsswitch.conf, 以及系统缺省设置，网络配置文件等等。以及一些系统和应用程序的配置文件。</p>
+
+<h3 id="home">/home</h3>
+
+<p>每一个用户的在这个目录下，都会单独有一个以其用户名命令的目录，在这里保存着用户的个人设置文件，尤其是以 profile结尾的文件。但是也有例外，root用户的数据就不在这个目录中，而是单独在根路径下，保存在单独的/root文件夹下。</p>
+
+<h3 id="media">/media</h3>
+
+<p>一个给所有可移动设备比如光驱、USB外接盘、软盘提供的常规挂载点。</p>
+
+<h3 id="mnt">/mnt</h3>
+
+<p>临时文件系统挂载点。比如，你并不想长期挂载某个驱动器，而是只是临时挂载一会U盘烤个MP3之类的，那么应该挂载在这个位置下。</p>
+
+<h3 id="opt">/opt</h3>
+
+<p>在Linux系统中，这个目录用到的并不多，opt是 可选系统程序包（Optional Software Packages）的简称。这个目录在UNIX系统，如Sun Solaris用途要广泛的多。</p>
+
+<h3 id="usr">/usr</h3>
+
+<p>用户数据目录，包含了属于用户的实用程序和应用程序。这里有很多重要的，但并非关键的文件系统挂载这个路径下面。在这里，你会重新找到一个 bin、sbin 和 lib目录，其中包含非关键用户和系统二进制文件以及相关的库和共享目录，以及一些库文件。</p>
+
+<h3 id="usr-sbin">/usr/sbin</h3>
+
+<p>包含系统中非必备和并不是特别重要的系统二进制文件以及网络应用工具。</p>
+
+<h3 id="usr-bin">/usr/bin</h3>
+
+<p>包含用户的非必备和并不是特别重要的二进制文件。</p>
+
+<h3 id="usr-lib">/usr/lib</h3>
+
+<p>保存着/usr/sbin以及/usr/bin中二进制文件所需要的库文件。</p>
+
+<h3 id="usr-share">/usr/share</h3>
+
+<p>“平台无关”的共享数据目录。</p>
+
+<h3 id="usr-local">/usr/local</h3>
+
+<p>是/usr下的二级目录，这里主要保存着包含系统二进制文件以及运行库在内的本地系统数据。</p>
+
+<h3 id="var">/var</h3>
+
+<p>这个路径下通常保存着包括系统日志、打印机后台文件（spool files）、定时任务（crontab）、邮件、运行进程、进程锁文件等。这个目录尤其需要注意进行日常的检查和维护，因为这个目录下文件的大小可能会增长很快，以致于很快占满硬盘，然后导致系统便会出现各种奇奇怪怪的问题。</p>
+
+<h3 id="tmp">/tmp</h3>
+
+<p>顾名思义，这是一个临时文件夹，专门用来保存临时文件，每次系统重启之后，这个目录下的”临时”文件便会被清空。同样，/var/tmp 也同样保存着临时文件。两者唯一的不同是，后者 /var/tmp目录保存的文件会受到系统保护，系统重启之后这个目录下的文件也不会被清空。</p>
+
+<h3 id="proc">/proc</h3>
+
+<p>这个目录是驻留在系统内存中的虚拟（psuedo，伪）文件系统，其中保存的都是文本格式的系统内核和进程信息。</p>
+
+<h2 id="linux系统目录结构图">LINUX系统目录结构图</h2>
+
+<p><img src="https://luciferseva.github.io/images/linux/raspi/linux_struct.png" alt="tu1" /></p>
+
+<p>需要注意的是，不同LINUX发行版本的目录结构会有一些差异，这对LINUX新手来说比较纠结，但是大体上，所以LINUX的不同发行版本，都符合上面这幅图片中的路径结构。</p>
+
+<h2 id="树莓派gpio结构">树莓派gpio结构</h2>
+
+<p>下面的图表展示了3B树莓派的GPIO连接器的针脚，有的40针。</p>
+
+<p><img src="https://luciferseva.github.io/images/linux/raspi/raspi_gpio.jpg" alt="tu2" /></p>
+
+<p>管脚功能如下:
+<img src="https://luciferseva.github.io/images/linux/raspi/123.webp" alt="tu3" /></p>
+
+<p>其中每一个针脚都有Pin#和NAME字段。Pin代表的是该针脚的编号，其中01和02针脚对应第一张图中GPIO最右边竖排的两个针脚。而NAME代表的是该针脚的BCM名称，当然NAME也可以直接看得出针脚的默认功能。比如 3.3v和5v代表着该针脚会输出3.3v和5v的电压，Ground代表着该针脚是接地的，GPIO0*则是一些待用户开发的针脚。每个针脚都可以使用程序进行控制操作。</p>
+
+<h3 id="控制gpio">控制GPIO</h3>
+
+<p>想用python来控制GPIO，最便捷的办法就是使用一些python类库，比如树莓派系统本身集成的RPi.GPIO。</p>
+
+<h3 id="导入rpi-gpio模块">导入RPi.GPIO模块</h3>
+
+<p>可以用下面的代码导入RPi.GPIO模块。</p>
+
+<pre><code class="language-c">import RPi.GPIO as GPIO
+</code></pre>
+
+<p>引入之后，就可以使用GPIO模块的函数了。如果你想检查模块是否引入成功，也可以这样写：</p>
+
+<pre><code class="language-c">try:
+    import RPi.GPIO as GPIO
+except RuntimeError:
+    print(&quot;引入错误&quot;)
+</code></pre>
+
+<h3 id="针脚编号">针脚编号</h3>
+
+<p>在RPi.GPIO中，同时支持树莓派上的两种GPIO引脚编号。第一种编号是BOARD编号，这和树莓派电路板上的物理引脚编号相对应。使用这种编号的好处是，你的硬件将是一直可以使用的，不用担心树莓派的版本问题。因此，在电路板升级后，你不需要重写连接器或代码。</p>
+
+<p>第二种编号是BCM规则，是更底层的工作方式，它和Broadcom的片上系统中信道编号相对应。在使用一个引脚时，你需要查找信道号和物理引脚编号之间的对应规则。对于不同的树莓派版本，编写的脚本文件也可能是无法通用的。</p>
+
+<p>可以使用下列代码（强制的）指定一种编号规则：</p>
+
+<pre><code class="language-c">GPIO.setmode(GPIO.BOARD)
+  # or
+GPIO.setmode(GPIO.BCM)
+</code></pre>
+
+<p>下面代码将返回被设置的编号规则</p>
+
+<pre><code class="language-c">mode = GPIO.getmode()
+</code></pre>
+
+<ul>
+<li><p>警告
+如果RPi.GRIO检测到一个引脚已经被设置成了非默认值，那么你将看到一个警告信息。你可以通过下列代码禁用警告：</p>
+
+<pre><code class="language-c">GPIO.setwarnings(False)
+</code></pre></li>
+</ul>
+
+<h3 id="引脚设置">引脚设置</h3>
+
+<p>在使用一个引脚前，你需要设置这些引脚作为输入还是输出。配置一个引脚的代码如下：</p>
+
+<pre><code class="language-c"># 将引脚设置为输入模式
+GPIO.setup(channel, GPIO.IN)
+
+# 将引脚设置为输出模式
+GPIO.setup(channel, GPIO.OUT)
+
+# 为输出的引脚设置默认值
+GPIO.setup(channel, GPIO.OUT, initial=GPIO.HIGH)
+</code></pre>
+
+<h3 id="释放">释放</h3>
+
+<p>一般来说，程序到达最后都需要释放资源，这个好习惯可以避免偶然损坏树莓派。释放脚本中的使用的引脚：</p>
+
+<pre><code class="language-c">GPIO.cleanup()
+</code></pre>
+
+<p>注意，GPIO.cleanup()只会释放掉脚本中使用的GPIO引脚，并会清除设置的引脚编号规则。</p>
+
+<h3 id="输出">输出</h3>
+
+<p>要想点亮一个LED灯，或者驱动某个设备，都需要给电流和电压他们，这个步骤也很简单，设置引脚的输出状态就可以了，代码如下：</p>
+
+<pre><code class="language-c">GPIO.output(channel, state)
+</code></pre>
+
+<p>状态可以设置为0 / GPIO.LOW / False / 1 / GPIO.HIGH / True。如果编码规则为，GPIO.BOARD，那么channel就是对应引脚的数字。</p>
+
+<p>如果想一次性设置多个引脚，可使用下面的代码：</p>
+
+<pre><code class="language-c">chan_list = [11,12]
+GPIO.output(chan_list, GPIO.LOW)
+GPIO.output(chan_list, (GPIO.HIGH, GPIO.LOW))   
+</code></pre>
+
+<p>你还可以使用Input()函数读取一个输出引脚的状态并将其作为输出值，例如：</p>
+
+<pre><code class="language-c">GPIO.output(12, not GPIO.input(12))
+</code></pre>
+
+<h3 id="读取">读取</h3>
+
+<p>我们也常常需要读取引脚的输入状态，获取引脚输入状态如下代码：</p>
+
+<pre><code class="language-c">GPIO.input(channel)
+</code></pre>
+
+<p>低电平返回0 / GPIO.LOW / False，高电平返回1 / GPIO.HIGH / True。</p>
+
+<p>如果输入引脚处于悬空状态，引脚的值将是漂动的。换句话说，读取到的值是未知的，因为它并没有被连接到任何的信号上，直到按下一个按钮或开关。由于干扰的影响，输入的值可能会反复的变化。
+使用如下代码可以解决问题：</p>
+
+<pre><code class="language-c">GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+  # or
+GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+</code></pre>
+
+<p>需要注意的是，上面的读取代码只是获取当前一瞬间的引脚输入信号。</p>
+
+<p>如果需要实时监控引脚的状态变化，可以有两种办法。最简单原始的方式是每隔一段时间检查输入的信号值，这种方式被称为轮询。如果你的程序读取的时机错误，则很可能会丢失输入信号。轮询是在循环中执行的，这种方式比较占用处理器资源。另一种响应GPIO输入的方式是使用中断（边缘检测），这里的边缘是指信号从高到低的变换（下降沿）或从低到高的变换（上升沿）。</p>
+
+<ol>
+<li><p>轮询方式</p>
+
+<pre><code class="language-c">while GPIO.input(channel) == GPIO.LOW:
+time.sleep(0.01)  # wait 10 ms to give CPU chance to do other things
+</code></pre></li>
+
+<li><p>边缘检测
+边缘是指信号状态的改变，从低到高（上升沿）或从高到低（下降沿）。通常情况下，我们更关心于输入状态的该边而不是输入信号的值。这种状态的该边被称为事件。
+先介绍两个函数：</p></li>
+</ol>
+
+<h3 id="wait-for-edge-函数">wait_for_edge() 函数。</h3>
+
+<p>wait_for_edge()被用于阻止程序的继续执行，直到检测到一个边沿。也就是说，上文中等待按钮按下的实例可以改写为：</p>
+
+<pre><code class="language-c">channel = GPIO.wait_for_edge(channel, GPIO_RISING, timeout=5000)
+if channel is None:
+    print('Timeout occurred')
+else:
+    print('Edge detected on channel', channel)
+</code></pre>
+
+<h3 id="add-event-detect-函数">add_event_detect() 函数</h3>
+
+<p>该函数对一个引脚进行监听，一旦引脚输入状态发生了改变，调用event_detected()函数会返回true，如下代码：</p>
+
+<pre><code class="language-c">GPIO.add_event_detect(channel, GPIO.RISING)  # add rising edge detection on a channel
+do_something()
+// 下面的代码放在一个线程循环执行。
+if GPIO.event_detected(channel):
+    print('Button pressed')
+</code></pre>
+
+<p>上面的代码需要自己新建一个线程去循环检测event_detected()的值，还算是比较麻烦的。</p>
+
+<p>不过可采用另一种办法轻松检测状态，这种方式是直接传入一个回调函数：</p>
+
+<pre><code class="language-c">def my_callback(channel):
+    print('This is a edge event callback function!')
+    print('Edge detected on channel %s'%channel)
+    print('This is run in a different thread to your main program')
+
+GPIO.add_event_detect(channel, GPIO.RISING, callback=my_callback)
+</code></pre>
+
+<p>如果你想设置多个回调函数，可以这样：</p>
+
+<pre><code class="language-c">def my_callback_one(channel):
+    print('Callback one')
+
+def my_callback_two(channel):
+    print('Callback two')
+
+GPIO.add_event_detect(channel, GPIO.RISING)
+GPIO.add_event_callback(channel, my_callback_one)
+GPIO.add_event_callback(channel, my_callback_two)
+</code></pre>
+
+<p>注意：回调触发时，并不会同时执行回调函数，而是根据设置的顺序调用它们。</p>
+
+<h2 id="综合例子-点亮led灯">综合例子：点亮LED灯</h2>
+
+<p>好了，上面说明了一大堆函数库的用法，那么现在就应该来个简单的实验了。这个实验很简单，点亮一个LED灯。</p>
+
+<p>编写代码之前，首先你需要将led灯的针脚通过杜邦线连接到树莓派的引脚上，比如你可以连接到11号引脚。
+新建一个main.py文件，写入如下代码：</p>
+
+<pre><code class="language-c">import RPi.GPIO as GPIO  //引入函数库
+import time
+
+RPi.GPIO.setmode(GPIO.BOARD)  //设置引脚编号规则
+RPi.GPIO.setup(11, RPi.GPIO.OUT)    //将11号引脚设置成输出模式
+
+while True
+    GPIO.output(channel, 1)   //将引脚的状态设置为高电平，此时LED亮了
+    time.sleep(1)   //程序休眠1秒钟，让LED亮1秒
+    GPIO.output(channel, 0)   //将引脚状态设置为低电平，此时LED灭了
+    time.sleep(1)   //程序休眠1秒钟，让LED灭1秒
+
+GPIO.cleanup()    //程序的最后别忘记清除所有资源
+</code></pre>
+
+<p>保存，并退出文件。执行python3 main.py，即可观看效果。Ctrl+C可以关闭程序。
+此外，不妨也试试其它的函数吧，增强印象。
+使用PWM
+这个python函数库还支持PWM模式的输出，我们可以利用PWM来制作呼吸灯效果。详情看代码：</p>
+
+<pre><code class="language-c">import time
+import RPi.GPIO as GPIO   //引入库
+GPIO.setmode(GPIO.BOARD)  //设置编号方式
+GPIO.setup(12, GPIO.OUT)  //设置12号引脚为输出模式
+
+p = GPIO.PWM(12, 50)  //将12号引脚初始化为PWM实例 ，频率为50Hz
+p.start(0)    //开始脉宽调制，参数范围为： (0.0 &lt;= dc &lt;= 100.0)
+try:
+    while 1:
+        for dc in range(0, 101, 5):
+            p.ChangeDutyCycle(dc)   //修改占空比 参数范围为： (0.0 &lt;= dc &lt;= 100.0)
+            time.sleep(0.1)
+        for dc in range(100, -1, -5):
+            p.ChangeDutyCycle(dc)
+            time.sleep(0.1)
+except KeyboardInterrupt:
+    pass
+p.stop()    //停止输出PWM波
+GPIO.cleanup()    //清除
+</code></pre>
+
+<h2 id="结语">结语</h2>
+
+<p>利用树莓派，学习linux，从我做起，加油鸭！！！</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
+
+
+
+
+
+
+
+  
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/" data-tooltip="Linux 网络协议栈开发（一）ping命令">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/" data-tooltip="Linux 网络协议栈开发（一）ping命令">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/12\/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0\/';
+          
+            this.page.identifier = '\/2019\/12\/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

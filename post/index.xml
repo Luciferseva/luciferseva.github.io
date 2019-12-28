@@ -6,10 +6,19 @@
     <description>Recent content in Posts on The way to be a master</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>树莓派学习 </title>
+      <link>https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0/</guid>
+      <description>&lt;p&gt;最近学习linux，嵌入式硬件中，树莓派是比较好的一个linux开发和学习平台，记下来进行总结&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Linux 网络协议栈开发（一）ping命令</title>
@@ -17,7 +26,7 @@
       <pubDate>Sun, 08 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://luciferseva.github.io/2019/12/linux-%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%BC%80%E5%8F%91%E4%B8%80ping%E5%91%BD%E4%BB%A4/</guid>
-      <description>&lt;p&gt;linux网络开发中比较常用的命令之一是ping，我们通常使用了ping命令加上要ping通的ip地址来进行分析，通过能否ping通指定ip或域名来检测网络连接是否成功，和连接质量。&lt;/p&gt;</description>
+      <description>&lt;p&gt;linux网络开发中比较常用的命令之一是ping，最近一直再查rtl的模块连接问题，使用ping命令后一段时间，模块就卡主了感觉，不能完成基本的网络通信了，所以来查一查，我通常使用了ping命令加上要ping通的ip地址来进行分析，通过能否ping通指定ip或域名来检测网络连接是否成功，和连接质量。&lt;/p&gt;</description>
     </item>
     
     <item>
