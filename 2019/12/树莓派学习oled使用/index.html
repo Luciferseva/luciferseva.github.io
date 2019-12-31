@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="外设, oled">
+<meta name="description" content="每次开机都需要查询树莓派的ip地址，比较烦人，就在网上找了一个oled进行显示，这样就可以查看到oled的ip地址了，其中OLED显示屏模块，IIC接口，128*32点阵，驱动芯片SSD1306。">
+
+
+<meta property="og:description" content="每次开机都需要查询树莓派的ip地址，比较烦人，就在网上找了一个oled进行显示，这样就可以查看到oled的ip地址了，其中OLED显示屏模块，IIC接口，128*32点阵，驱动芯片SSD1306。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派学习oled使用">
+<meta name="twitter:title" content="树莓派学习oled使用">
+<meta property="og:url" content="https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0oled%E4%BD%BF%E7%94%A8/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0oled%E4%BD%BF%E7%94%A8/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="每次开机都需要查询树莓派的ip地址，比较烦人，就在网上找了一个oled进行显示，这样就可以查看到oled的ip地址了，其中OLED显示屏模块，IIC接口，128*32点阵，驱动芯片SSD1306。">
+<meta name="twitter:description" content="每次开机都需要查询树莓派的ip地址，比较烦人，就在网上找了一个oled进行显示，这样就可以查看到oled的ip地址了，其中OLED显示屏模块，IIC接口，128*32点阵，驱动芯片SSD1306。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2019-12-31T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-12-31T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+  
+  
+    
+      <meta property="article:tag" content="树莓派">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+  <meta property="og:image" content="//images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="//images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>树莓派学习oled使用</title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0oled%E4%BD%BF%E7%94%A8/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('//images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      树莓派学习oled使用
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-12-31T00:00:00Z">
+        
+  
+  
+  
+  
+    2019年12月31日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>
+    
+  
+
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>每次开机都需要查询树莓派的ip地址，比较烦人，就在网上找了一个oled进行显示，这样就可以查看到oled的ip地址了，其中OLED显示屏模块，IIC接口，128*32点阵，驱动芯片SSD1306。</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#树莓派学习-oled使用">树莓派学习（oled使用）</a>
+<ul>
+<li><a href="#安装">安装</a></li>
+<li><a href="#树莓派环境准备">树莓派环境准备</a></li>
+<li><a href="#树莓派下载安装-ssd1306-屏幕驱动库">树莓派下载安装 SSD1306 屏幕驱动库</a>
+<ul>
+<li><a href="#adafruit">Adafruit</a>
+<ul>
+<li><a href="#在显示屏上显示文字">在显示屏上显示文字</a></li>
+</ul></li>
+<li><a href="#这里使用的是luma-oled">这里使用的是luma.oled</a>
+<ul>
+<li><a href="#测试">测试</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#题外话">题外话</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="树莓派学习-oled使用">树莓派学习（oled使用）</h1>
+
+<h2 id="安装">安装</h2>
+
+<ol>
+<li>接线</li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th>oled ping</th>
+<th align="right">树莓派ping</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>3.3v</td>
+<td align="right">1 or7</td>
+<td align="center">3.3v</td>
+</tr>
+
+<tr>
+<td>gnd</td>
+<td align="right">6 或 9/14/20/25/30/34/39</td>
+<td align="center">ground</td>
+</tr>
+
+<tr>
+<td>scl</td>
+<td align="right">5</td>
+<td align="center">i2c scl</td>
+</tr>
+
+<tr>
+<td>sad</td>
+<td align="right">3</td>
+<td align="center">i2c sca</td>
+</tr>
+
+<tr>
+<td>res</td>
+<td align="right">不连可以</td>
+<td align="center">未用到</td>
+</tr>
+</tbody>
+</table>
+
+<ol>
+<li><p>现在树莓派终端中执行 sudo raspi-config ，选择 Interfacing Options &gt; I2C ，使能树莓派的i2c功能后，确认后重启。
+接好后执行</p>
+
+<pre><code class="language-c">sudo apt-get install -y i2c-tools
+sudo i2cdetect -y 
+</code></pre>
+
+<p>在0x3C处有输出，说明接线OK。</p></li>
+</ol>
+
+<h2 id="树莓派环境准备">树莓派环境准备</h2>
+
+<p>安装可以进行在 Python 2.7 或 Python 3 里，推荐使用 Python 3。</p>
+
+<ol>
+<li><p>Python 3 的可以执行下面的一系列命令进行自查：</p>
+
+<pre><code class="language-c">sudo apt install -y python3-dev
+sudo apt install -y python-imaging python-smbus i2c-tools
+sudo apt install -y python3-pil
+sudo apt install -y python3-pip
+sudo apt install -y python3-setuptools
+sudo apt install -y python3-rpi.gpio
+</code></pre></li>
+
+<li><p>Python 2.7 的：</p>
+
+<pre><code class="language-c">sudo apt install -y python-dev
+sudo apt install -y python-imaging python-smbus i2c-tools
+sudo apt install -y python-pil
+sudo apt install -y python-pip
+sudo apt install -y python-setuptools 
+</code></pre>
+
+<h2 id="树莓派下载安装-ssd1306-屏幕驱动库">树莓派下载安装 SSD1306 屏幕驱动库</h2>
+
+<h3 id="adafruit">Adafruit</h3>
+
+<p>有很多开源的 SSD1306 屏幕驱动库，使用的是 Adafruit 的 Python 库，可以用于 128x32 和 128x64 的显示屏。地址是：<a href="https://github.com/adafruit/Adafruit_Python_SSD1306。">https://github.com/adafruit/Adafruit_Python_SSD1306。</a></p></li>
+</ol>
+
+<p>下载安装方式有两种：</p>
+
+<ol>
+<li><p>直接从 gitHub 上 clone 到本地</p>
+
+<pre><code class="language-c">git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git
+cd Adafruit_Python_SSD1306
+Python 3 下： sudo python3 setup.py install ；Python 2 下：sudo python setup.py install
+</code></pre></li>
+
+<li><p>用 pip 下载</p>
+
+<pre><code class="language-c">sudo pip install Adafruit-SSD1306
+</code></pre>
+
+<p>我用到是第一种下载安装方式。</p></li>
+
+<li><p>测试代码</p></li>
+</ol>
+
+<p>下载的 Python 库中有很多现成的例子，在 examples 文件夹中。终端进入该文件夹下，执行 python shapes.py 或 python3 shapes.py 进行测试即可</p>
+
+<h4 id="在显示屏上显示文字">在显示屏上显示文字</h4>
+
+<p>想要显示中文，就需要下载中文的字体，有很多免费网站可以下载到，需要是 ttf 文件。我下载了一个楷体的 ttf，然后需要将这个 ttf 文件和代码放在同一路径下（如果不同路径，代码中的路径需要修改正确）。</p>
+
+<p>直接贴代码吧，</p>
+
+<pre><code class="language-c">#!/usr/bin/python 
+# -*- coding: utf-8 -*-
+
+#import RPi.GPIO as GPIO
+
+#import time
+
+#import Adafruit_GPIO.SPI as SPI
+import Adafruit_SSD1306
+
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageFont
+
+# Raspberry Pi pin configuration:
+RST = 24
+# 128x32 display with hardware I2C:
+disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST)
+
+# Initialize library.
+disp.begin()
+
+# Clear display.
+disp.clear()
+disp.display()
+
+# Create blank image for drawing.
+# Make sure to create image with mode '1' for 1-bit color.
+width = disp.width
+height = disp.height
+image = Image.new('1', (width, height))
+
+# Get drawing object to draw on image.
+draw = ImageDraw.Draw(image)
+
+# Load default font.
+#font = ImageFont.load_default()
+
+# Alternatively load a TTF font.  Make sure the .ttf font file is in the same directory as the python script!
+# Some other nice fonts to try: http://www.dafont.com/bitmap.php
+font = ImageFont.truetype('kaiti.ttf', 30)
+
+# First define some constants to allow easy resizing of shapes.
+padding = 0
+top = padding
+bottom = height-padding
+
+# Move left to right keeping track of the current x position for drawing shapes.
+# 增加 x 值可以将文字向右移动
+x = 0
+
+draw.text((x, top), u'你好!宝贝', font=font, fill=255) # 字段前加 u 表示是文字
+disp.image(image)
+disp.display()
+</code></pre>
+
+<h3 id="这里使用的是luma-oled">这里使用的是luma.oled</h3>
+
+<p>这里使用的是luma.oled <a href="https://github.com/rm-hull/luma.oled">https://github.com/rm-hull/luma.oled</a></p>
+
+<pre><code class="language-c">git clone https://github.com/rm-hull/luma.oled.git
+cd luma.oled
+python setup.py install
+</code></pre>
+
+<h4 id="测试">测试</h4>
+
+<p>可以使用 luma 配套的一些测试例程，<a href="https://github.com/rm-hull/luma.examples">https://github.com/rm-hull/luma.examples</a></p>
+
+<pre><code class="language-c">git clone https://github.com/rm-hull/luma.examples.git
+cd luma.examples/examples/
+python demo.py
+</code></pre>
+
+<p>在前文 树莓派SSD1306屏幕180度旋转 中，因为我的屏幕要旋转180度，代码大概如下：</p>
+
+<pre><code class="language-c">from luma.core.interface.serial import i2c
+from luma.core.render import canvas
+from luma.oled.device import ssd1306, ssd1325, ssd1331, sh1106
+
+serial = i2c(port=1, address=0x3C)
+#rotate参数，整数值，可选0（默认）、1、2、3
+#其中0为无旋转，1为顺时针旋转90°，2为180°，3为270°
+device = ssd1306(serial, rotate=2)
+……
+另外其默认调用是，执行完毕后清除当前屏幕内容
+如果需要执行完毕代码，并保留内容的话，需要重新定义 cleanup 方法
+from luma.core.interface.serial import i2c
+from luma.core.render import canvas
+from luma.oled.device import ssd1306, ssd1325, ssd1331, sh1106
+
+serial = i2c(port=1, address=0x3C)
+device = ssd1306(serial, rotate=2)
+#定义cleanup为空，覆盖原方法，可保留内容
+device.cleanup = &quot;&quot;
+</code></pre>
+
+<h2 id="题外话">题外话</h2>
+
+<p>python中如果想查询某个指定库的目录，可以通过如下方法得到</p>
+
+<pre><code class="language-c">import a_module
+print a_module.__file__
+</code></pre>
+
+<p>例如，我想用opencv,那个库的名字叫做cv2，如果我想找到他的地址，那么我就应该这样：</p>
+
+<pre><code class="language-c">import cv2
+print cv2.__file__
+</code></pre>
+
+<p>可以看到执行这两行就会打印出地址：</p>
+
+<pre><code class="language-c">/usr/local/lib/python2.7/dist-packages/cv2/cv2.so
+</code></pre>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a>
+
+
+
+
+
+
+
+  
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0/" data-tooltip="树莓派学习 ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0/" data-tooltip="树莓派学习 ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2019\/12\/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0oled%E4%BD%BF%E7%94%A8\/';
+          
+            this.page.identifier = '\/2019\/12\/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0oled%E4%BD%BF%E7%94%A8\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

@@ -6,10 +6,19 @@
     <description>Recent content in HOME on The way to be a master</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>树莓派学习oled使用</title>
+      <link>https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0oled%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2019/12/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AD%A6%E4%B9%A0oled%E4%BD%BF%E7%94%A8/</guid>
+      <description>&lt;p&gt;每次开机都需要查询树莓派的ip地址，比较烦人，就在网上找了一个oled进行显示，这样就可以查看到oled的ip地址了，其中OLED显示屏模块，IIC接口，128*32点阵，驱动芯片SSD1306。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>树莓派学习 </title>
