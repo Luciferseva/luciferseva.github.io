@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Kris Wu">
-<meta name="keywords" content="介绍, gpio">
+<meta name="keywords" content="目录结构, gpio">
 <meta name="description" content="最近学习linux，嵌入式硬件中，树莓派是比较好的一个linux开发和学习平台，记下来进行总结">
 
 
@@ -267,6 +267,7 @@
 <li><a href="#bin">/bin</a></li>
 <li><a href="#lib">/lib</a></li>
 <li><a href="#dev">/dev</a></li>
+<li><a href="#root">/root</a></li>
 <li><a href="#etc">/etc</a></li>
 <li><a href="#home">/home</a></li>
 <li><a href="#media">/media</a></li>
@@ -330,17 +331,52 @@ Linux目录结构遵循”文件系统层次结构（Filesystem Hierarchy Struct
 
 <p>Initrd ramdisk或者””initrd””是指一个临时文件系统，它在启动阶段被Linux内核调用。initrd主要用于当“根”文件系统被挂载之前，进行准备工作。</p>
 
+<p>/boot下挂载了FAT32格式的启动分区，里面的文件用于树莓派的开机启动。</p>
+
+<p>计算机启动是一个神秘而有趣的过程，先来看计算机常见的启动方式。</p>
+
+<p>当我们打开一台普通计算机的电源时，计算机一般会自动从主板的 BIOS上读取其中所存储的程序。BIOS知道直接连接在主板上的硬件。 它从默认存储设备中读取最开始512字节的数据，即所谓的 MBR（Master Boot Record）。用户也可以通过BIOS配置，从其他数据 存储设备中找到MBR。通过MBR，计算机知道要从该存储设备的哪个分区来找引导加载程序。引导加载程序储存有操作系统的相关信息，比 如操作系统名称、内核所在位置等。随后引导加载程序加载内核，操作 系统开始工作。</p>
+
+<p>树莓派的开机方式有别于普通计算机。树莓派是一块集成电路板， 没有主板，也没有BIOS。树莓派电路板上携带着启动程序。板载启动 程序会挂载FAT32的启动分区，并运行其中的引导程序bootcode.bin。它 负责下一阶段的启动工作，会从SD卡上找到GPU固件start.elf，将固件 写入GPU。GPU在start.elf的指挥下，会读取系统配置文件config.txt和内核配置文件cmdline.txt，并启动内核文件kernel.img。当内核加载成功时，处理器开始工作，系统启动正式开始。</p>
+
+<p>普通计算机的启动流程有更多可选项。而树莓派通过板载程序来固 化启动流程，让启动更可控。但无论是哪种开机流程，我们看到操作系 统是通过小程序加载大程序，并相继唤醒硬件的过程。内核加载成功之后，操作系统正式开始工作。Linux系统还会进行一系列的准备工作， 来让操作系统更好用。</p>
+
+<p>内核会首先预留运行所需的内存空间，然后通过驱动程序检测计算 机硬件。这样，操作系统就可以知道自己有哪些硬件可用。随后，内核 会启动init进程。到此，内核完成了启动阶段的工作。进程init会运行一 系列初始脚本，这些脚本用于准备操作系统。</p>
+
+<p>·　设置计算机名称、时区等。</p>
+
+<p>·　检测存储器。</p>
+
+<p>·　挂载存储器。</p>
+
+<p>·　清空临时文件。</p>
+
+<p>·　设置网络。</p>
+
+<p>·　启动其他后台进程。</p>
+
+<p>这些初始脚本运行完毕，操作系统就准备好了，只是，还没有人可 以登录。进程init会给出登录对话框，或是图形化的登录界面。登录之 后，就是Shell或图形化的用户界面了。</p>
+
 <h3 id="sys">/sys</h3>
 
 <p>这个目录下包含内核、固件以及系统相关文件。</p>
 
 <h3 id="sbin">/sbin</h3>
 
+<p>保存了系统启动、修复和恢复所必需的应用程序</p>
+
 <p>包含系统操作和运作所必需的二进制文件以及管理工具，主要就是可执行文件。类似WINDOWS下的EXE文件。</p>
 
 <h3 id="bin">/bin</h3>
 
+<p>这里保存着Linux系统运行必须的应用程序。</p>
+
 <p>包含单用户模式下的二进制文件以及工具程序，比如cat，ls，cp这些命令。</p>
+
+<pre><code class="language-c">bash cat chmod cp date echo expr kill ln ls mkdir mv pwd rm rmdir sleep test unlink 
+
+fdisk  hwclock ifconfig reboot shutdown
+</code></pre>
 
 <h3 id="lib">/lib</h3>
 
@@ -348,11 +384,160 @@ Linux目录结构遵循”文件系统层次结构（Filesystem Hierarchy Struct
 
 <h3 id="dev">/dev</h3>
 
-<p>内含必需的系统文件和驱动器。</p>
+<p>内含必需的系统文件和驱动器。
+/dev目录中保存着设备文件。</p>
+
+<p>每个设备文件对应着一个设备，比如 存储器和UART接口。通过这些设备文件，设备还可以是没有硬件实物的虚拟设备，比如终端。我们可以以文件操作的形式直接和设备进行交流，通过读写/dev/ttyAMA0来与UART接口通信。</p>
+
+<p>Linux的设备有主编号（Major Number）和副编号（Minor Number）。主编号说明了设备的类型，在/dev中对应为一个名字，比 如&rdquo;ttyAMA&rdquo;。副编号就是后面跟的&rdquo;0&rdquo;，即该类型下编号为0的设备。通过man命令来找出某种设备的主编号，比如：</p>
+
+<p>man 4 ttysAMA</p>
+
+<h3 id="root">/root</h3>
+
+<p>/root是root的用户目录。该目录文件的拥有者和拥有组都是root。</p>
 
 <h3 id="etc">/etc</h3>
 
 <p>内含系统配置文件，其下的目录，比如 /etc/hosts, /etc/resolv.conf, nsswitch.conf, 以及系统缺省设置，网络配置文件等等。以及一些系统和应用程序的配置文件。</p>
+
+<p>/etc中有很多配置文件。这些配置文件可以影响系统和应用程序的行为。之前已经见过很多/etc下的配置文件，借助这些已经见过的文件来说明/etc下文件的类型。</p>
+
+<p>/etc保存着关键的操作系统配置文件，这些配置文件可以改变操作系统级别的行为，例如</p>
+
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>功能</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/default/local</td>
+<td>本地设置，入语言，字符编码</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>/etc/default/keyboard</td>
+<td>键盘设置</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>/etc/localtime</td>
+<td>时间和时区配置</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>/etc/moudles</td>
+<td>可加载模块配置</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<p>操作系统启动时的init进程及init调用的脚本也在/etc下。这些脚本在 启动阶段执行，并最终决定呈现给我们的操作系统。路径与功能如下所示。</p>
+
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>功能</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/init.d/</td>
+<td>初始化相关文件</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>/etc/rc.local</td>
+<td>初始化脚本</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<p>我们在Linux用户中看到，/etc保存着用户和用户组的相关信息。增 加或删除用户的操作，实际上就是修改这些文件，如下所示。</p>
+
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>功能</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/passwd</td>
+<td>用户列表</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>/etc/group</td>
+<td>用户组列表</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>/etc/passwd</td>
+<td>用户密码</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+
+<p>上面提到的配置文件都是操作系统级别的。/etc不仅有操作系统级 别的配置文件，还包括了应用程序的配置文件。这些配置文件是全局的，对所有用户都有效，如下所示。</p>
+
+<p>/etc/motion/motion.conf motion的配置文件</p>
+
+<p>/etc/apt/sources.list  apt-get软件源配置</p>
+
+<p>/etc/wpa_supplicant/wpa_supplicant.conf  wifi setting</p>
+
+<p>应用程序也可以有自己的初始化脚本</p>
+
+<table>
+<thead>
+<tr>
+<th>路径</th>
+<th>功能</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>/etc/bashrc</td>
+<td>motion 初始化设置</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>/etc/nanorc</td>
+<td>nano初始化设置</td>
+<td align="left"></td>
+</tr>
+
+<tr>
+<td>/etc/virc</td>
+<td>vi初始化设置</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 
 <h3 id="home">/home</h3>
 
@@ -362,9 +547,13 @@ Linux目录结构遵循”文件系统层次结构（Filesystem Hierarchy Struct
 
 <p>一个给所有可移动设备比如光驱、USB外接盘、软盘提供的常规挂载点。</p>
 
+<p>Linux下的/mnt用于挂载额外的文件系统，比如网络硬盘、光驱和 额外的硬盘。对于/mnt下的存储设备，通常要手动挂载或者在挂载文件 里增加对应条目。</p>
+
 <h3 id="mnt">/mnt</h3>
 
 <p>临时文件系统挂载点。比如，你并不想长期挂载某个驱动器，而是只是临时挂载一会U盘烤个MP3之类的，那么应该挂载在这个位置下。</p>
+
+<p>Linux下的/mnt用于挂载额外的文件系统，比如网络硬盘、光驱和 额外的硬盘。对于/mnt下的存储设备，通常要手动挂载或者在挂载文件 里增加对应条目。</p>
 
 <h3 id="opt">/opt</h3>
 
@@ -378,9 +567,16 @@ Linux目录结构遵循”文件系统层次结构（Filesystem Hierarchy Struct
 
 <p>包含系统中非必备和并不是特别重要的系统二进制文件以及网络应用工具。</p>
 
+<p>同理，/usr/sbin保存的也是次要的系统维护程序，比如任务规划程序cron</p>
+
 <h3 id="usr-bin">/usr/bin</h3>
 
 <p>包含用户的非必备和并不是特别重要的二进制文件。</p>
+
+<p>/usr/bin保存了次要一些的应用程序。在大多数Linux发行版本中，/usr/bin中包含的应用 程序比/bin中多得多。Raspbian中apt-get安装的程序，大多也会出现在这里。虽然/usr/bin程序对于Linux程序的运行不是那么关键，但很可能是常用的应用程序，比如文本编辑程序、编译器、数据库等</p>
+
+<pre><code class="language-c">cut diff free gcc head locate man make nano nice sftp ssh tail uniq vi wc which who
+</code></pre>
 
 <h3 id="usr-lib">/usr/lib</h3>
 
@@ -394,17 +590,35 @@ Linux目录结构遵循”文件系统层次结构（Filesystem Hierarchy Struct
 
 <p>是/usr下的二级目录，这里主要保存着包含系统二进制文件以及运行库在内的本地系统数据。</p>
 
+<p>其中，/usr/local/bin和/usr/local/sbin也是保存应用程序的地方。 这里通常保存了用户自己编写或手动编译安装的应用程序。</p>
+
 <h3 id="var">/var</h3>
 
 <p>这个路径下通常保存着包括系统日志、打印机后台文件（spool files）、定时任务（crontab）、邮件、运行进程、进程锁文件等。这个目录尤其需要注意进行日常的检查和维护，因为这个目录下文件的大小可能会增长很快，以致于很快占满硬盘，然后导致系统便会出现各种奇奇怪怪的问题。</p>
+
+<p>/var用于保存系统中会动态增长的数据，比如/var/log下的系统日志和应用程序日志。此外，每个应用程序也会产生动态增长的数据。就拿 邮件程序来说，其可执行文件是一个大小不变的静态文件，但电子邮件的相关文字和图片会随着用户使用快速增长。</p>
+
+<p>因此，电子邮件常常归档 保存在/var下。缓存数据占据的空间经常浮动变化，因此也保存在/var 下。由于/var的动态变化性，它经常挂载有独立的存储器。</p>
 
 <h3 id="tmp">/tmp</h3>
 
 <p>顾名思义，这是一个临时文件夹，专门用来保存临时文件，每次系统重启之后，这个目录下的”临时”文件便会被清空。同样，/var/tmp 也同样保存着临时文件。两者唯一的不同是，后者 /var/tmp目录保存的文件会受到系统保护，系统重启之后这个目录下的文件也不会被清空。</p>
 
+<p>应用程序运行的过程中可能会有一些临时数据需要保存到文件系统 中，比如数学运算的中间结果。如果应用程序不想持久保存这些文件， 就会把这些文件放在/tmp文件下。因为应用程序可能依赖这些临时文 件，所以随意修改/tmp下的文件可能造成应用程序的崩溃。幸好，/tmp 下的文件会自动清空，因此/tmp下的文件基本不需要维护。不同版本的 Linux系统会选择不同的时间来清空临时文件。Raspbian会在开机后清 空/tmp文件夹。由于临时文件的增长很难预知，因此/tmp也经常位于额 外的存储器中，以免临时文件和系统文件竞争空间</p>
+
 <h3 id="proc">/proc</h3>
 
 <p>这个目录是驻留在系统内存中的虚拟（psuedo，伪）文件系统，其中保存的都是文本格式的系统内核和进程信息。</p>
+
+<p>内核直接管理的硬件信息可以在/proc下查询。/proc其实是一个虚 拟文件系统，直接对应了内存上的内核空间。</p>
+
+<p>通过/proc，内核给用户提 供了一个查询内核信息的简易窗口。</p>
+
+<p>/proc/cpuinfo中保存着CPU信息。</p>
+
+<p>/proc/meminfo中保存着内存使用信息。</p>
+
+<p>因为内核直接管理的设备对于计算机运行至关重要，所以/proc下的文件大多是只读的，不允许用户 直接进行写入操作。内核还保存着进程的信息。这些原本在内核空间的 信息也以文件的形式呈现在/proc目录下。</p>
 
 <h2 id="linux系统目录结构图">LINUX系统目录结构图</h2>
 
@@ -732,7 +946,7 @@ GPIO.cleanup()    //清除
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Kris Wu. All Rights Reserved
+    &copy; 2020 Kris Wu. All Rights Reserved
   </span>
 </footer>
 

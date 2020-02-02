@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="linux运维, 基础">
+<meta name="description" content="Linux Shell脚本自动化编程，是一种嵌入式系统工程师必学的课程，现在趁着假期学习一波">
+
+
+<meta property="og:description" content="Linux Shell脚本自动化编程，是一种嵌入式系统工程师必学的课程，现在趁着假期学习一波">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux运维 基础知识（一） ">
+<meta name="twitter:title" content="linux运维 基础知识（一） ">
+<meta property="og:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%80/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%80/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="Linux Shell脚本自动化编程，是一种嵌入式系统工程师必学的课程，现在趁着假期学习一波">
+<meta name="twitter:description" content="Linux Shell脚本自动化编程，是一种嵌入式系统工程师必学的课程，现在趁着假期学习一波">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-02-01T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2020-02-01T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+  
+  
+    
+      <meta property="article:tag" content="基础知识">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+  <meta property="og:image" content="//images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="//images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>linux运维 基础知识（一） </title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%80/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('//images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      linux运维 基础知识（一） 
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-02-01T00:00:00Z">
+        
+  
+  
+  
+  
+    2020年2月1日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>
+    
+  
+
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>Linux Shell脚本自动化编程，是一种嵌入式系统工程师必学的课程，现在趁着假期学习一波</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#简介">简介</a>
+<ul>
+<li><a href="#shell介绍">shell介绍</a>
+<ul>
+<li><a href="#cd-和cd-和pushd-popd">cd ..和cd -和pushd,popd</a></li>
+<li><a href="#bash-shell-sh-shell-sh与-shell-sh-source-shell-sh区别">bash shell.sh ，./shell.sh与. shell.sh，source shell.sh区别</a></li>
+<li><a href="#常用命令">常用命令</a></li>
+<li><a href="#shell通配符-元字符">shell通配符（元字符）</a></li>
+<li><a href="#shell变量">shell变量</a>
+<ul>
+<li><a href="#自定义变量-作用范围只在当前shell-以下举例说明"><strong><em>自定义变量</em></strong>作用范围只在当前shell，以下举例说明：</a></li>
+<li><a href="#环境变量-为的作用范围为当前shell和子shell"><strong><em>环境变量</em></strong>为的作用范围为当前shell和子shell，</a></li>
+<li><a href="#位置变量">位置变量</a></li>
+<li><a href="#预定变量">预定变量</a></li>
+</ul></li>
+<li><a href="#shell变量赋值方式">shell变量赋值方式</a></li>
+<li><a href="#定义或引用变量是注意事项">定义或引用变量是注意事项</a></li>
+<li><a href="#变量的运算">变量的运算</a></li>
+<li><a href="#变量内容的删除和替换">变量内容的删除和替换</a></li>
+</ul></li>
+<li><a href="#举例学习">举例学习</a>
+<ul>
+<li><a href="#shell-sh">shell.sh</a>
+<ul>
+<li><a href="#shell-sh解释">shell.sh解释</a></li>
+<li><a href="#eof和-eof区别">EOF和-EOF区别</a></li>
+</ul></li>
+<li><a href="#shell2-sh">shell2.sh</a></li>
+<li><a href="#shell3-sh">shell3.sh</a></li>
+<li><a href="#shell4-sh">shell4.sh</a></li>
+<li><a href="#shell5-sh">shell5.sh</a></li>
+<li><a href="#shell6-sh">shell6.sh</a></li>
+<li><a href="#shell7-sh">shell7.sh</a></li>
+<li><a href="#shell8-sh">shell8.sh</a></li>
+<li><a href="#shell9-sh">shell9.sh</a></li>
+</ul></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="简介">简介</h1>
+
+<h2 id="shell介绍">shell介绍</h2>
+
+<p>是一种解释器，shell下敲的命令为shell命令，linux本身支持多种shell，在/etc/shells下查看</p>
+
+<pre><code class="language-shell">cat /etc/shells
+
+/etc/shells: valid login shells
+/bin/sh
+/bin/dash
+/bin/bash(多用)
+/bin/rbash
+</code></pre>
+
+<p>在passwd里面可查看
+可在命令行和脚本执行
+相关文件：</p>
+
+<p>系统级</p>
+
+<ol>
+<li>/etc/profile</li>
+<li>/etc/bashrc</li>
+</ol>
+
+<p>用户级</p>
+
+<ol>
+<li>~/.bash_profile</li>
+<li>~/.bashrc</li>
+<li>~/.bash_logout</li>
+<li>~/.bash_history</li>
+</ol>
+
+<p>离开shell执行：5-6</p>
+
+<p>进入（登录）shell执行：1-4</p>
+
+<p>login shell  su - alice 1-4都执行</p>
+
+<p>nologin shell su alice 2和4执行，只执行rc</p>
+
+<h3 id="cd-和cd-和pushd-popd">cd ..和cd -和pushd,popd</h3>
+
+<p>cd .. ：返回上一级目录</p>
+
+<p>cd - ：返回上一次目录</p>
+
+<p>pushd ./  ：将此目录压栈</p>
+
+<p>popd ：将目录弹出</p>
+
+<h3 id="bash-shell-sh-shell-sh与-shell-sh-source-shell-sh区别">bash shell.sh ，./shell.sh与. shell.sh，source shell.sh区别</h3>
+
+<p>&mdash;前两个在子shell中执行，后两个在当前shell中执行&mdash;</p>
+
+<h3 id="常用命令">常用命令</h3>
+
+<p>#history//查看历史作业</p>
+
+<p>#!2018（历史的命令）//执行作业号</p>
+
+<p>!$               //取上一个命令的最后一个参数</p>
+
+<p>！！          //执行上一个命令</p>
+
+<p>^为ctrl</p>
+
+<p>^R              //搜索历史命令</p>
+
+<p>^A              //光标移动到最前(Ahead)</p>
+
+<p>^E              //光标移动到最后(End)</p>
+
+<p>ctrl+c          //停止</p>
+
+<p>^Z              //暂停任务放到前台</p>
+
+<p>^q              //解锁</p>
+
+<p>^s             //锁住</p>
+
+<p>jobs           //查看任务序号</p>
+
+<p>fg %1              //调出后台任务，百分号可以省略，后面跟作业号</p>
+
+<p>ctrl+z           //暂停，执行完毕想要执行的命令后，可执行fg返回继续执行</p>
+
+<p>alias  //对命令设置别名</p>
+
+<pre><code class="language-shell">alias bieming =`ls`
+vi .bashrc 
+alias ls =`ls -al`
+source .bashrc                  //配置生效
+alias bieming //查看别名
+unalias bieming //取消别名
+\bieming  //跳过别名
+exit//退出shell
+</code></pre>
+
+<p>tty 查看终端</p>
+
+<p>ps aux |grep sleep 查找任务</p>
+
+<p><code>&gt;</code> &ndash;定向改变原有内容&ndash;</p>
+
+<p><code>&gt;&gt;</code> &ndash;定向追加原有内容&ndash;</p>
+
+<p>kill 3（pid进程号） 或者%3（作业号）</p>
+
+<p>echo &ldquo;1112233&rdquo; &gt;file1 //创建文件file1，写入1112233</p>
+
+<p>cat <code>&lt;&lt;</code>EOF<code>&gt;&gt;</code> file2</p>
+
+<pre><code class="language-c">corvin@robot:~$ cat &lt;&lt;EOF&gt;&gt; file1 
+&gt; 1
+&gt; 2
+&gt; 3
+&gt; 4
+&gt; EOF //必须有这个，否则无效
+corvin@robot:~$ cat file1 
+1112233
+1
+2
+3
+4
+</code></pre>
+
+<p><code>|</code>管道</p>
+
+<pre><code class="language-c">date &gt; date.txt//
+date |tee date.txt//显示后在输入到date.txt里，并不会节流
+2020\u5e74 02\u6708 01\u65e5 \u661f\u671f\u516d 16:28:01 CST
+</code></pre>
+
+<p><code>;</code>一行敲多个命令，无逻辑判断</p>
+
+<p><code>&amp;</code>后台执行</p>
+
+<p><code>&amp;&gt;</code>混合重定向（标准输出1，错误输出2）</p>
+
+<p><code>&amp;&amp;</code>一行敲多个命令，有逻辑判断，前一个命令返回值为0才执行后一个（成功后执行）</p>
+
+<p><code>||</code>一行敲多个命令，有逻辑判断，前一个命令返回值为非0才执行后一个（失败后执行）</p>
+
+<p>echo$?  返回上一个命令执行的返回值（代码）</p>
+
+<h3 id="shell通配符-元字符">shell通配符（元字符）</h3>
+
+<p><code>*</code>匹配任意多个字符，如</p>
+
+<pre><code class="language-shell">ls *.txt//所有txt结尾分拣
+rm -rf *
+rm -rf *.pdf
+ls in* //列出所有in开头的文件
+ll l*ve
+</code></pre>
+
+<p><code>?</code>匹配任意一个字符，如</p>
+
+<pre><code class="language-bash">ll l?ve
+</code></pre>
+
+<p><code>[]</code>匹配括号中任意一个字符，如</p>
+
+<pre><code class="language-bash">[abc]
+[a-z]
+[^a-z]//非a-z
+[0-9]
+[^a-z0-9]//非a-z，非0-9
+ll l[a-z]ve
+ll l[^a-z]ve
+</code></pre>
+
+<p><code>()</code>在子shell中执行，如</p>
+
+<pre><code class="language-bash">（umask 077;touch love123.txt）
+</code></pre>
+
+<p><code>{}</code>参数集合，可用于省略相同路径下不同文件名文件处理，如</p>
+
+<pre><code class="language-bash">touch file{0..9}
+mkdir /home/{11,22}
+mkdir -pv /home/{33/{aa,bb},44}
+cp -rv /home/network{,.old}//将home下的network复制成相同路径下的network.old
+</code></pre>
+
+<p><code>\</code>转义符号，让元字符回归本意,也可以转成特殊字符</p>
+
+<pre><code class="language-bash">echo *
+echo \*
+echo &quot;a\tn&quot;
+</code></pre>
+
+<h3 id="shell变量">shell变量</h3>
+
+<h4 id="自定义变量-作用范围只在当前shell-以下举例说明"><strong><em>自定义变量</em></strong>作用范围只在当前shell，以下举例说明：</h4>
+
+<p>假设有三个脚本，</p>
+
+<pre><code class="language-c">public.sh,
+ip=1.1.1.1.1
+path=/bin/local
+use1.sh,
+. public.sh//在当前shell中执行这个脚本，且需在用同一文件夹下，如果不是，则需要引入绝对路径
+echo $ip//这里就可以执行了
+
+use2.sh
+source public.sh//原理如上
+echo $path//这里就可以执行了
+</code></pre>
+
+<p>我的理解public.sh这里相当于c语言中的.h文件</p>
+
+<h4 id="环境变量-为的作用范围为当前shell和子shell"><strong><em>环境变量</em></strong>为的作用范围为当前shell和子shell，</h4>
+
+<p>一般和脚本无关，主要跟系统有关，用<strong><em>env</em></strong>查看所有变量</p>
+
+<pre><code class="language-shell">ip=1//当前shell订阅的自定义变量
+export ip //变成环境变量
+export ip2=12//变成环境变量
+</code></pre>
+
+<p>在<strong><em>/etc/profile</em></strong>（shell的配置文件）中，可以添加环境变量，
+一般在这个文件最后添加：</p>
+
+<p>PATH=$PATH:/new/bin
+export PATH</p>
+
+<p>然后<strong><em>source /etc/profile</em></strong>或重启当前shell</p>
+
+<h4 id="位置变量">位置变量</h4>
+
+<p>$1 $2 $3 $4 ${10}</p>
+
+<h4 id="预定变量">预定变量</h4>
+
+<p>$0 脚本名</p>
+
+<p>$* 所有的参数</p>
+
+<p>$@ 所有的参数</p>
+
+<p>$# 参数的个数</p>
+
+<p>$$ 当前进程的PID</p>
+
+<p>$! 上一个<strong>后台</strong>进程的pid</p>
+
+<p>$? 上一个命令返回值 0表示成功</p>
+
+<p>运用见</p>
+
+<p><a href="#shell7.sh">shell7.sh</a></p>
+
+<h3 id="shell变量赋值方式">shell变量赋值方式</h3>
+
+<ol>
+<li><p>显示赋值</p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#变量名=变量值
+#实例：
+ip=192.168.0.1
+shchool=&quot;bejing 1000&quot;
+today=`date+%f`
+today=$(date+%f)
+结果都是字符串
+</code></pre></li>
+
+<li><p>read从键盘读入变量值</p>
+
+<pre><code class="language-shell">#!/etc/bin/bash
+#变量名=变量值
+#实例：
+read 变量名1 量名2
+read -p &quot;提示信息：&quot; 变量名
+read -t 5-p &quot;infor:&quot; 变量名，#等待5秒
+read -n 2 变量名        #两个字符
+</code></pre></li>
+</ol>
+
+<h3 id="定义或引用变量是注意事项">定义或引用变量是注意事项</h3>
+
+<p><code>&quot;&quot;</code>弱引用
+<code>''</code> 强引用，</p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+school=1000
+echo &quot;${school} is good&quot;# output 1000 is good
+echo '${school} is good'# ${school} is good
+
+</code></pre>
+
+<p>``  命令替换等价于 $() <strong><em>反引号中的shell命令会先被执行</em></strong></p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+touch `date+%F`_file.txt
+touch $(date+%F)_file.txt        
+disk_free=&quot;df-Ph |grep '/$' | awk '{print$4}'   &quot; #加上P是因为要poxi，打印出书在一行 ，'/$'获取根位，错误，双引号只能先赋值，应该用反引号或者$()
+</code></pre>
+
+<h3 id="变量的运算">变量的运算</h3>
+
+<ol>
+<li>整数运算</li>
+
+<li><p>方法1 expr</p>
+
+<pre><code class="language-shell">expr 1+2
+expr $num1+$num2      #可用符号+- \* / % 
+</code></pre></li>
+</ol>
+
+<ul>
+<li><p><strong><em>方法2 $(())</em></strong></p>
+
+<pre><code class="language-shell">echo $(1+2)
+echo $(($num1+$num2))      #+- * / % ，可不写$字符
+sum =$((1+2*3));echo $sum
+</code></pre></li>
+
+<li><p>方法3 $[]</p>
+
+<pre><code class="language-shell">echo $[1+2)]
+echo $(($num1+$num2))      #+- * / % 
+sum =$((1+2*3));echo $sum
+</code></pre></li>
+
+<li><p><strong><em>方法4 let 用的较多</em></strong></p>
+
+<pre><code class="language-shell">let i++;echo $i
+echo $(($num1+$num2))      #+- * / % 
+let sum=1+2*3;echo $sum
+</code></pre></li>
+
+<li><p>小数运算</p></li>
+
+<li><p>基本运算</p>
+
+<pre><code class="language-shell">echo &quot;2*4&quot; |bc
+echo &quot;2^4&quot; |bc
+echo &quot;scale=2;6/4&quot;|bc
+awk 'BEGIN{print 1/2}'
+echo 'print 5.0/2'|pyhton
+
+</code></pre></li>
+</ul>
+
+<h3 id="变量内容的删除和替换">变量内容的删除和替换</h3>
+
+<pre><code class="language-bash">url=www.baidu.com
+    0123456789
+echo ${#url}    #获取变量值长度 output 15
+
+echo ${url}    #标准查看 www.baidu.com
+
+echo ${url#*.}    #从前往后，最短匹配 baidu.com
+
+echo ${url##*.}    #从前往后，最长匹配 贪婪匹配 com,取最后一个
+
+
+echo ${url%*.}    #从后往前，最短匹配 www.baidu
+
+echo ${url%%*.}    #从后往前，最长匹配 贪婪匹配 www,取最后一个
+
+echo ${url:0:5}    #切片 www.ba 第一个是开始的位置，第二个是从开始位置后（算上开始位置）共几个数，没有则是到最后
+
+echo ${url:0:5}    #切片 aidu.
+
+#变量的替代
+echo ${url/b/B}    #变量的替换 www.Baidu.com
+
+echo ${url/baidu/coco}    #变量的替换 www.coco.com
+
+
+echo ${url//c/K}    #变量的替换 www.KoKo.com
+
+
+echo ${var1-abcdefg}    #${变量名-新的变量值}变量没有被赋值，会使用 新的变量值 替代，变量有被赋值（包括空值）不会被替代
+
+unset var1 #释放var1的定义
+
+echo ${var1:-abcdefg}    #${变量名:-新的变量值}变量没有被赋值(包括空值)，会使用 新的变量值 替代，变量有被赋值（包括空值：不会被替代）
+
+unset var1 #释放var1的定义
+
+#这里还有+，:+,=,:=,?,:?
+path=&quot;/root/abc/abc/test.txt&quot;
+
+#1、读取长度	=&gt; length()
+
+  echo ${#path}	     	//22
+#2、字符串截取	=&gt; substring()
+
+  echo ${path:3}	  	==&gt; ot/abc/abc/test.txt
+  echo ${path:0:5}   	==&gt; /root
+  echo ${path:0-7:5}   	==&gt; 从右往左第七位开始算，取5位 =&gt; est.t
+#3、替换(也可以模糊匹配)。/只会替换第一个，//全部替换。如果替换为空等同于删除
+
+  echo ${path/abc/替换}	==&gt; /root/替换/abc/test.txt
+  echo ${path//abc/替换}	==&gt; /root/替换/替换/test.txt
+  echo ${path//abc/}	==&gt; /root///test.txt
+  echo ${path/*abc/}	==&gt; /test.txt
+  echo ${path//*abc/}	==&gt; /test.txt
+#4、字符串 模糊匹配并删除
+
+  `#` ==&gt; 前缀匹配并删除前面的，#第一个，##最后一个
+  echo ${path#/root/}	==&gt; abc/abc/test.txt
+  echo ${path#/oot/}	==&gt; /root/abc/abc/test.txt
+  echo ${path#*oot/}	==&gt; abc/abc/test.txt
+  echo ${path#*abc/}	==&gt; abc/test.txt
+  echo ${path#*abc*}	==&gt; /abc/test.txt   最后那个*无效
+  echo ${path##*abc/}	==&gt; test.txt
+
+  `%`  ==&gt; 后缀匹配并删除后面的。%最后一个，%%第一个
+  echo ${path%/abc*}	==&gt; 从最后一个/abc*开始删除，结果：/root/abc
+  echo ${path%*abc*}	==&gt; 前面那个*无效，结果：/root/abc/
+  echo ${path%%/abc*}	==&gt; 从第一个/abc开始删除,结果：/root
+
+  # basename 和 dirname 针对文件的操作
+  echo $(basename $path)		==&gt; test.txt
+  echo $(basename $path .txt)	==&gt; test
+  echo $(dirname $path)		==&gt; /root/abc/abc
+#5、字符串不存在的默认值
+
+  echo ${abc-'ok'}		//abc没定义，所以输出ok，但是abc还是没有值
+  echo ${abc='ok'}		//同样输出OK，但是abc已经有值
+#6、获取所有以XX开头的变量
+
+  var1=10; var2=20; var3=30
+  echo ${!var*}			//输出varl1 var2 var3
+  echo ${!var@}			//输出varl1 var2 var3
+  for val in ${!var*}
+  do
+      echo $val	//无法得到10 20 30 ，得到的还是var1 var2 var3
+  done
+</code></pre>
+
+<h2 id="举例学习">举例学习</h2>
+
+<h3 id="shell-sh">shell.sh</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#ping 成功，返回打印baidu.com is up，失败 ，返回baidu.com isdown...，相当于if else
+echo ‘checking...’ &amp;&amp; ping -c 1 ‘www.baidu.com’&amp;&gt; /dev/null &amp;&amp; echo ‘baidu.com is up’ || echo ‘baidu.com isdown...’
+#这里调用python脚本进行编程
+/usr/bin/python &lt;&lt;EOF
+print ‘*’*50
+print ‘this is python’
+print ‘*’*50
+EOF
+</code></pre>
+
+<h4 id="shell-sh解释">shell.sh解释</h4>
+
+<ol>
+<li><p>&amp;&gt;混合输出重定向  /dev/null 将执行丢弃（不回显命令结果）</p></li>
+
+<li><p>0表示标准输入</p></li>
+
+<li><p>1表示标准输出</p></li>
+
+<li><p>2表示标准错误输出</p></li>
+
+<li><p><code>&gt;</code>默认为标准输出重定向，与 1&gt; 相同</p></li>
+
+<li><p>2&gt;&amp;1 意思是把标准错误输出 重定向到 标准输出.</p></li>
+
+<li><p>&amp;&gt;file 意思是把标准输出 和 标准错误输出 都重定向到文件file中</p></li>
+
+<li><p>#echo$?  返回上一个命令执行的返回值（代码）</p></li>
+
+<li><p>shell 在执行某个命令的时候，会返回一个返回值，该返回值保存在 shell 变量 ?中。当? ==0 时，表示执行成功；当 $? == 1 （非0的数，返回值在0-255间），表示执行失败。</p></li>
+
+<li><p>&amp; //后台执行</p>
+
+<h4 id="eof和-eof区别">EOF和-EOF区别</h4></li>
+
+<li><p>EOF 只是一个标识，可以替换成任意的合法字符
+没有-的话，EOF作为结束符，前面不能有任何tab制表符。
+有-的话，EOF作为结束符，前面可以有tab制表符,容错率更高一点。</p></li>
+
+<li><p>配合figlet打印菜单</p>
+
+<pre><code class="language-bash">#!/usr/bin/bash
+cat &lt;&lt;EOF
++-----------------------------------------------------+
+|                                         _          |
+|        _ __ ___   __ _ _ __ _   _  __ _| |         |
+|       | '_ \` _ \ / _\` | '_ \| | ||/ _\` | |              |
+|       | | | | | | (_| | | | | |_| |(_| | |         |
+|       |_| |_| |_|\__,_|_||_|\__,_|\__,_|_|         |
+|                                                    |
++-----------------------------------------------------+
+EOF
+</code></pre></li>
+</ol>
+
+<h3 id="shell2-sh">shell2.sh</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+ip=192.168.1.1
+ping -c $ip &amp;&gt; /dev/null &amp;&amp; echo &quot;$ip is up&quot;||echo &quot;$ip is down&quot;
+</code></pre>
+
+<p>其中使用了变量，ip为变量的名字，必须以字母或下划线开头，区分大小写，这里使用<strong>显示赋值</strong></p>
+
+<h3 id="shell3-sh">shell3.sh</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+ip=127.0.0.1
+if  ping -c 1 $ip &amp;&gt; /dev/null
+then
+        echo &quot;$ip is up&quot;
+else
+        echo &quot;$ip is down&quot;
+fi
+</code></pre>
+
+<h3 id="shell4-sh">shell4.sh</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+ip=127.0.0.1
+ping -c 1 $ip&amp;&gt; /dev/null
+if [ $? -eq 0 ]
+then
+        echo &quot;$ip is up&quot;
+else
+        echo &quot;$ip is down&quot;
+fi
+</code></pre>
+
+<p>这里用了方括号<code>[]</code>,用来做条件测试，$?是上一个命令的返回值，然<code>-eq 0</code>判断是否为0，如果返回0，表示成功</p>
+
+<h3 id="shell5-sh">shell5.sh</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+read ip //从键盘读入，或者read -p &quot;please in put:&quot; ip
+#ip=127.0.0.1
+ping -c 1 $ip&amp;&gt; /dev/null
+if [ $? -eq 0 ]
+then
+        echo &quot;$ip is up&quot;
+else
+        echo &quot;$ip is down&quot;
+fi
+</code></pre>
+
+<p>这里用了方括号<code>[]</code>,用来做条件测试，$?是上一个命令的返回值，然<code>-eq 0</code>判断是否为0，如果返回0，表示成功</p>
+
+<p><strong>read 读取变量</strong></p>
+
+<h3 id="shell6-sh">shell6.sh</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+
+#ip=127.0.0.1
+ping -c1 $1&amp;&gt; /dev/null
+if [ $? -eq 0 ]
+then
+        echo &quot;$1 is up&quot;
+else
+        echo &quot;$1 is down&quot;
+fi
+</code></pre>
+
+<p><strong>这里运用到了参数输入：$1,$2（位置变量）。在调用脚本时，可以输入对应的值</strong></p>
+
+<h3 id="shell7-sh">shell7.sh</h3>
+
+<pre><code class="language-c">存在ip.txt，里面有
+12.168.0.1
+191.2.2.2
+192.168.0.1
+现有shell7.sh对ip.txt进行处理
+basename 文件名字命令
+dirname 路径名称
+</code></pre>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#如果没有参数
+if [ $# -eq 0 ];then
+        echo &quot;no value can not exe `basename $0` file&quot;
+fi
+#检查是不是文件
+if [ ！-f $1];then
+        echo &quot;error file type&quot;
+        exit
+fi
+
+for ip in `cat $1`
+do
+        ping -c1 $ip&amp;&gt; /dev/null
+        if [ $? -eq 0 ]
+        then
+                echo &quot;$ip is up&quot;
+        else
+                echo &quot;$ip is down&quot;
+        fi
+done
+</code></pre>
+
+<h3 id="shell8-sh">shell8.sh</h3>
+
+<p>获取内存值得使用情况,这里使用到了<strong><em>bash -vx</em></strong>可以对脚本进行输出调试</p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#^代表行首$代表行尾,表示以Mem开头
+free -m |grep  '^Mem'
+
+Mem:             8064        5276        2788           0           0
+
+free -m | grep '^Mem:' | awk '{print $3}'
+5298
+
+mem1=`free -m | grep '^Mem:' | awk '{print $3}'`
+mem2=`free -m | grep '^Mem:' | awk '{print $2}'`
+mem3=$(({mem1}*100/mem2))
+echo &quot;当前占用%mem3&quot;
+</code></pre>
+
+<p><strong><em>bash -vx shell8.sh 可看见脚本执行过程</em></strong></p>
+
+<p><strong>这里运用到了参数输入：$1,$2（位置变量）。在调用脚本时，可以输入对应的值</strong></p>
+
+<h3 id="shell9-sh">shell9.sh</h3>
+
+<p>获取内存值得使用情况,这里使用到了<strong><em>bash -vx</em></strong>可以对脚本进行输出调试</p>
+
+<pre><code class="language-shell">ip=192.168.0.1
+for i in {1..5}
+do
+        ping -c1 $ip&amp;&gt; /dev/null
+        if [ $? -eq 0 ]
+        then
+                echo &quot;$ip is up&quot;
+        else
+                echo &quot;$ip is down&quot;
+        fi
+done
+
+i=1
+#-le小于等于
+while [$i -le 5 ]
+do
+        ping -c1 $ip&amp;&gt; /dev/null
+        if [ $? -eq 0 ]
+        then
+                echo &quot;$ip is up&quot;
+        else
+                echo &quot;$ip is down&quot;
+        fi
+        let i++         #算是条件
+done
+</code></pre>
+
+<h2 id="总结">总结</h2>
+
+<ul>
+<li>掌握什么是shell变量？</li>
+<li>变量有哪些类型？</li>
+<li>自定义变量</li>
+<li>环境变量</li>
+<li>位置变量</li>
+<li>预定义变量</li>
+<li>变量的定义方式？</li>
+<li>键盘输入 read</li>
+<li>显示赋值</li>
+<li>位置赋值</li>
+<li>变量的运算？</li>
+<li>$(())</li>
+<li>let</li>
+<li>列出三种小数的运算方式？</li>
+<li>awk</li>
+<li>python</li>
+<li>bc</li>
+<li>$@和$*有什么区别？</li>
+<li>如何给变量设置默认值 - ，:-</li>
+</ul>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+
+
+
+
+
+
+
+  
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/01/%E5%88%86%E7%BA%A7%E5%AD%98%E5%82%A8/" data-tooltip="分级存储">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/01/%E5%88%86%E7%BA%A7%E5%AD%98%E5%82%A8/" data-tooltip="分级存储">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%80\/';
+          
+            this.page.identifier = '\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%80\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
