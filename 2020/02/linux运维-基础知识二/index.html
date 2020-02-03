@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="linux运维, 基础">
+<meta name="description" content="学习Linux Shell第二波！gogogo">
+
+
+<meta property="og:description" content="学习Linux Shell第二波！gogogo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux运维 基础知识（二） ">
+<meta name="twitter:title" content="linux运维 基础知识（二） ">
+<meta property="og:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="学习Linux Shell第二波！gogogo">
+<meta name="twitter:description" content="学习Linux Shell第二波！gogogo">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-02-03T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2020-02-03T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+  
+  
+    
+      <meta property="article:tag" content="基础知识">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+  <meta property="og:image" content="//images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="//images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>linux运维 基础知识（二） </title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('//images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      linux运维 基础知识（二） 
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-02-03T00:00:00Z">
+        
+  
+  
+  
+  
+    2020年2月3日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>
+    
+  
+
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>学习Linux Shell第二波！gogogo</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#简介">简介</a>
+<ul>
+<li><a href="#shell条件测试">shell条件测试</a>
+<ul>
+<li><a href="#1-文件测试">1. 文件测试</a></li>
+<li><a href="#2-数字比较判断">2.数字比较判断</a></li>
+<li><a href="#3-字符串比较判断">3.字符串比较判断</a></li>
+</ul></li>
+<li><a href="#shell条件测试实例">shell条件测试实例</a>
+<ul>
+<li><a href="#shell1-sh">shell1.sh</a></li>
+<li><a href="#shell2-sh">shell2.sh</a>
+<ul>
+<li><a href="#输入一个用户名-如果存在-则提示退出-如果不存在则创建后提示成功">输入一个用户名，如果存在，则提示退出，如果不存在则创建后提示成功</a></li>
+</ul></li>
+<li><a href="#shell3-sh">shell3.sh</a>
+<ul>
+<li><a href="#磁盘报警及计划任务">磁盘报警及计划任务</a></li>
+</ul></li>
+<li><a href="#shell4-sh">shell4.sh</a>
+<ul>
+<li><a href="#内存报警及计划任务">内存报警及计划任务</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#shell模式匹配-case">shell模式匹配 case</a>
+<ul>
+<li><a href="#语法结构">语法结构</a></li>
+</ul></li>
+<li><a href="#shell模式匹配for">shell模式匹配for</a>
+<ul>
+<li><a href="#2-1-循环遍历传入进来的参数">2.1、循环遍历传入进来的参数</a></li>
+<li><a href="#2-2-遍历内存中的数组">2.2、遍历内存中的数组</a></li>
+<li><a href="#2-3-修改ifs-n-将cat的结果变成数组-然后再for">2.3、修改IFS=\n，将cat的结果变成数组，然后再for</a></li>
+<li><a href="#2-4-遍历文件夹下的文件">2.4、遍历文件夹下的文件</a></li>
+</ul></li>
+<li><a href="#shell模式判断实例">shell模式判断实例</a>
+<ul>
+<li><a href="#shell1-sh-1">shell1.sh</a></li>
+<li><a href="#shell2-sh-跳板机-堡垒主机">shell2.sh 跳板机，堡垒主机</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="简介">简介</h1>
+
+<h2 id="shell条件测试">shell条件测试</h2>
+
+<p>判断某一个条件是不是城里的，
+格式有三种，分别是
+1. test
+2. [ ]
+3. [[ ]]
+分为三类</p>
+
+<h3 id="1-文件测试">1. 文件测试</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+back_dir=/var/mysql_back
+#检查这个目录是否存在，如果不存在，则创建
+if ! test -d $back_dir;then
+        mkdir -p $back_dir
+fi
+
+
+</code></pre>
+
+<p><strong><em><code>[]</code>和使用test是一致的，注意使用<code>[]</code>的空格</em></strong></p>
+
+<ol>
+<li>-e filename      如果 filename 存在，则为真[[ -e /var/log/syslog ]]</li>
+<li>-d filename      如果 filename 为目录，则为真[[ -d /tmp/mydir ]]</li>
+<li>-f filename          如果 filename 为常规文件，则为真[[ -f /usr/bin/grep ]]</li>
+<li>-L filename      如果 filename 为符号链接，则为真[[ -L /usr/bin/grep ]]</li>
+<li>-r filename      如果 filename 对于当前用户可读，则为真[[ -r /var/log/syslog ]]</li>
+<li>-w filename      如果 filename 可写，则为真[[ -w /var/mytmp.txt ]]</li>
+<li>-x filename      如果 filename 可执行，则为真[[ -L /usr/bin/grep ]]</li>
+<li>filename1 -nt filename2 如果 filename1 比 filename2 新，则为真[[ /tmp/install/etc/services -nt /etc/services ]]</li>
+
+<li><p>filename1 -ot filename2     如果 filename1 比 filename2 旧，则为真[[ /boot/bzImage -ot arch/i386/boot/bzImage ]]</p>
+
+<pre><code class="language-shell">filePath=&quot;/root/test.txt&quot;
+if [[ -e $filePath ]]
+then
+ echo &quot;file is exist&quot;
+else
+ echo &quot;file is not exist&quot;
+fi
+</code></pre></li>
+</ol>
+
+<h3 id="2-数字比较判断">2.数字比较判断</h3>
+
+<pre><code>    num1 -eq num2   等于          [[ 3 -eq $mynum ]]
+    num1 -ne num2   不等于     [[ 3 -ne $mynum ]]
+    num1 -lt num2   小于          [[ 3 -lt $mynum ]]
+    num1 -le num2   小于或等于   [[ 3 -le $mynum ]]
+    num1 -gt num2   大于          [[ 3 -gt $mynum ]]
+    num1 -ge num2   大于或等于   [[ 3 -ge $mynum ]]
+</code></pre>
+
+<pre><code class="language-shell">a=10
+b=20
+if [[ $a -eq $b ]];then
+echo &quot;$a -eq $b : a 等于 b&quot;
+else
+echo &quot;$a -eq $b: a 不等于 b&quot;
+fi
+</code></pre>
+
+<h3 id="3-字符串比较判断">3.字符串比较判断</h3>
+
+<p><strong><em>注意字符串要加双引号</em></strong></p>
+
+<pre><code>    -z string           如果 string 长度为零，则为真[[ -z $myvar ]]
+    -n string           如果 string 长度非零，则为真[[ -n $myvar ]]
+    string1 == string2  如果 string1 与 string2 相同，则为真[[ $myvar == one two three ]]string1 != string2  如果 string1 与 string2 不同，则为真[[ $myvar != one two three ]]
+</code></pre>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#注意字符串要加双引号
+str1=&quot;i am xiaoming&quot;
+str2=&quot;i am xiaoqiang&quot;
+if [[ $str1 == $str2 ]]
+then
+echo &quot;咦！我俩咋相同&quot;
+else
+echo &quot;咦！我俩咋不一样&quot;
+fi
+</code></pre>
+
+<h2 id="shell条件测试实例">shell条件测试实例</h2>
+
+<h3 id="shell1-sh">shell1.sh</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+grep 'cat $1' *#从所有文件中找到含有字符串cat $1的东西
+#判断是否有参数
+if [ $# -eq 0 ];then
+        echo &quot;no value can not exe `basename $0` file&quot;
+fi
+#检查是不是文件
+if [ ！-f $1];then
+        echo &quot;error file type&quot;
+        exit
+fi
+
+for ip in `cat $1`
+do
+        ping -c1 $ip&amp;&gt; /dev/null
+        if [ $? -eq 0 ]
+        then
+                echo &quot;$ip is up&quot;
+        else
+                echo &quot;$ip is down&quot;
+        fi
+done
+</code></pre>
+
+<h3 id="shell2-sh">shell2.sh</h3>
+
+<h4 id="输入一个用户名-如果存在-则提示退出-如果不存在则创建后提示成功">输入一个用户名，如果存在，则提示退出，如果不存在则创建后提示成功</h4>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+
+grep 'cat $1' *#从所有文件中找到含有字符串cat $1的东西
+read -p &quot;请输入用户名：&quot; user
+if id $user&amp;.&gt;/dev/null; then
+        echo &quot;$user is already exists&quot;
+        exit
+else
+        useradd $user
+        if [ $? -eq 0 ];then
+                echo &quot;$user creat success&quot;
+        fi
+fi 
+
+</code></pre>
+
+<h3 id="shell3-sh">shell3.sh</h3>
+
+<h4 id="磁盘报警及计划任务">磁盘报警及计划任务</h4>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+df -h |grep  '/$'
+100.0G     53.2G     46.8G  53% /
+df -h |grep  '/$' | awk '{print $(NF-1)}'
+53%
+df -h |grep  '/$' | awk '{print $(NF-1)}' | awk -F&quot;%&quot; '{print $1}'#去掉百分号
+53
+
+disk_mem=`df -h |grep  '/$' | awk '{print $(NF-1)}' | awk -F&quot;%&quot; '{print $1}'`# set value
+mail_user=alice
+if [ $disk_mem -ge 90 ];then
+        #send a mail to user by title named disk war...
+        echo &quot;`date+%F-%H` disk : ${disk_mem}%&quot; |mail -s &quot;disk war...&quot; $mail_user
+fi
+</code></pre>
+
+<p>这里可以添加计划任务 ：每隔五分钟执行一次任务
+crontab -e来执行
+添加
+*/5 * * * *     /bin/bash shell3.sh</p>
+
+<h3 id="shell4-sh">shell4.sh</h3>
+
+<h4 id="内存报警及计划任务">内存报警及计划任务</h4>
+
+<p>获取内存值得使用情况,这里使用到了<strong><em>bash -vx</em></strong>可以对脚本进行输出调试</p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#^代表行首,$代表行尾,表示以Mem开头
+free -m |grep  '^Mem'
+#1               2           3           4             5
+Mem:             8064        5276        2788           0           0
+
+free -m | grep '^Mem:' | awk '{print $3}'
+5298
+
+mem1=`free -m | grep '^Mem:' | awk '{print $3}'`
+mem2=`free -m | grep '^Mem:' | awk '{print $2}'`
+mem3=$(({mem1}*100/mem2))
+echo &quot;当前占用${mem3}%&quot;
+war_file=/bin/war.txt
+mail_user=alice
+rm -rf $war_file #判断是否有残留
+if [ $mem3 -ge 80 ];then
+    echo &quot;`date+%F-%H` mem : ${mem3}%&quot; |mail -s &quot;disk war...&quot; $mail_user
+fi
+if (( $mem3&gt;80));then
+    echo &quot;`date+%F-%H` mem : ${mem3}%&quot; &gt; $war_file
+fi
+#判断文件是否存在
+if [ -f $war_file ];then
+        mail -s &quot;disk war...&quot; $mail_user &lt; $war_file
+        rm -rf $war_file
+fi
+</code></pre>
+
+<h2 id="shell模式匹配-case">shell模式匹配 case</h2>
+
+<h3 id="语法结构">语法结构</h3>
+
+<pre><code class="language-shell">case 变量 in
+
+mode_1)
+        commond1
+        ;;
+mode_2)
+        commond2
+        ;;
+mode_3)
+        commond3
+        ;;
+*)#相当于c语言中的default
+        commond
+esac
+</code></pre>
+
+<h2 id="shell模式匹配for">shell模式匹配for</h2>
+
+<h3 id="2-1-循环遍历传入进来的参数">2.1、循环遍历传入进来的参数</h3>
+
+<pre><code class="language-shell">  for x in $@
+  do
+  echo number $x
+  done
+</code></pre>
+
+<h3 id="2-2-遍历内存中的数组">2.2、遍历内存中的数组</h3>
+
+<pre><code class="language-shell">  arr=(&quot;one&quot; &quot;two&quot; 123 456)
+  for x in ${arr[@]}
+  do
+  echo number $x
+  done
+</code></pre>
+
+<h3 id="2-3-修改ifs-n-将cat的结果变成数组-然后再for">2.3、修改IFS=\n，将cat的结果变成数组，然后再for</h3>
+
+<pre><code class="language-shell">  #!/bin/bash
+  # 由于cat 是以\n来区分行，所以需要修改IFS
+  oldIFS=$IFS
+  IFS=&quot;\\n&quot;
+
+  # 将cat得到的文件内容，收集起来，加上（）转化为数组
+  catLines=(`cat /etc/hosts`)
+  IFS=$oldIFS
+  for line in ${catLines[*]}
+  do
+      echo $line
+  done
+</code></pre>
+
+<h3 id="2-4-遍历文件夹下的文件">2.4、遍历文件夹下的文件</h3>
+
+<pre><code class="language-shell">  #!/bin/bash
+  # 先收集成数组，这样只有文件名
+  catLines=($(ls /root))
+  for line in ${catLines[*]}
+  do
+      echo $line
+  done
+
+  # 直接读，这样line是完整路径
+  for line in /root/*
+  do
+      echo $line
+  done
+</code></pre>
+
+<h2 id="shell模式判断实例">shell模式判断实例</h2>
+
+<h3 id="shell1-sh-1">shell1.sh</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#delet user
+#首先学习检测一个输入是否为一个命令
+command -v ls
+alias ls='_bbf ls --color=auto'
+
+read -p &quot;input a username: &quot; user
+id $user &amp;&gt;/dev/null
+if [$? -ne 0 ];then
+        echo &quot;no such user:$user&quot;
+        exit 1 #退出返回值为
+fi
+read -p &quot;sure?{y/n}:&quot; action
+case $action in
+&quot;y&quot;|&quot;yes&quot;|&quot;Y&quot;)
+        userdel -r $user
+        echo &quot;$user is delet!&quot;
+       ;;
+&quot;no&quot;)
+        echo &quot;good&quot;
+        : #返回为真，相当于ture命令
+*)
+        echo &quot;bad&quot;
+esac
+</code></pre>
+
+<h3 id="shell2-sh-跳板机-堡垒主机">shell2.sh 跳板机，堡垒主机</h3>
+
+<p>跳板机（Jump Server），也称堡垒机，是一类可作为跳板批量操作远程设备的网络设备，跳板机最核心的功能是以本机作为跳板来操作远程设备，较为普遍地是通过ssh协议实现远程管理，使用单位一般会自己开发或选择性地使用以下自动化运维工具：</p>
+
+<p>生产环境不建议root权限登录
+一般生产环境有两个限制：
+1：不允许直接连接
+2：不允许root用户账户登录</p>
+
+<p>远程登录一般为user登录,登录方式为密码账户或者密钥登录
+将一下脚本放入 当前用户的.bash_profile里面
+在最后一行加入 shell2.sh脚本的全路径</p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#jumpserver
+trap &quot;&quot; HUP INT OUIT TSTP #用来屏蔽系统的中断信号，什么也不执行，防止从脚本中跳出来，屏蔽退出命令
+web1=192.168.0.1
+web2=192.168.0.2
+web3=192.168.0.3
+#函数
+menu(){
+cat &lt;&lt;-EOF
+        +-------------------------------+
+        |       1. web1                 |
+        |       2. web2                 |
+        |       3. web3                 |
+        +-------------------------------+
+EOF
+}
+while :
+do
+        clear
+        menu 
+
+        echo -e &quot;\e[1;32mimput number: \e[0m&quot;#换行输出绿色打印信息 input number：，-en是不换行的写法
+        read num    
+        #or read -p &quot;input number: &quot; num
+        case $num in
+        1)
+                ssh alice@$web1
+                ;;
+        2)
+                ssh alice@$web2
+                ;;
+        3)
+                ssh alice@$web3
+                ;;
+        &quot; &quot;)
+                ;;
+        *)
+                echo &quot;input error &quot;
+                break
+done
+
+</code></pre>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+
+
+
+
+
+
+
+  
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%80/" data-tooltip="linux运维 基础知识（一） ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%80/" data-tooltip="linux运维 基础知识（一） ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C\/';
+          
+            this.page.identifier = '\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

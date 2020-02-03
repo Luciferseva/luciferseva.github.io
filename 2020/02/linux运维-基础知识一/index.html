@@ -878,7 +878,7 @@ dirname 路径名称
 </code></pre>
 
 <pre><code class="language-shell">#!/usr/bin/bash
-#如果没有参数
+#判断是否有参数
 if [ $# -eq 0 ];then
         echo &quot;no value can not exe `basename $0` file&quot;
 fi
@@ -905,9 +905,9 @@ done
 <p>获取内存值得使用情况,这里使用到了<strong><em>bash -vx</em></strong>可以对脚本进行输出调试</p>
 
 <pre><code class="language-shell">#!/usr/bin/bash
-#^代表行首$代表行尾,表示以Mem开头
+#^代表行首,$代表行尾,表示以Mem开头
 free -m |grep  '^Mem'
-
+#1               2           3           4             5
 Mem:             8064        5276        2788           0           0
 
 free -m | grep '^Mem:' | awk '{print $3}'
@@ -1009,7 +1009,7 @@ done
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" data-tooltip="linux运维 基础知识（二） ">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -1077,7 +1077,7 @@ done
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" data-tooltip="linux运维 基础知识（二） ">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>

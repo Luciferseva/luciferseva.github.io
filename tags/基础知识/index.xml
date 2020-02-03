@@ -6,10 +6,19 @@
     <description>Recent content in 基础知识 on The way to be a master</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 01 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://luciferseva.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>linux运维 基础知识（二） </title>
+      <link>https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/</link>
+      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/</guid>
+      <description>&lt;p&gt;学习Linux Shell第二波！gogogo&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>linux运维 基础知识（一） </title>
