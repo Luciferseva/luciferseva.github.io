@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Kris Wu">
-<meta name="keywords" content="linux运维, 基础">
+<meta name="keywords" content="shell变量, shell条件判断">
 <meta name="description" content="学习Linux Shell第二波！gogogo">
 
 
@@ -36,7 +36,7 @@
   
   
     
-      <meta property="article:tag" content="基础知识">
+      <meta property="article:tag" content="linux运维">
     
   
 
@@ -294,7 +294,18 @@
 <ul>
 <li><a href="#shell1-sh-1">shell1.sh</a></li>
 <li><a href="#shell2-sh-跳板机-堡垒主机">shell2.sh 跳板机，堡垒主机</a></li>
+<li><a href="#shell3-sh-for循环的实现ping主机1">shell3.sh for循环的实现ping主机1</a></li>
+<li><a href="#shell4-sh-for循环的实现创建用户2">shell4.sh for循环的实现创建用户2</a></li>
+<li><a href="#shell5-sh-for循环的实现文件中批量创建用户3">shell5.sh for循环的实现文件中批量创建用户3</a></li>
+<li><a href="#shell6-sh-for循环的实现文件中批量创建用户3">shell6.sh for循环的实现文件中批量创建用户3</a></li>
+<li><a href="#shell7-sh-for实现ssh批量创建用户3">shell7.sh for实现ssh批量创建用户3</a></li>
 </ul></li>
+<li><a href="#while应用-非常适合逐行处理文件">while应用,非常适合逐行处理文件！！！</a>
+<ul>
+<li><a href="#shell1-sh-create-user">shell1.sh create user</a></li>
+<li><a href="#shell2-sh-探索while的字段分隔符定义">shell2.sh 探索while的字段分隔符定义</a></li>
+</ul></li>
+<li><a href="#until应用-也非常适合处理文件">until应用,也非常适合处理文件！！！</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -308,7 +319,7 @@
 1. test
 2. [ ]
 3. [[ ]]
-分为三类</p>
+分种类有三类，以下三类</p>
 
 <h3 id="1-文件测试">1. 文件测试</h3>
 
@@ -651,6 +662,300 @@ do
 done
 
 </code></pre>
+
+<h3 id="shell3-sh-for循环的实现ping主机1">shell3.sh for循环的实现ping主机1</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+&gt; a.txt #重定向 
+for i in {2...254} #or for i in `cat ip.txt`     #这里要执行cat ip.txt，所以要执行``或者${}
+
+do
+        {
+        ip=192.168.0.$i
+        ping -c1 -W.1 $ip&amp;&gt; /dev/null   #-c1 ping一次，-W.1等待0.1s
+        if [ $? -eq 0 ]
+        then
+                echo &quot;$ip is up&quot;|tee -a ip.txt #usr tee type creat a file to record ping history
+        else
+                echo &quot;$ip is down&quot;
+        fi
+        }&amp;      # 在（子shell）后台执行
+done
+wait    #等待前面所有后台进程结束
+echo &quot;finish&quot;
+</code></pre>
+
+<p><strong><em>任何程序或者脚本，都可以在前面加个time来统计执行的时间</em></strong>
+time /shell3.sh</p>
+
+<h3 id="shell4-sh-for循环的实现创建用户2">shell4.sh for循环的实现创建用户2</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+while :
+do
+read -p &quot;enter prefix &amp; passwod &amp; num&quot; prefix pass num
+printf &quot;user information:
+------------------------
+prefix:$prefix
+pass:$pass
+num:$num
+------------------------
+&quot;
+read -p &quot;are you sure ?:&quot; action
+#此处判断是否确认输入
+if [ &quot;$action&quot;=&quot;y&quot;];then
+        break
+
+fi
+done
+
+
+for i in `seq -w $num`#等位补齐
+do
+        user=$prefix$i
+        id $user &amp;&gt;/dev/null
+        if [ $? -eq 0 ];then #检测用户是否存在
+                echo &quot;can not create $user ，already exists&quot;
+        else
+                useradd $user
+                echo &quot;pass&quot; |passwd --stdin &amp;user &amp;&gt;/dev/null
+                if [ $? -eq 0];then
+                        echo &quot;creat $user success&quot;
+                fi
+        fi
+done
+echo &quot;create user&quot;
+
+</code></pre>
+
+<h3 id="shell5-sh-for循环的实现文件中批量创建用户3">shell5.sh for循环的实现文件中批量创建用户3</h3>
+
+<pre><code class="language-c">user.txt
+a 123
+b 456
+d 789
+</code></pre>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#是否有输入参数
+if [ $# -eq 0];then
+        echo &quot;nu value can not use: `basename $0` file&quot;
+        exit 1
+fi
+#检查类型
+if [ ! -f $1];then
+        echo &quot;type wrong&quot;
+        exit 2
+fi
+#希望for处理文件按回车分割，而不是空格或tab空格
+#但是for确实是这样--空格分割或tab空格
+#所以要重新定义分隔符
+#IFS内部字段分隔符
+#IFS=$'\n'
+#应增加以下两行 
+#IFS='
+#'
+for line in `cat $1` #每一行，每一行取（错误写法）
+do      
+        #判断长度是否为0，这里for会自动筛选，则不需要这个
+        if [ ${#line} -eq 0 ];then
+                continue #break是跳出循环，continue是结束本次循环
+        fi
+        user= `echo &quot;$line&quot; |awk '{print $1}'`
+        pass= `echo &quot;$line&quot; |awk '{print $2}'`
+        id $user &amp;&gt;/dev/null
+        if [ $? -eq 0 ];then #检测用户是否存在
+                echo &quot;can not create $user ，already exists&quot;
+        else
+                useradd $user
+                echo &quot;pass&quot; |passwd --stdin &amp;user &amp;&gt;/dev/null
+                if [ $? -eq 0];then
+                        echo &quot;creat $user success&quot;
+                fi
+        fi
+done
+
+</code></pre>
+
+<h3 id="shell6-sh-for循环的实现文件中批量创建用户3">shell6.sh for循环的实现文件中批量创建用户3</h3>
+
+<pre><code class="language-shell">#！/usr/bin/bash
+#重定向,相当于删除原有存在的
+#&gt;ok.txt
+#&gt;fail.txt
+read -p &quot;please enter a new password&quot; pass
+for ip in `cat ip.txt`     #这里要执行cat ip.txt，所以要执行``或者$()
+
+do
+        {
+        
+        ping -c1 -W1 $ip&amp;&gt; /dev/null   #-c1 ping一次，-W1等待1s
+        if [ $? -eq 0 ]
+        then
+                ssh $ip &quot;echo $pass |passwd --stdin root&quot;
+                if [ $? -eq 0];then
+
+                        echo &quot;$ip is up&quot;|tee -a ok_`date +%F`.txt #usr tee type creat a file to record ping history
+                else
+                        echo &quot;$ip is down&quot; &gt;&gt; fail_`date +%F`.txt
+                fi
+        else
+                echo &quot;$ip is down&quot; &gt;&gt;fail_`date +%F`.txt
+        fi
+        }&amp;      # 在（子shell）后台执行
+done
+wait    #等待前面所有后台进程结束
+echo &quot;finish&quot;
+</code></pre>
+
+<h3 id="shell7-sh-for实现ssh批量创建用户3">shell7.sh for实现ssh批量创建用户3</h3>
+
+<pre><code class="language-shell">#！/usr/bin/bash
+#重定向,相当于删除原有存在的
+#&gt;ok.txt
+#&gt;fail.txt
+read -p &quot;please enter a new password&quot; pass
+for ip in `cat ip.txt`     #这里要执行cat ip.txt，所以要执行``或者$()
+
+do
+        {
+        
+        ping -c1 -W1 $ip&amp;&gt; /dev/null   #-c1 ping一次，-W1等待1s
+        if [ $? -eq 0 ]
+        then
+                #sed -ri '/^#UseDNS/cUseDNS no ' /etc/ssh/sshd_config #从/etc/ssh/sshd_config文件中，通过sed -ri查找 ,/^#UseDNS搜索以#UseDNS开头， /c替换为UseDNS
+                #ssh $ip &quot;echo $pass |passwd --stdin root&quot;
+                ssh $ip &quot;sed -ri '/^#UseDNS/cUseDNS no ' /etc/ssh/sshd_config&quot;
+                #if [ $? -eq 0];then
+
+                #        echo &quot;$ip is up&quot;|tee -a ok_`date +%F`.txt #usr tee type creat a file to record ping history
+                #else
+                #        echo &quot;$ip is down&quot; &gt;&gt; fail_`date +%F`.txt
+                #fi
+        else
+                #echo &quot;$ip is down&quot; &gt;&gt;fail_`date +%F`.txt
+        fi
+        }&amp;      # 在（子shell）后台执行
+done
+wait    #等待前面所有后台进程结束
+echo &quot;finish&quot;
+
+grep 'DNS' /ect.ssh_config #在某个文件中查找DNS并打印所得行
+</code></pre>
+
+<h2 id="while应用-非常适合逐行处理文件">while应用,非常适合逐行处理文件！！！</h2>
+
+<ol>
+<li><p>普通的循环控制</p>
+
+<pre><code class="language-shell">#!/bin/bash
+while [[ i -lt 10 ]]
+do
+  echo $i
+  i=$[i + 1]
+done
+</code></pre></li>
+
+<li><p>读取文件的每一行</p>
+
+<pre><code class="language-shell">#!/bin/bash
+cat $1| while read hostLine
+do
+  # 将hostLine转化为数组，第一个是ip，第二个是机器名称，第三个是密码
+  # 如果hostLine分隔符是IFS默认的分隔符一种' ' 、 tab ，则可以直接下面这种方式切割
+  ipArr=($hostLine)
+
+  # 如果hostLine分隔符是&quot;,&quot;，要么临时修改IFS为&quot;,&quot;，要么将hostLine分隔符替换为' '
+  # ipArr=(${hostLine//,/' '})
+
+  IP=${ipArr[0]}
+  NAME=${ipArr[1]}
+  PASSWD=${ipArr[2]}
+  echo &quot;ip是:$IP  hostname是：$NAME  密码是：$PASSWD&quot;
+done
+</code></pre></li>
+
+<li><p>普通的循环控制</p>
+
+<pre><code class="language-shell">#!/bin/bash
+while : #:冒号返回为真
+do
+  echo $i
+  i=$[i + 1]
+done
+</code></pre></li>
+</ol>
+
+<h3 id="shell1-sh-create-user">shell1.sh create user</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+# 读取user.txt文件，创建账号，其中user是读的一行，因为read是以换行符为结束
+while read user
+do
+        #判断用户是否存在
+        id $user &amp;&gt;/dev/null
+        if [ $? -eq 0];then
+                echo &quot;user already exists&quot;
+        else
+                useradd $user
+                if [ $? -eq 0 ];then
+
+                        echo &quot;$user ok&quot;
+                else
+                        echo &quot;bad&quot;
+                fi
+        fi
+
+done &lt; user .txt #输入重定向
+</code></pre>
+
+<h3 id="shell2-sh-探索while的字段分隔符定义">shell2.sh 探索while的字段分隔符定义</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+# 读取user.txt文件，创建账号，其中line是读的一行，因为read是以换行符为结束
+while read line
+do
+        if [ ${#line} -eq 0 ];then
+                echo    &quot;---------------&quot;
+                continue
+
+        fi
+        #判断用户是否存在
+        user =`echo $line|awk '{print $1}' `
+        pass =`echo $line|awk '{print $2}' `
+        id $user &amp;&gt;/dev/null
+        if [ $? -eq 0];then
+                echo &quot;user already exists&quot;
+        else
+                useradd $user
+                if [ $? -eq 0 ];then
+
+                        echo &quot;$user ok&quot;
+                else
+                        echo &quot;bad&quot;
+                fi
+        fi
+
+done &lt; $1 #输入重定向，读取一行，否则退出
+
+echo 
+</code></pre>
+
+<h2 id="until应用-也非常适合处理文件">until应用,也非常适合处理文件！！！</h2>
+
+<ol>
+<li><p>普通的循环控制</p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+
+ip=192.168.0.1
+until ping -c1 -W1 $ip&amp;&gt; /dev/null #ping 不通继续ping，使用while ping 成功继续ping
+do
+sleep 1
+done 
+echo &quot;$ip is done&quot;
+</code></pre></li>
+</ol>
               
             </div>
           </div>
@@ -662,7 +967,7 @@ done
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/linux%E8%BF%90%E7%BB%B4/">linux运维</a>
 
 
 
