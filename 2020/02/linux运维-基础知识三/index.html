@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="Expect, array">
+<meta name="description" content="学习Linux Shell第三波！gogogo">
+
+
+<meta property="og:description" content="学习Linux Shell第三波！gogogo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux运维 基础知识（三） ">
+<meta name="twitter:title" content="linux运维 基础知识（三） ">
+<meta property="og:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="学习Linux Shell第三波！gogogo">
+<meta name="twitter:description" content="学习Linux Shell第三波！gogogo">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-02-05T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2020-02-05T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+  
+  
+    
+      <meta property="article:tag" content="linux运维">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+  <meta property="og:image" content="//images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="//images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>linux运维 基础知识（三） </title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('//images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      linux运维 基础知识（三） 
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-02-05T00:00:00Z">
+        
+  
+  
+  
+  
+    2020年2月5日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>
+    
+  
+
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>学习Linux Shell第三波！gogogo</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#简介">简介</a>
+<ul>
+<li><a href="#expect是什么">expect是什么？</a></li>
+<li><a href="#expect基础">expect基础</a>
+<ul>
+<li><a href="#命令-作用">命令 作用</a></li>
+</ul></li>
+<li><a href="#实用代码分析">实用代码分析</a>
+<ul>
+<li><a href="#模式-动作">模式-动作</a></li>
+<li><a href="#传参">传参</a></li>
+</ul></li>
+<li><a href="#总结1">总结1</a></li>
+<li><a href="#数组操作">数组操作</a>
+<ul>
+<li><a href="#查看数组">查看数组</a></li>
+<li><a href="#实例">实例</a>
+<ul>
+<li><a href="#shell1-sh">shell1.sh</a></li>
+<li><a href="#shell2-sh">shell2.sh</a></li>
+<li><a href="#shell3-sh-统计元素-性别">shell3.sh 统计元素-性别</a></li>
+<li><a href="#shell4-sh-统计对象作为索引-统计shell的数量">shell4.sh 统计对象作为索引，统计shell的数量</a></li>
+<li><a href="#shell5-sh-统计对象作为索引-统计tcp连接的数量">shell5.sh 统计对象作为索引，统计tcp连接的数量</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="简介">简介</h1>
+
+<p>先抛出一个问题
+现在有两台Linux主机A和B，如何从A主机ssh到B主机，然后在B主机上执行命令，如何使这个过程实现全程自动化？你可能会使用这种方法：</p>
+
+<p>ssh admin@10.222.20.15 &ldquo;ls&rdquo;</p>
+
+<p>但是这种方式比较笨拙，每次都要输入密码，同时并不能执行一些复杂的逻辑或命令。那么如何实现全程自动化呢？这就要用到今天这篇文章总结的expect了。</p>
+
+<h2 id="expect是什么">expect是什么？</h2>
+
+<p>expect是一个免费的编程工具，用来实现自动的交互式任务，而无需人为干预。说白了，expect就是一套用来实现自动交互功能的软件。</p>
+
+<p>在实际工作中，我们运行命令、脚本或程序时，这些命令、脚本或程序都需要从终端输入某些继续运行的指令，而这些输入都需要人为的手工进行。而利用expect，则可以根据程序的提示，模拟标准输入提供给程序，从而实现自动化交互执行。这就是expect！！！</p>
+
+<h2 id="expect基础">expect基础</h2>
+
+<p>在使用expect时，基本上都是和以下四个命令打交道：</p>
+
+<h3 id="命令-作用">命令 作用</h3>
+
+<ul>
+<li>send 用于向进程发送字符串</li>
+<li>expect 从进程接收字符串</li>
+<li>spawn 启动新的进程</li>
+<li>interact 允许用户交互</li>
+</ul>
+
+<p>send命令接收一个字符串参数，并将该参数发送到进程。</p>
+
+<p>expect命令和send命令相反，expect通常用来等待一个进程的反馈，我们根据进程的反馈，再发送对应的交互命令。</p>
+
+<p>spawn命令用来启动新的进程，spawn后的send和expect命令都是和使用spawn打开的进程进行交互。</p>
+
+<p>interact命令用的其实不是很多，一般情况下使用spawn、send和expect命令就可以很好的完成我们的任务；但在一些特殊场合下还是需要使用interact命令的，interact命令主要用于退出自动化，进入人工交互。比如我们使用spawn、send和expect命令完成了ftp登陆主机，执行下载文件任务，但是我们希望在文件下载结束以后，仍然可以停留在ftp命令行状态，以便手动的执行后续命令，此时使用interact命令就可以很好的完成这个任务。</p>
+
+<h2 id="实用代码分析">实用代码分析</h2>
+
+<p>上面对expect进行了总结，特别是对一些常用的命令进行了详细的说明。下面就通过一些常用的expect脚本来具体的说明如何使用expect来完成日常的一些工作。</p>
+
+<pre><code class="language-shell">#!/usr/bin/expect
+#显示赋值
+set timeout 30
+set host &quot;101.200.241.109&quot;
+set username &quot;root&quot;
+set password &quot;123456&quot;
+
+spawn ssh $username@$host       #启动一个会话，spawn：启动
+spawn scp -r /etc/file $username$ip:/tmp       #启动一个会话，并且赋值文件spawn：启动
+expect {
+        &quot;yes/no&quot; { send &quot;yes\r&quot;;exp_continue }  #没有继续执行
+        &quot;*password*&quot; {send &quot;$password\r&quot;}
+}
+interact        #停在对方那边
+
+
+</code></pre>
+
+<p>这是一段非常简单的expect示例代码，演示了expect的基本使用方法。</p>
+
+<pre><code>    \#!/usr/tcl/bin/expect：
+</code></pre>
+
+<p>使用expect来解释该脚本；</p>
+
+<pre><code>    set timeout 30：
+</code></pre>
+
+<p>设置超时时间，单位为秒，默认情况下是10秒；</p>
+
+<pre><code>    set host &quot;101.200.241.109&quot;：
+</code></pre>
+
+<p>设置变量；</p>
+
+<pre><code>    spawn ssh \$username@\$host：spawn
+</code></pre>
+
+<p>是进入expect环境后才可以执行的expect内部命令，如果没有装expect或者直接在默认的SHELL下执行是找不到spawn命令的。它主要的功能是给ssh运行进程加个壳，用来传递交互指令；</p>
+
+<pre><code>    expect &quot;*password*&quot;：
+</code></pre>
+
+<p>这里的expect也是expect的一个内部命令，这个命令的意思是判断上次输出结果里是否包含“password”的字符串，如果有则立即返回；否则就等待一段时间后返回，这里等待时长就是前面设置的30秒；</p>
+
+<pre><code>    send &quot;\$password\r&quot;：
+</code></pre>
+
+<p>当匹配到对应的输出结果时，就发送密码到打开的ssh进程，执行交互动作；</p>
+
+<pre><code>    interact：
+</code></pre>
+
+<p>执行完成后保持交互状态，把控制权交给控制台，这个时候就可以手工操作了。如果没有这一句登录完成后会退出，而不是留在远程终端上。</p>
+
+<p>这就是对上述这段简单简单脚本的分析，在上述的示例中，涉及到expect中一个非常重要的概念——模式-动作；即上述expect &ldquo;<em>password</em>&rdquo; {send &ldquo;$password\r&rdquo;}这句代码表达出来的含义。</p>
+
+<h3 id="模式-动作">模式-动作</h3>
+
+<p>结合着expect &ldquo;*password*&rdquo; {send &ldquo;$password\r&rdquo;}这句代码来说说“模式-动作”。简单的说就是匹配到一个模式，就执行对应的动作；匹配到password字符串，就输入密码。你可能也会看到这样的代码：</p>
+
+<pre><code class="language-shell">expect {
+    &quot;password&quot; {
+        send &quot;$password\r&quot;
+        exp_continue
+    }
+    eof
+    {
+        send &quot;eof&quot;
+    }
+}
+</code></pre>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+# 读取user.txt文件，创建账号，其中line是读的一行，因为read是以换行符为结束
+for i in {2...254} #or for i in `cat ip.txt`     #这里要执行cat ip.txt，所以要执行``或者${
+
+do
+        {
+        ip=192.168.0.$i
+        ping -c1 -W.1 $ip&amp;&gt; /dev/null   #-c1 ping一次，-W.1等待0.1s
+        if [ $? -eq 0 ]
+        then
+                echo &quot;$ip is up&quot; &gt;&gt; -a ip.txt #usr tee type creat a file to record ping history
+                #这里千万不要有空格，否则是找死
+
+                /usr/bin/expect &lt;&lt;-EOF
+                set timeout 10  #设置执行超时
+                expect {
+                        &quot;yes/no&quot; { send &quot;yes\r&quot;;exp_continue }  #没有继续执行
+                        &quot;*password*&quot; {send &quot;$password\r&quot;}
+                }
+                expect eof
+                EOF
+        else
+                echo &quot;$ip is down&quot;
+        fi
+        }&amp;      # 在（子shell）后台执行，相当于并发执行 多进程
+done
+wait    #等待前面所有后台进程结束
+echo &quot;finish&quot;
+</code></pre>
+
+<p>其中exp_continue表示循环式匹配，通常匹配之后都会退出语句，但如果有exp_continue则可以不断循环匹配，输入多条命令，简化写法。</p>
+
+<h3 id="传参">传参</h3>
+
+<p>很多时候，我们需要传递参数到脚本中，现在通过下面这段代码来看看如何在expect中使用参数：</p>
+
+<pre><code class="language-shell">#!/usr/tcl/bin/expect
+
+if {$argc &lt; 3} {
+    puts &quot;Usage:cmd &lt;host&gt; &lt;username&gt; &lt;password&gt;&quot;
+    exit 1
+}
+
+set timeout -1
+set host [lindex $argv 0] 
+set username [lindex $argv 1]
+set password [lindex $argv 2]
+
+spawn ssh $username@$host
+expect &quot;*password*&quot; {send &quot;$password\r&quot;}
+
+#interact #不停留在那边
+expect &quot;#&quot;
+send &quot;useradd yangyang\r&quot;
+expect eof #结束expect
+</code></pre>
+
+<p>在expect中，$argc表示参数个数，而参数值存放在$argv中，比如取第一个参数就是[lindex $argv 0]，以此类推。</p>
+
+<h2 id="总结1">总结1</h2>
+
+<p>能够在工作中熟练的使用Shell脚本就可以很大程度的提高工作效率，如果再搭配上expect，那么很多工作都可以自动化进行，对工作的展开如虎添翼。如果你会Python的话，你的视野将会更加开阔，那个时候你又会“嫌弃”expect了。</p>
+
+<h2 id="数组操作">数组操作</h2>
+
+<p>一般 name=qwe 变量赋值，索引0：q，1：w，2：e</p>
+
+<p>arr=(&ldquo;one&rdquo; &ldquo;two&rdquo; [123]=456) <strong><em>普通数组</em></strong>,相当于python中的list，从0开始,其中从123跳着赋值</p>
+
+<p>索引下标：
+0：&rdquo;one&rdquo;</p>
+
+<p>arr=([name]=qwe [sex]=male [age]=36)<strong><em>关联数组</em></strong>,相当于python中的dict(字典)</p>
+
+<p>索引下标
+name：qwe
+sex:  male
+age:  36</p>
+
+<h3 id="查看数组">查看数组</h3>
+
+<p>declare -a 查看所有数组</p>
+
+<ol>
+<li>赋值</li>
+</ol>
+
+<p>arr[0]=10        #重新覆盖</p>
+
+<p>arr[0]=(10 [20] 1)        #重新覆盖</p>
+
+<p>echo ${arr[@]}        #查看所有数组    # @等价于*</p>
+
+<p>echo #{arr[@]}        #查看数组个数  # @等价于*</p>
+
+<p>echo ${!arr[@]}      #<strong><em>获得数组的索引</em></strong>
+2. 取值</p>
+
+<p>oneTemp=${arr[0]}</p>
+
+<ol>
+<li>获得数组的所有元素，然后for循环遍历</li>
+</ol>
+
+<p>for x in ${arr[<em>]}     # @等价于</em></p>
+
+<pre><code>    do
+            echo number $x
+    done
+</code></pre>
+
+<ol>
+<li>获得数组长度</li>
+</ol>
+
+<p>length=${#arr[<em>]}     # @等价于</em></p>
+
+<ol>
+<li>取得数组单个元素的长度（其实就是字符串长度）</li>
+</ol>
+
+<p>lengthn=${#arr[n]}</p>
+
+<p>str=&ldquo;i am rrr&rdquo;</p>
+
+<p>echo ${#str}</p>
+
+<ol>
+<li>数组删除</li>
+</ol>
+
+<p>unset arr[1] # 删除数组中第一个元素</p>
+
+<p>unset arr # 删除整个数组</p>
+
+<ol>
+<li>数组截取</li>
+</ol>
+
+<p>${arr[*]:1} # two three four,第一个元素后所有元素</p>
+
+<p>${arr[*]:0}表示所有元素</p>
+
+<p>${arr[*]:0:2} # one two</p>
+
+<p>${arr[*]:1:2} # two 123</p>
+
+<ol>
+<li>使用IFS将字符串转化为数组</li>
+</ol>
+
+<p>*** IFS是内部字段分隔符（internal field separator）***</p>
+
+<pre><code class="language-shell">  #!/bin/bash
+
+  # 情况1、符合默认IFS
+  ips=&quot;ip1 ip2 ip3 ip6&quot;
+  # 直接加上()即可，因为默认的IFS就是以' ' 切分的
+  ipArr=($ips)
+
+  for ip in ${ipArr[*]}
+  do
+      echo $ip
+  done
+
+  # 情况2、其他分隔符
+  ips=&quot;ip1,ip2,ip3,ip6&quot;
+  # 方法1、临时修改IFS，最后还原IFS，避免影响
+  oldIFS=$IFS
+  IFS=&quot;,&quot;
+  ipArr=($ips)
+  IFS=$oldIFS
+
+  for ip in ${ipArr[*]}
+  do
+      echo $ip
+  done
+
+  # 方法2、使用字符串替换功能，将字符串分隔符替换为' '。 //表示全部替换
+  ipArr=(${ips//,/' '})
+
+  for ip in ${ipArr[*]}
+  do
+      echo $ip
+  done
+
+</code></pre>
+
+<h3 id="实例">实例</h3>
+
+<p>hosts文件</p>
+
+<pre><code class="language-c">127.0.0.1 localhost
+::1       localhose
+192.168.122.47  localhost
+</code></pre>
+
+<h4 id="shell1-sh">shell1.sh</h4>
+
+<pre><code class="language-shell">#！/usr/bin/bash
+while read line
+do
+        host[++i]=$line
+
+done &lt;/etc/hosts
+
+echo &quot;hosts first:  ${hosts[1]}&quot; 
+
+echo 
+
+for i in ${!hosts[i]}
+do
+        echo &quot;$i: ${hosts[i]}&quot;
+done
+
+</code></pre>
+
+<h4 id="shell2-sh">shell2.sh</h4>
+
+<pre><code class="language-shell">#！/usr/bin/bash
+#同上方法差不多，但是因为for的分隔符与while不通，则输出不通，这里改进分隔符
+#OLD_IFS=$IFS
+#IFS=$'\n'
+#IFS=$OLD_IFS   #在最后可以恢复原有换行符
+for line in `cat /etc/hosts`
+do
+        host[++i]=$line
+
+done &lt;/etc/hosts
+
+echo &quot;hosts first:  ${hosts[1]}&quot; 
+
+echo 
+
+for i in ${!hosts[@]}
+do
+        echo &quot;$i: ${hosts[i]}&quot;
+done
+</code></pre>
+
+<h4 id="shell3-sh-统计元素-性别">shell3.sh 统计元素-性别</h4>
+
+<p>sex.txt 文件</p>
+
+<pre><code class="language-c">wang m
+wu   m
+tom  f
+</code></pre>
+
+<pre><code class="language-shell">#！/usr/bin/bash
+
+# 声明一个数组
+
+declare -A sex
+
+while read line
+do
+        #读行取第二列，取
+        type=`echo $line |awk '{print $2}'`
+        #host[++i]=$sex
+        #sex+=（[f]=1）#是元素加一，添加一个新的元素
+        #是某一个索引对应的值加一
+        let sex[$type]++ 
+done &lt;sex.txt
+
+
+echo 
+# 无论什么数组，都可通过索引遍历，要统计对象作为数组的索引，然后++，就可以打印出来
+for i in ${!sex[@]}
+do
+        echo &quot;$i: ${sex[$i]}&quot;
+done
+#输出
+#m:2
+#f:1
+</code></pre>
+
+<h4 id="shell4-sh-统计对象作为索引-统计shell的数量">shell4.sh 统计对象作为索引，统计shell的数量</h4>
+
+<pre><code class="language-shell">
+#！/usr/bin/bash
+# awk -F&quot;:&quot; '{print$NF}' /etc/passwd |sort |uniq -c
+# 可以直接通过以上命令进行统计，或者通过以下命令
+# 声明一个数组
+
+declare -A shells
+
+while read line
+do
+        #读行,截取，-F 冒号分割，为最后一列 7或者NF
+        type=`echo $line |awk -F &quot;:&quot; '{print $7}'`
+        #host[++i]=$sex
+        #sex+=（[f]=1）#是元素加一，添加一个新的元素
+        #是某一个索引对应的值加一
+        let shells[$type]++ 
+done &lt;/etc/passwd
+
+
+echo 
+# 无论什么数组，都可通过索引遍历，要统计对象作为数组的索引，然后++，就可以打印出来
+for i in ${!shells[@]}
+do
+        echo &quot;$i: ${shells[$i]}&quot;
+done
+#输出
+#shell:2
+#bash:1
+</code></pre>
+
+<h4 id="shell5-sh-统计对象作为索引-统计tcp连接的数量">shell5.sh 统计对象作为索引，统计tcp连接的数量</h4>
+
+<pre><code class="language-shell">
+#！/usr/bin/bash
+# count tcp status
+# 通过 watch -n1 ./shell5.sh脚本 #循环一秒钟执行一次
+# 声明一个数组
+#
+#***这里如果这样写，要对数组从新赋值才行，要不然数组会一直累加的，所以放到里面，每次执行完都清零***
+#unset status
+#declare -A status
+
+while :
+do
+        #为了防止累加，所以只能这样写
+        unset status
+        declare -A status
+        type=`ss -an |grep ：80 |awk '{print$2}'`
+        for j in $type
+        do
+                #读行,截取，-F 冒号分割，为最后一列 7或者NF
+                #type=`echo $line |awk -F &quot;:&quot; '{print $7}'`
+                #host[++i]=$sex
+                #sex+=（[f]=1）#是元素加一，添加一个新的元素
+                #是某一个索引对应的值加一
+                let status[$j]++ 
+        done 
+
+
+        echo 
+        # 无论什么数组，都可通过索引遍历，要统计对象作为数组的索引，然后++，就可以打印出来
+        for i in ${!status[@]}
+        do
+                echo &quot;$i: ${status[$i]}&quot;
+        done
+        sleep 1
+        clear
+done
+#输出
+#wating:2
+#listen:1
+</code></pre>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/linux%E8%BF%90%E7%BB%B4/">linux运维</a>
+
+
+
+
+
+
+
+  
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/" data-tooltip="linux运维 基础知识（四） ">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" data-tooltip="linux运维 基础知识（二） ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/" data-tooltip="linux运维 基础知识（四） ">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%8C/" data-tooltip="linux运维 基础知识（二） ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89\/';
+          
+            this.page.identifier = '\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

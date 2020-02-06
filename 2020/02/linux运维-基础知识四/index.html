@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="shell函数使用, shell内置命令">
+<meta name="description" content="学习Linux Shell第四波！gogogo">
+
+
+<meta property="og:description" content="学习Linux Shell第四波！gogogo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux运维 基础知识（四） ">
+<meta name="twitter:title" content="linux运维 基础知识（四） ">
+<meta property="og:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="学习Linux Shell第四波！gogogo">
+<meta name="twitter:description" content="学习Linux Shell第四波！gogogo">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-02-06T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2020-02-06T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+  
+  
+    
+      <meta property="article:tag" content="linux运维">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+  <meta property="og:image" content="//images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="//images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>linux运维 基础知识（四） </title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('//images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      linux运维 基础知识（四） 
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-02-06T00:00:00Z">
+        
+  
+  
+  
+  
+    2020年2月6日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>
+    
+  
+
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>学习Linux Shell第四波！gogogo</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#简介">简介</a>
+<ul>
+<li><a href="#函数格式">函数格式</a></li>
+<li><a href="#实例讲解">实例讲解</a>
+<ul>
+<li><a href="#shell1-sh">shell1.sh</a></li>
+<li><a href="#shell1-sh-1">shell1.sh</a></li>
+<li><a href="#shell2-sh-函数参数使用">shell2.sh 函数参数使用</a></li>
+<li><a href="#shell3-sh-函数参数使用数组">shell3.sh 函数参数使用数组</a></li>
+<li><a href="#shell4-sh-函数参数使用数组-返回数组">shell4.sh 函数参数使用数组,返回数组</a></li>
+</ul></li>
+<li><a href="#函数的内置命令">函数的内置命令</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="简介">简介</h1>
+
+<p>完成特定功能的代码片段</p>
+
+<p>在shell中定义函数可以用代码模块化，便于复用代码</p>
+
+<p>函数必须先定义才可以使用</p>
+
+<h2 id="函数格式">函数格式</h2>
+
+<p>传参 $1 $2</p>
+
+<p>变量 local</p>
+
+<p>返回值 return $?</p>
+
+<ul>
+<li><p>方法1</p>
+
+<pre><code class="language-shell">    函数名(){
+            函数要实现的功能代码
+    }
+</code></pre></li>
+
+<li><p>方法2</p>
+
+<pre><code class="language-shell">    function 函数名(){
+            函数要实现的功能代码    
+    }
+</code></pre></li>
+</ul>
+
+<h2 id="实例讲解">实例讲解</h2>
+
+<h3 id="shell1-sh">shell1.sh</h3>
+
+<p>阶乘</p>
+
+<pre><code class="language-shell">#！/usr/bin/bash
+#! /bin/bash
+#! /bin/env bash 
+factorial(){
+factorial=1
+#下面是c风格的写法
+for((i=1;i&lt;=$sum;i++))
+do
+    factoral=${$factorial * $i}
+
+    echo &quot;$sum 的阶乘: $factorial&quot;
+done
+
+
+#执行函数
+factorial
+#或者
+#函数里面的位置变量是这个函数的，不是整个脚本的，需要在执行的时候连接起来
+factorial=1
+#for((i=1;i&lt;=$1;i++))
+#for((i=1;i&lt;=$1;i++))
+#也可以这样写
+for i in `seq $1`
+do
+    #factoral=${$factorial * $i}
+        #或者这样写
+        #let factoral*=*$i
+        let factoral=$factoral*$i
+    echo &quot;$1 的阶乘: $factorial&quot;
+done
+#执行函数时，调用了脚本的$1,函数的$1
+factorial $1
+#执行函数时，调用了脚本的$2,函数的$1,以此类推
+factorial $2
+}
+
+
+</code></pre>
+
+<h3 id="shell1-sh-1">shell1.sh</h3>
+
+<p>提示用户输入个值，然后返回</p>
+
+<pre><code class="language-shell">#！/usr/bin/bash
+#! /bin/bash
+#! /bin/env bash 
+fun2(){
+        read -p &quot;enter number: &quot; num
+        let 2*num
+
+}
+#函数的返回值是函数的最后一条命令执行的结果的返回值
+fun2
+echo &quot;return $?&quot; #返回0
+#------------------------------#
+fun2(){
+        read -p &quot;enter number: &quot; num
+        return $[2*$num] #小于等于255
+
+}
+#函数的返回值是函数的最后一条命令执行的结果的返回值
+fun2
+#echo &quot;return $?&quot; #返回0,shell返回值的大小不能超过255，会有错误的结果
+#
+#------------------------------#
+#返回大于255的数
+fun2(){
+        read -p &quot;enter number: &quot; num
+        echo $[2*$num] #小于等于255
+
+}
+#函数的返回值是函数的最后一条命令执行的结果的返回值
+result=`fun2`
+echo &quot;return $result&quot; #函数的输出
+
+</code></pre>
+
+<h3 id="shell2-sh-函数参数使用">shell2.sh 函数参数使用</h3>
+
+<pre><code class="language-shell">#!/bin/bash
+
+if [ $# -ne 3]; then
+        echo &quot;usage: `basename $0` pa1 pa2 pa3&quot;
+        exit
+fi
+fun3(){
+        echo &quot;$(($1*$2*$3))&quot;
+
+}
+result=`fun3 $1 $2 $3`
+echo &quot;resule: $result&quot;
+</code></pre>
+
+<h3 id="shell3-sh-函数参数使用数组">shell3.sh 函数参数使用数组</h3>
+
+<pre><code class="language-shell">#!/bin/bash
+#脚本执行所有参数
+#或者for i in $* 或&quot;$@&quot;
+for i
+do
+        let num+=$i
+done
+echo $num
+
+
+num =(1,2,3)
+echo &quot;${num[@]}&quot;
+
+array(){
+        farcty=1        #全局变量，函数外边可以使用
+        local farcty2=1        #局部变量
+        
+        for i in &quot;$@&quot; #获得所有参数，或者$* 或者 for i in ${num[*]}
+        do
+                #farcty*=$i
+                farcty=$[farcty*$i]
+        done
+}
+
+#array ${num[@]} #数组所有参数
+array ${num[*]} #数组所有参数
+
+
+</code></pre>
+
+<h3 id="shell4-sh-函数参数使用数组-返回数组">shell4.sh 函数参数使用数组,返回数组</h3>
+
+<p><strong><em>函数接收位置参数 $1 $2&hellip;$n</em></strong></p>
+
+<p>*<strong>函数接收数组变量 $* 或者 $@</strong>*</p>
+
+<p>***   参数个数 $#   ***</p>
+
+<p>*<strong>函数将接收到的所有参数赋值给数组 array=($*)</strong>*</p>
+
+<pre><code class="language-shell">#!/bin/bash
+#脚本执行所有参数
+#或者for i in $* 或&quot;$@&quot;
+
+num =(1,2,3)
+num2 =(1,2,3)
+echo &quot;${num[@]}&quot;
+
+array(){
+        echo &quot;all: $*&quot;
+        farcty=1        #全局变量，函数外边可以使用
+        local farcty3=()       #局部变量
+        local farcty2=1        #局部变量
+        local newarray=(`echo $*`) #创建新数组,或者newarray=（$*）
+        for((i=0;i&lt;$#;i++))     # $#接收参数的个数
+        do
+                outarry[$i]=$[ ${newarray[$i]} *5 ]
+                #或者outarry[$i]=$(( ${newarray[$i]} *5 ))
+        done
+        
+        echo &quot;${outarray[*]}&quot;
+}
+#函数通过 一下两种方式传所有
+#array ${num[@]} #数组所有参数
+#array ${num[*]} #数组所有参数
+result=`array ${num[*]}`
+
+echo &quot;{get $result[*]}&quot;
+
+
+
+
+#——————————————————————————————————————#
+
+num =(1,2,3)
+array(){
+       
+        #for((i=0;i&lt;$#;i++))     # $#接收参数的个数
+        local i
+        local j
+        local out=()
+        for i in $*    # 也可以这样写 
+                       #  for i 相当于 for i in $*
+                       #do
+                       #
+                       #done
+                       #
+        do
+                out[j++]=$[$i*5]
+        done
+        
+        echo &quot;${out[*]}&quot;
+}
+#函数通过 一下两种方式传所有
+#array ${num[@]} #数组所有参数
+#array ${num[*]} #数组所有参数
+result=`array ${num[*]}`        #在子shell中执行
+
+echo &quot;get ${result[*]}&quot;
+
+
+
+
+#——————————————————————————————————————————————————#
+
+</code></pre>
+
+<h2 id="函数的内置命令">函数的内置命令</h2>
+
+<p><code>：</code>返回一个真值
+* break，continue exit</p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+for i in {A..D}
+do
+        echo -n $i      #不换行
+        for j in {1...9}
+        do
+                if [ $j -eq 5 ];then
+                        break 2  #跳几层 #空行可用continue跳出 只作用于循环
+                fi
+
+                echo -n $j   #不换行
+        done
+        echo #换行
+done
+
+</code></pre>
+
+<ul>
+<li>shift使用</li>
+</ul>
+
+<p>执行以下脚本 shell.sh 1 2 3</p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#for i in
+while [ $# -ne 0 ]
+do
+        let sum+=$i
+        shift 1 #位置参数向左移动一位
+done
+echo &quot;sum: $sum&quot;
+</code></pre>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+#for i in
+while [ $# -ne 0 ]
+do
+        useradd $1
+        echo &quot;$1 create &quot;
+        shift 1 #位置参数向左移动一位
+done
+echo &quot;sum: $sum&quot;
+</code></pre>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/linux%E8%BF%90%E7%BB%B4/">linux运维</a>
+
+
+
+
+
+
+
+  
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" data-tooltip="linux运维 基础知识（三） ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" data-tooltip="linux运维 基础知识（三） ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B\/';
+          
+            this.page.identifier = '\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

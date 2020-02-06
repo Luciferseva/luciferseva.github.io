@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Kris Wu">
-<meta name="keywords" content="shell变量, shell条件判断">
+<meta name="keywords" content="shell变量, shell条件判断, shell多进程, Fd和命名管道">
 <meta name="description" content="学习Linux Shell第二波！gogogo">
 
 
@@ -306,6 +306,18 @@
 <li><a href="#shell2-sh-探索while的字段分隔符定义">shell2.sh 探索while的字段分隔符定义</a></li>
 </ul></li>
 <li><a href="#until应用-也非常适合处理文件">until应用,也非常适合处理文件！！！</a></li>
+<li><a href="#shell多进程-命名管道和fd">shell多进程，命名管道和Fd</a>
+<ul>
+<li><a href="#文件描述符fd">文件描述符FD</a></li>
+<li><a href="#再谈管道">再谈管道</a>
+<ul>
+<li><a href="#匿名管道">匿名管道</a></li>
+<li><a href="#命名管道">命名管道</a></li>
+</ul></li>
+<li><a href="#shell1-sh-多进程ping-无控制">shell1.sh 多进程ping 无控制</a></li>
+<li><a href="#shell2-sh-多进程创建用户">shell2.sh 多进程创建用户</a></li>
+<li><a href="#shell3-sh-多进程ping-控制">shell3.sh 多进程ping 控制</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -797,7 +809,7 @@ do
 
                         echo &quot;$ip is up&quot;|tee -a ok_`date +%F`.txt #usr tee type creat a file to record ping history
                 else
-                        echo &quot;$ip is down&quot; &gt;&gt; fail_`date +%F`.txt
+                        echo &quot;$ip is down&quot; &gt;&gt; fail_`date +%F`.txt #追加，不替代
                 fi
         else
                 echo &quot;$ip is down&quot; &gt;&gt;fail_`date +%F`.txt
@@ -956,6 +968,148 @@ done
 echo &quot;$ip is done&quot;
 </code></pre></li>
 </ol>
+
+<h2 id="shell多进程-命名管道和fd">shell多进程，命名管道和Fd</h2>
+
+<h3 id="文件描述符fd">文件描述符FD</h3>
+
+<p>File Description 文件描述符 或者文件句柄</p>
+
+<p>进程使用文件描述符来管理打开的文件</p>
+
+<pre><code class="language-shell">ll /proc/$$/fd #$$是当前进程的pid，在/proc/进程id号/fd
+
+0 1 2 3 4 .....
+
+0: standard input
+1: standard output
+2: standard error
+4: 可用句柄
+
+touch /file1
+exec 6&lt;&gt; /file1 #打开文件,且控制文件描述符号为6
+
+echo &quot;hello&quot; &gt; /proc/$$/fd/6
+
+cat /proc/$$/fd/6       #输出hello
+
+cat /file1      #输出hello
+
+exec 6&lt;&amp;- #关闭文件,且控制文件描述符号为6，如果打开后没有关闭，就删除了文件，该句柄依然在
+</code></pre>
+
+<h3 id="再谈管道">再谈管道</h3>
+
+<h4 id="匿名管道">匿名管道</h4>
+
+<p>管道也是个文件其实，用了就没了 |</p>
+
+<h4 id="命名管道">命名管道</h4>
+
+<p>先进先出的管道，实现两个shell通讯</p>
+
+<p>mkfifo /tmp/tmpfifo</p>
+
+<pre><code class="language-shell">cat &lt;&lt;-EOF
+        +--------------------------------- -+
+        0        1--stdout--stdin---&gt;-0     1
+        |process |                    |process|
+        |        2                    |     2
+        +-----------------------------------+
+EOF
+
+rpm -qa |grep bash
+
+
+</code></pre>
+
+<h3 id="shell1-sh-多进程ping-无控制">shell1.sh 多进程ping 无控制</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+# 读取user.txt文件，创建账号，其中line是读的一行，因为read是以换行符为结束
+for i in {2...254} #or for i in `cat ip.txt`     #这里要执行cat ip.txt，所以要执行``或者${}
+
+do
+        {
+        ip=192.168.0.$i
+        ping -c1 -W.1 $ip&amp;&gt; /dev/null   #-c1 ping一次，-W.1等待0.1s
+        if [ $? -eq 0 ]
+        then
+                echo &quot;$ip is up&quot;|tee -a ip.txt #usr tee type creat a file to record ping history
+        else
+                echo &quot;$ip is down&quot;
+        fi
+        }&amp;      # 在（子shell）后台执行，相当于并发执行 多进程
+done
+wait    #等待前面所有后台进程结束
+echo &quot;finish&quot;
+</code></pre>
+
+<h3 id="shell2-sh-多进程创建用户">shell2.sh 多进程创建用户</h3>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+# 读取user.txt文件，创建账号，其中line是读的一行，因为read是以换行符为结束
+for i in {1...1000} #or for i in `cat ip.txt`     #这里要执行cat ip.txt，所以要执行``或者${}
+
+do
+        {
+        user=ttt$i
+        useradd $user
+        echo &quot;111&quot; |pass --stdin $user $&gt;/dev/null
+        if [ $? -eq 0 ]
+        then
+                echo &quot;$user is up&quot;|tee -a user.txt #usr tee type creat a file to record ping history
+        else
+                echo &quot;$user is down&quot;
+        fi
+        }&amp;      # 在（子shell）后台执行，相当于并发执行 多进程
+done
+wait    #等待前面所有后台进程结束
+echo &quot;finish...&quot;
+</code></pre>
+
+<h3 id="shell3-sh-多进程ping-控制">shell3.sh 多进程ping 控制</h3>
+
+<p><strong><em>当很多线程需要并发时，可以采用这个进行控制</em></strong></p>
+
+<pre><code class="language-shell">#!/usr/bin/bash
+# 读取user.txt文件，创建账号，其中line是读的一行，因为read是以换行符为结束
+thread =5 #当很多线程需要并发时，可以采用这个进行控制
+tmp_fifofile=/tmp/$$.fifo #当前pid命名
+#创建管道
+mkfifo $tmp_fifofile #创建管道文件
+exec 8&lt;&gt; $tmp_fifofile #打开管道文件，并将句柄命名成8
+rm $tmp_fifofile #删除文件，但是还保留句柄8
+
+
+for i in `seq $thread` #for i in {1...$thread} #因为这里不识别变量，所有不能用这个判断
+
+do
+        echo &gt;&amp;8 #操作文件描述符8  echo相当于回车
+done
+
+for i in {1...254} #or for i in `cat ip.txt`     #这里要执行cat ip.txt，所以要执行``或者${}
+
+do
+        read -u 8 # read -u 读取文件描述符8，有数据 读到了才进行下去
+        {
+        user=ttt$i
+        useradd $user
+        echo &quot;111&quot; |pass --stdin $user $&gt;/dev/null
+        if [ $? -eq 0 ]
+        then
+                echo &quot;$user is up&quot;|tee -a user.txt #usr tee type creat a file to record ping history
+        else
+                echo &quot;$user is down&quot;
+        fi
+        echo &gt;&amp;8 #返回
+        }&amp;      # 在（子shell）后台执行，相当于并发执行 多进程
+done
+wait    #等待前面所有后台进程结束
+exec 8&gt;&amp;- #释放文件描述符8，不是管道
+echo &quot;finish...&quot;
+
+</code></pre>
               
             </div>
           </div>
@@ -988,7 +1142,7 @@ echo &quot;$ip is done&quot;
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" data-tooltip="linux运维 基础知识（三） ">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -1056,7 +1210,7 @@ echo &quot;$ip is done&quot;
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" data-tooltip="linux运维 基础知识（三） ">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
