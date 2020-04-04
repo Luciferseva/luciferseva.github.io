@@ -7,26 +7,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Kris Wu">
-<meta name="keywords" content="shell函数使用, shell内置命令">
-<meta name="description" content="shell函数使用,shell内置命令">
+<meta name="keywords" content="流编辑器sed">
+<meta name="description" content="流编辑器 sed 的介绍和使用，简单的来说，Sed一次处理一行内容。">
 
 
-<meta property="og:description" content="shell函数使用,shell内置命令">
+<meta property="og:description" content="流编辑器 sed 的介绍和使用，简单的来说，Sed一次处理一行内容。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux运维 基础知识（四） ">
-<meta name="twitter:title" content="linux运维 基础知识（四） ">
-<meta property="og:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/">
-<meta property="twitter:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/">
+<meta property="og:title" content="linux运维 基础知识（六） ">
+<meta name="twitter:title" content="linux运维 基础知识（六） ">
+<meta property="og:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%85%AD/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%85%AD/">
 <meta property="og:site_name" content="The way to be a master">
-<meta property="og:description" content="shell函数使用,shell内置命令">
-<meta name="twitter:description" content="shell函数使用,shell内置命令">
+<meta property="og:description" content="流编辑器 sed 的介绍和使用，简单的来说，Sed一次处理一行内容。">
+<meta name="twitter:description" content="流编辑器 sed 的介绍和使用，简单的来说，Sed一次处理一行内容。">
 <meta property="og:locale" content="zh-cn">
 
   
-    <meta property="article:published_time" content="2020-02-06T00:00:00">
+    <meta property="article:published_time" content="2020-02-09T00:00:00">
   
   
-    <meta property="article:modified_time" content="2020-02-06T00:00:00">
+    <meta property="article:modified_time" content="2020-02-09T00:00:00">
   
   
   
@@ -63,14 +63,14 @@
   <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
 
 
-    <title>linux运维 基础知识（四） </title>
+    <title>linux运维 基础知识（六） </title>
 
     <link rel="icon" href="images/cover.jpg">
     
 
     
 
-    <link rel="canonical" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/">
+    <link rel="canonical" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%85%AD/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -208,19 +208,19 @@
       <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      linux运维 基础知识（四） 
+      linux运维 基础知识（六） 
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-02-06T00:00:00Z">
+      <time itemprop="datePublished" datetime="2020-02-09T00:00:00Z">
         
   
   
   
   
-    2020年2月6日
+    2020年2月9日
   
 
       </time>
@@ -251,313 +251,324 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>shell函数使用,shell内置命令</p>
+              <p>流编辑器 sed 的介绍和使用，简单的来说，Sed一次处理一行内容。</p>
 
 <h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
 <ul>
 <li><a href="#简介">简介</a>
 <ul>
-<li><a href="#函数格式">函数格式</a></li>
-<li><a href="#实例讲解">实例讲解</a>
+<li>
+<ul>
+<li><a href="#命令格式">命令格式</a></li>
+<li><a href="#支持正则表达式">支持正则表达式</a></li>
+<li><a href="#示例讲解">示例讲解</a>
 <ul>
 <li><a href="#shell1-sh">shell1.sh</a></li>
-<li><a href="#shell1-sh-1">shell1.sh</a></li>
-<li><a href="#shell2-sh-函数参数使用">shell2.sh 函数参数使用</a></li>
-<li><a href="#shell3-sh-函数参数使用数组">shell3.sh 函数参数使用数组</a></li>
-<li><a href="#shell4-sh-函数参数使用数组-返回数组">shell4.sh 函数参数使用数组,返回数组</a></li>
 </ul></li>
-<li><a href="#函数的内置命令">函数的内置命令</a></li>
+</ul></li>
+<li><a href="#sed扩展">sed扩展</a>
+<ul>
+<li><a href="#地址-定址">地址（定址）</a></li>
+<li><a href="#命令">命令</a></li>
+<li><a href="#选项">选项</a></li>
+<li><a href="#sed命令示例">sed命令示例</a></li>
+<li><a href="#sed常见操作">sed常见操作</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
 
 <h1 id="简介">简介</h1>
 
-<p>完成特定功能的代码片段</p>
+<p>简单的来说，Sed一次处理一行内容。处理时，把当前处理的行存储在临时缓冲区中，称之为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕，接着处理下一行，直到文件末尾。</p>
 
-<p>在shell中定义函数可以用代码模块化，便于复用代码</p>
+<p>文本文件&mdash;&gt;sed的模式空间（缓冲器）&mdash;&mdash;&ndash;&gt;shell</p>
 
-<p>函数必须先定义才可以使用</p>
+<p>sed 是一种在线的、非交互式的编辑器，它一次处理一行内容。</p>
 
-<h2 id="函数格式">函数格式</h2>
+<p>处理时，把当前处理的行存储在临时缓冲区中，称为模式空间</p>
 
-<p>传参 $1 $2</p>
+<p>接着用sed命令处理缓冲区的内容，处理完后把缓冲区的内容送往屏幕。</p>
 
-<p>变量 local</p>
+<p>接着处理下一行，这样不断重复，知道文件末尾，文件内容并没有改变，除非你使用重定向存储输出。</p>
 
-<p>返回值 return $?</p>
+<p>sed主要用来自动编辑一个或多个文件，简化对文件反复操作，编写转换程序等</p>
 
-<ul>
-<li><p>方法1</p>
+<p>sed -ri.bak
+sed -ric &ndash;follow-symlinks</p>
 
-<pre><code class="language-shell">    函数名(){
-            函数要实现的功能代码
-    }
-</code></pre></li>
+<h3 id="命令格式">命令格式</h3>
 
-<li><p>方法2</p>
+<p>sed [options]  <code>command</code> file(s)</p>
 
-<pre><code class="language-shell">    function 函数名(){
-            函数要实现的功能代码    
-    }
-</code></pre></li>
-</ul>
+<p>sed [options]  -f scripfile file(s)</p>
 
-<h2 id="实例讲解">实例讲解</h2>
+<p>注意：sed和grep不一样，不管是否找到指定的模式，它的退出状态都是0</p>
 
-<h3 id="shell1-sh">shell1.sh</h3>
+<p>只有当命令存在语法错误时，sed的退出状态才是非0</p>
 
-<p>阶乘</p>
+<h3 id="支持正则表达式">支持正则表达式</h3>
 
-<pre><code class="language-shell">#！/usr/bin/bash
-#! /bin/bash
-#! /bin/env bash 
-factorial(){
-factorial=1
-#下面是c风格的写法
-for((i=1;i&lt;=$sum;i++))
-do
-    factoral=${$factorial * $i}
+<p>与grep一样，sed在文件中查找模式时也可以使用正则表达式（re）及各种元字符，正则表达式是括在斜线间的模式，用于查找和替换</p>
 
-    echo &quot;$sum 的阶乘: $factorial&quot;
-done
+<p>以下是sed支持的元字符</p>
 
+<p>基本元字符：^,$,.,*,[],[^],&lt;&gt;,(),{}</p>
 
-#执行函数
-factorial
-#或者
-#函数里面的位置变量是这个函数的，不是整个脚本的，需要在执行的时候连接起来
-factorial=1
-#for((i=1;i&lt;=$1;i++))
-#for((i=1;i&lt;=$1;i++))
-#也可以这样写
-for i in `seq $1`
-do
-    #factoral=${$factorial * $i}
-        #或者这样写
-        #let factoral*=*$i
-        let factoral=$factoral*$i
-    echo &quot;$1 的阶乘: $factorial&quot;
-done
-#执行函数时，调用了脚本的$1,函数的$1
-factorial $1
-#执行函数时，调用了脚本的$2,函数的$1,以此类推
-factorial $2
-}
+<p>使用扩展元字符：？，+，{}，|，（）</p>
 
+<p>使用扩展元字符,有两种方法</p>
 
+<ol>
+<li><p>+</p></li>
+
+<li><p>sed -r</p></li>
+</ol>
+
+<h3 id="示例讲解">示例讲解</h3>
+
+<h4 id="shell1-sh">shell1.sh</h4>
+
+<pre><code class="language-shell">sed '4,7' passwd #不修改源文件
+
+sed -rn 'p' passwd #打印
+sed -rn '/^root/' passwd #打印
+
+sed -r 's/^root/alice/gi' passwd #查找替换，s是替换，gi忽略大小写，作用每一行，i真删除
+
+sed -r '/^root/alice/d' passwd #从passwd查找删除，d假删除,只是打印删除
+
+sed -r 's#/etc/root#/root/file#' passwd #从passwd查找替换，
 </code></pre>
 
-<h3 id="shell1-sh-1">shell1.sh</h3>
+<h2 id="sed扩展">sed扩展</h2>
 
-<p>提示用户输入个值，然后返回</p>
+<h3 id="地址-定址">地址（定址）</h3>
+
+<p>地址用于决定处理那些进行编辑，地址形式可以是数字，正则表达式，或者二者的结合</p>
+
+<p>如果没有执行地址，sed奖处理输入人间中的所有行。</p>
+
+<pre><code class="language-shell">#！/user/bin/bash
+sed -r 'd' /etc/passwd #删除所有
+sed -r '3d' /etc/passwd #删除第三行
+sed -r '1,3d' /etc/passwd #删除第1行到第三行
+sed -r '/root/d' /etc/passwd #删除root行，或者转义 \#root#d，
+sed -r '/root/,5d' /etc/passwd #删除root行开始到第三行
+
+sed -r 's/root/alice/g' /etc/passwd #查找替换‘’ ，这里可以将斜线换成#号，@号
+
+
+sed -r '/^adm/,+5d' /etc/passwd #查找adm开头行后，再删除5行
+
+sed -r '/root/d' /etc/passwd #查找替换
+
+sed -r '/root/!d' /etc/passwd #除了root行都删除
+
+ed -r '1~2d' /etc/passwd #删除所有奇数行，从1开始，每隔两个删一个 odd
+
+ed -r '0~2d' /etc/passwd #删除所有偶数行 从0开始，每隔两个删一个 even
+</code></pre>
+
+<h3 id="命令">命令</h3>
+
+<p>sed 命令告诉sed对执行的对象进行何种操作，保留打印，，删除，修改等</p>
+
+<pre><code class="language-shell">命令        功能
+a           在当前行后添加一行或多行
+c           用新文本修改或替换当前行中的文本
+d           删除行
+i           当前行之前插入文本
+l           列出非打印字符
+p           打印行
+n           读入下一输入行，并从下一条命令而不是第一条命令开始对其的处理
+q           结束或退出sed
+！          对所选行以外的所有行应用命令
+
+S           用一个字符串替换另一个
+            g 在行内进行全局替换
+            i 胡烈大小写
+r           从文件中读
+w           将行写入文件
+
+h           把模式空间里的内容复制到暂存缓冲区（覆盖）
+H           把模式空间里的内容追加到暂存缓冲区
+g           提取暂存缓冲区的内容，将其复制到模式空间，覆盖该处原有内容
+G           提取暂存缓冲区的内容，将其复制到模式空间，追加在该出原有内容
+x           交换暂存缓冲区与模式空间的内容
+            
+</code></pre>
+
+<h3 id="选项">选项</h3>
+
+<pre><code class="language-shell">选项        功能
+-e          允许多项编辑
+-f          指定sed脚本文件名
+-n          取消默认的输出
+-i          inplace，就地编辑
+-r          支持扩展元字符
+</code></pre>
+
+<h3 id="sed命令示例">sed命令示例</h3>
 
 <pre><code class="language-shell">#！/usr/bin/bash
-#! /bin/bash
-#! /bin/env bash 
-fun2(){
-        read -p &quot;enter number: &quot; num
-        let 2*num
+#打印命令
+sed -r '/north/p' datafile
+sed -rn '/north/p' datafile
 
-}
-#函数的返回值是函数的最后一条命令执行的结果的返回值
-fun2
-echo &quot;return $?&quot; #返回0
-#------------------------------#
-fun2(){
-        read -p &quot;enter number: &quot; num
-        return $[2*$num] #小于等于255
+#删除命令：d
 
-}
-#函数的返回值是函数的最后一条命令执行的结果的返回值
-fun2
-#echo &quot;return $?&quot; #返回0,shell返回值的大小不能超过255，会有错误的结果
+sed -r '3d' datafile
+sed -r '3{h;d}' datafile #同一行可能有多个命令,这里执行了两个命令
+sed -r '3{d;}' datafile #同一行可能有多个命令,这里执行了1个命令,同下
+sed -r '3{d}' datafile #同一行可能有多个命令,这里执行了1个命令,同下
+
+sed -r '3,$d' datafile #删除3到最后一行
+sed -r '$d' datafile #删除最后一行
+sed -r '/north/d' datafile #删除包含north行
+sed -r '/sourth/d' datafile #删除包含north行
+
+#替换命令：s
+sed -r 's/west/north/g' datafile #全局执行
+sed -r 's/^west/north/' datafile
+
+sed -r '1,5s/[0-9][0-9]$/&amp;.5/' datafile #&amp;代表在查找串中匹配到的内容,一到五行
+
+# 读文件命令：r
+sed -r '/suan/r etc/file' datafile
+sed -r '2r /etc/hosts' a.txt
+sed -r '/2/r /etc/hosts' a.txt
+
+#写文件命令：w
+sed -r '/north/w newfile' datafile #将datafile中的north行写到newfile中去
+sed -r '3,$w /new1.txt' datafile
+
+#追加命令：a
+sed -r '2a\11111111' /etc/hosts
+
+#i 在前面插入
+
+#c：替换行
+
+#获取下一行命令：n
+sed -r '/eastern/{n:d}' datafile
+
+sed -r '/eastern/{n:s/Am/archile}' datafile
+
+#暂存和取用命令：h，H，g G
+#这里涉及到模式空间和暂存空间
 #
-#------------------------------#
-#返回大于255的数
-fun2(){
-        read -p &quot;enter number: &quot; num
-        echo $[2*$num] #小于等于255
+#               暂存空间   #本身会有个换行符,暂存空间里默认存储一个空行。
+#               ^       |
+# h，覆盖       |       |  G   追加
+# H，追加       |       |  g  覆盖
+#               |       |
+#               |      \/
+#文本-----------&gt;-模式空间--------------&gt;终端输出
+#
+#
+sed -r '1h;$G' /etc/hosts #把第一行放到暂存空间里，然后在处理最后一行时，再在最后追加这一行
 
-}
-#函数的返回值是函数的最后一条命令执行的结果的返回值
-result=`fun2`
-echo &quot;return $result&quot; #函数的输出
+sed -r '1{h;d}' /etc/hosts #把第一行覆盖到暂存空间里，然后删除
+sed -r '1h;2,$g' /etc/hosts #把第一行覆盖到暂存空间里，第二行，到最后一行都覆盖成第一行
+sed -r '1h;2,3H;$G' /etc/hosts #把第一，二，三行覆盖到暂存空间里，到最后一行后再追加成第一，二，三行
 
-</code></pre>
+#暂存空间和模式空间交换命令：x
+sed -r '4h;5x;6G' /etc/hosts # 先把第四行放到暂存空间，然后在第五行与暂存空间的互换，然后在第六行时，追加暂存空间（第五行）在后面
 
-<h3 id="shell2-sh-函数参数使用">shell2.sh 函数参数使用</h3>
+# 反向选择：！
 
-<pre><code class="language-shell">#!/bin/bash
+sed -r '3d' /etc/passwd
+sed -r '!3d' /etc/passwd #除了第三行意外的都删除
 
-if [ $# -ne 3]; then
-        echo &quot;usage: `basename $0` pa1 pa2 pa3&quot;
-        exit
-fi
-fun3(){
-        echo &quot;$(($1*$2*$3))&quot;
+# 多重编辑选项：e
 
-}
-result=`fun3 $1 $2 $3`
-echo &quot;resule: $result&quot;
-</code></pre>
+sed -r -e '1,3d' -e 's/hem/jones/' /etc/passwd
 
-<h3 id="shell3-sh-函数参数使用数组">shell3.sh 函数参数使用数组</h3>
+sed -r -e '1,3d;s/hem/jones/' /etc/passwd
 
-<pre><code class="language-shell">#!/bin/bash
-#脚本执行所有参数
-#或者for i in $* 或&quot;$@&quot;
-for i
-do
-        let num+=$i
-done
-echo $num
+sed -r -e '2s/we/1000/g;2s/ad/da/g' /etc/passwd #/g的意思是把第二行所有找到的都换掉
 
-
-num =(1,2,3)
-echo &quot;${num[@]}&quot;
-
-array(){
-        farcty=1        #全局变量，函数外边可以使用
-        local farcty2=1        #局部变量
-        
-        for i in &quot;$@&quot; #获得所有参数，或者$* 或者 for i in ${num[*]}
-        do
-                #farcty*=$i
-                farcty=$[farcty*$i]
-        done
-}
-
-#array ${num[@]} #数组所有参数
-array ${num[*]} #数组所有参数
+sed -r -e '2{s/we/1000/g;s/ad/da/g}' /etc/passwd
 
 
 </code></pre>
 
-<h3 id="shell4-sh-函数参数使用数组-返回数组">shell4.sh 函数参数使用数组,返回数组</h3>
+<h3 id="sed常见操作">sed常见操作</h3>
 
-<p><strong><em>函数接收位置参数 $1 $2&hellip;$n</em></strong></p>
+<pre><code class="language-c">#hellp
+        #hellp
 
-<p>*<strong>函数接收数组变量 $* 或者 $@</strong>*</p>
-
-<p>***   参数个数 $#   ***</p>
-
-<p>*<strong>函数将接收到的所有参数赋值给数组 array=($*)</strong>*</p>
-
-<pre><code class="language-shell">#!/bin/bash
-#脚本执行所有参数
-#或者for i in $* 或&quot;$@&quot;
-
-num =(1,2,3)
-num2 =(1,2,3)
-echo &quot;${num[@]}&quot;
-
-array(){
-        echo &quot;all: $*&quot;
-        farcty=1        #全局变量，函数外边可以使用
-        local farcty3=()       #局部变量
-        local farcty2=1        #局部变量
-        local newarray=(`echo $*`) #创建新数组,或者newarray=（$*）
-        for((i=0;i&lt;$#;i++))     # $#接收参数的个数
-        do
-                outarry[$i]=$[ ${newarray[$i]} *5 ]
-                #或者outarry[$i]=$(( ${newarray[$i]} *5 ))
-        done
-        
-        echo &quot;${outarray[*]}&quot;
-}
-#函数通过 一下两种方式传所有
-#array ${num[@]} #数组所有参数
-#array ${num[*]} #数组所有参数
-result=`array ${num[*]}`
-
-echo &quot;{get $result[*]}&quot;
-
-
-
-
-#——————————————————————————————————————#
-
-num =(1,2,3)
-array(){
-       
-        #for((i=0;i&lt;$#;i++))     # $#接收参数的个数
-        local i
-        local j
-        local out=()
-        for i in $*    # 也可以这样写 
-                       #  for i 相当于 for i in $*
-                       #do
-                       #
-                       #done
-                       #
-        do
-                out[j++]=$[$i*5]
-        done
-        
-        echo &quot;${out[*]}&quot;
-}
-#函数通过 一下两种方式传所有
-#array ${num[@]} #数组所有参数
-#array ${num[*]} #数组所有参数
-result=`array ${num[*]}`        #在子shell中执行
-
-echo &quot;get ${result[*]}&quot;
-
-
-
-
-#——————————————————————————————————————————————————#
-
+// hellp
 </code></pre>
 
-<h2 id="函数的内置命令">函数的内置命令</h2>
+<pre><code class="language-shell">删除配置文件中#号注释行
 
-<p><code>：</code>返回一个真值
-* break，continue exit</p>
+sed -ri '/^[\t]*#/d' file.config  ,其中`*`表示0到多个元字符，这里是0到多个table键
 
-<pre><code class="language-shell">#!/usr/bin/bash
-for i in {A..D}
-do
-        echo -n $i      #不换行
-        for j in {1...9}
-        do
-                if [ $j -eq 5 ];then
-                        break 2  #跳几层 #空行可用continue跳出 只作用于循环
-                fi
+#删除配置文件中//号注释行
 
-                echo -n $j   #不换行
-        done
-        echo #换行
-done
+sed -ri '\Y^[\t]*//Yd' file.config ，这里相当于 #   /^[\t]*///d  其中两个/，换成#后 #^[\t]*//# ,再转义一下 \#^[\t]*//#d
 
-</code></pre>
+#删除无内容空行
 
-<ul>
-<li>shift使用</li>
-</ul>
+sed -ri '/^[\t]*$/d' file.config #这里加了i的话，相当于对源文件进行了操作
+#为文件添加注释
+sed -r '2,6s/^/#/' a.txt
+sed -r '2.6s/(.*)/#\1/' a.txt
+sed -r '2,6s/.*/#&amp;/' a.txt
+sed -r '3,$ s/^#*/#/' a.txt 将行首0个或者多个# 换成一个#
 
-<p>执行以下脚本 shell.sh 1 2 3</p>
+sed -r '30,50s/^[\t]*#*/#' a.config
 
-<pre><code class="language-shell">#!/usr/bin/bash
-#for i in
-while [ $# -ne 0 ]
-do
-        let sum+=$i
-        shift 1 #位置参数向左移动一位
-done
-echo &quot;sum: $sum&quot;
-</code></pre>
+sed -r '3,8s/^[\t#]*/#' a.config
 
-<pre><code class="language-shell">#!/usr/bin/bash
-#for i in
-while [ $# -ne 0 ]
-do
-        useradd $1
-        echo &quot;$1 create &quot;
-        shift 1 #位置参数向左移动一位
-done
-echo &quot;sum: $sum&quot;
+
+#sed使用外部变量
+
+外部变量 var=11111
+
+sed -ri '3a$var' /etc/pw #这里是错的，最终添加了$var
+#使用双引号
+sed -ri &quot;$a$var&quot; /etc/pw #这里是错的，$a是错的，不是变量，二十最后一行添加 
+#个使个的,分开使用
+sed -ri '$a'&quot;$var&quot; /etc/pw
+#也可以使用
+sed -ri $a$var /etc/pw 
+#或者
+sed -ri &quot;\$a$var&quot; /etc/pw
+
+
+#倒转
+sed -r '1!G;$!h;$!d' a.txt #类似cat和tac
+#a.txt原本是
+#1
+#2
+#3
+#4
+
+#执行上述命令后变为
+#4
+#3
+#2
+#1
+#思路：
+#1！G可以简化为 [2,5]G
+#$!h 可以理解为[1,4]h
+#$!d 可以理解为[1,4]d
+
+#类似于seq 3| sed '1!G;h;$!d'
+
+#G将暂存空间的内容追加到模式空间
+#h将模式空间的内容覆盖到暂存空间
+#d删除模式空间中的所有行，并读入下一个新行到模式空间中
+#所以当行数为1时，不执行1！G，执行h和$!d,此时模式空间是null，无输出到屏幕，暂存空间是1
+#当执行到第二行时，读入2到模式空间，执行1！G，此时模式空间时2，1，暂存空间是1，，然后再把模式空间替换到暂存空间，则此时模式空间和暂存空间都是2，1，然后判断不是最后一行，则删除模式空间为null，无输出到屏幕，暂存空间为2，1
+#当执行到第三行时，读入3到模式空间，执行1！G，再执行h，模式空间和暂存空间都为3，2，1，再执行$!d删除模式空间为null，无输出到屏幕，此时暂存空间为3，2，1
+#当读到第四行时，将4独到模式空间后执行1！G，追加模式空间为4，3，2，1，然后执行$!h,此时不执行，再执行$!d,此时不执行，这是模式空间为4，3，2，1，输出到屏幕可见，暂存空间为3，2，1
+
+
+
 </code></pre>
               
             </div>
@@ -591,7 +602,7 @@ echo &quot;sum: $sum&quot;
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94/" data-tooltip="linux运维 基础知识（五） ">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%83/" data-tooltip="linux运维 基础知识（七） ">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -599,7 +610,7 @@ echo &quot;sum: $sum&quot;
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" data-tooltip="linux运维 基础知识（三） ">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94/" data-tooltip="linux运维 基础知识（五） ">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -659,7 +670,7 @@ echo &quot;sum: $sum&quot;
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94/" data-tooltip="linux运维 基础知识（五） ">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%83/" data-tooltip="linux运维 基础知识（七） ">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -667,7 +678,7 @@ echo &quot;sum: $sum&quot;
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" data-tooltip="linux运维 基础知识（三） ">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94/" data-tooltip="linux运维 基础知识（五） ">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -799,9 +810,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/luciferseva.github.io\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B\/';
+          this.page.url = 'https:\/\/luciferseva.github.io\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%85%AD\/';
           
-            this.page.identifier = '\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B\/'
+            this.page.identifier = '\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%85%AD\/'
           
         };
         (function() {

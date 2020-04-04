@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="Kris Wu">
+<meta name="keywords" content="文本处理 awk">
+<meta name="description" content="awk是一种编程语言，用于在linux\unix下对文本和数据进行处理，数据可以来自标准输入，一个或多个文件，或者其他命令输出。">
+
+
+<meta property="og:description" content="awk是一种编程语言，用于在linux\unix下对文本和数据进行处理，数据可以来自标准输入，一个或多个文件，或者其他命令输出。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux运维 基础知识（七） ">
+<meta name="twitter:title" content="linux运维 基础知识（七） ">
+<meta property="og:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%83/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%83/">
+<meta property="og:site_name" content="The way to be a master">
+<meta property="og:description" content="awk是一种编程语言，用于在linux\unix下对文本和数据进行处理，数据可以来自标准输入，一个或多个文件，或者其他命令输出。">
+<meta name="twitter:description" content="awk是一种编程语言，用于在linux\unix下对文本和数据进行处理，数据可以来自标准输入，一个或多个文件，或者其他命令输出。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-02-10T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2020-02-10T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="linux">
+    
+  
+  
+    
+      <meta property="article:tag" content="linux运维">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/cover-v1.2.0.jpg">
+
+
+  <meta property="og:image" content="//images/cover-v1.2.0.jpg">
+  <meta property="twitter:image" content="//images/cover-v1.2.0.jpg">
+
+
+
+
+  <meta property="og:image" content="https://luciferseva.github.io/images/icon.png">
+  <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
+
+
+    <title>linux运维 基础知识（七） </title>
+
+    <link rel="icon" href="images/cover.jpg">
+    
+
+    
+
+    <link rel="canonical" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%83/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://luciferseva.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://luciferseva.github.io/">The way to be a master</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://luciferseva.github.io/#POST">
+    
+    
+    
+      
+        <img class="header-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://luciferseva.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Kris Wu</h4>
+        
+          <h5 class="sidebar-profile-bio">specializing in networking and communication</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://luciferseva.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-center
+              "
+       style="background-image:url('//images/cover-v1.2.0.jpg')"
+       data-behavior="5">
+    
+      <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      linux运维 基础知识（七） 
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-02-10T00:00:00Z">
+        
+  
+  
+  
+  
+    2020年2月10日
+  
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://luciferseva.github.io/categories/linux">linux</a>
+    
+  
+
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="5"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>awk是一种编程语言，用于在linux\unix下对文本和数据进行处理，数据可以来自标准输入，一个或多个文件，或者其他命令输出。</p>
+
+<h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
+<ul>
+<li><a href="#简介">简介</a>
+<ul>
+<li><a href="#语法格式">语法格式</a>
+<ul>
+<li><a href="#awk工作原理">awk工作原理</a></li>
+<li><a href="#lab1">lab1:</a></li>
+<li><a href="#格式化输出">格式化输出</a></li>
+</ul></li>
+<li><a href="#awk模式或动作">awk模式或动作</a></li>
+<li><a href="#awk使用实例">awk使用实例</a></li>
+<li><a href="#awk脚本编程">awk脚本编程</a>
+<ul>
+<li><a href="#条件判断">条件判断</a></li>
+<li><a href="#数组的处理">数组的处理</a></li>
+<li><a href="#脚本联系">脚本联系</a></li>
+<li><a href="#awk内置函数">awk内置函数</a></li>
+</ul></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<h1 id="简介">简介</h1>
+
+<p>它支持用户自定义函数和动态正则表达式等现金功能，是linux/unix下的强大编辑工具，在命令行使用，但更多的是作为脚本来使用。</p>
+
+<p>awk的处理文本和数据的方式是这样的，</p>
+
+<p><strong>它逐行扫描文件，然后第一行到最后一行，寻找匹配的特定模式的行，并在这些行进你想要的的操作，如果没有指定动作，则把匹配的行显示到标准输出（屏幕），如果没有指定模式，则所有被操作所指定的行都被处理</strong></p>
+
+<p>awk是三个人的名字，一般使用的是gnu版本的awk。</p>
+
+<h2 id="语法格式">语法格式</h2>
+
+<pre><code class="language-shell">awk [option] 'commands' filename
+
+awk [option] -f awk-scrip-file filename
+
+
+= =options:
+
+-F 定义输入字段分隔符，默认的分隔符是空格或者制表符tab
+
+
+= =command:
+
+BEGIN{}         {}              END{}
+行处理前         行处理         行处理后
+
+awk 'BEGIN{1/2} {print &quot;ok&quot;} END{print &quot;。。。。。。&quot;}' /etc/hosts
+#输出
+0.5
+ok
+ok
+ok      #这里表示hosts有三行
+......................
+
+BEGIN{}         #通常用于定义一些变量，列如BEGIN{FS=&quot;:&quot;;OFS=&quot;---&quot;}#FS这里修改成冒号分割，OFS为输出分隔符
+
+
+= = awk命令格式：
+
+awk 'pattern' filename          awk -F '/root/' /etc/passwd
+awk '{action}' filename         awk -F&quot;:&quot; '{print $1}' /etc/passwd
+awk 'pattern {action}' filename awk -F '/root/{print $1}' /etc/passwd
+
+command | awk 'pattern {action}'
+</code></pre>
+
+<h3 id="awk工作原理">awk工作原理</h3>
+
+<ul>
+<li>awk -F: &lsquo;{print $1,$3}&rsquo; /etc/passwd</li>
+<li>awk使用一行作为输入，并将这一行赋给内部变量$0,每一行也可称为一个记录，以换行符作为结束</li>
+<li>然后，行被<code>:</code>(默认为空格或制表符)分解成字段（或域），每个字段存储在已编号的变量中，从$1开始，最多达100个字段</li>
+<li>awk如何知道用空格来分隔字段的呢，因为有一个内部变量FS来确定字段分隔符。初始时，FS赋值为空格</li>
+<li>awk打印字段时，将以设置的方法使用print函数打印，awk在打印的字段间加上空格，因为$1<code>,</code>$3之间有一个逗号。逗号比较特殊，它映射为另一个内部变量，称之为输出字段分隔符OFS,OFS默认为空格</li>
+<li>awk输出之后，从文件中获取另一行，并将其存储在$0中，覆盖原有的内容，然后将新的字符串分隔成字段并进行处理，该过程将持续到所有行处理完毕</li>
+</ul>
+
+<p>= =记录与字段相关内部变量：man awk</p>
+
+<pre><code class="language-shell">$0 #awk变量$0保存当前记录内容    awk -F&quot;:&quot; '{print $1}' /etc/passwd 完整的输入记录
+NR #the total number of input records seen so far      awk -F&quot;:&quot; '{print NR,$1}' /etc/passwd 行号， 已读的记录数，已经读出的记录数，就是行号，从1开始
+            
+            
+FNR #the input record number in the current input file      awk -F&quot;:&quot; '{print FNR,$0}' /et#c/passwd 多个文件可以看出
+NF      #保存记录的字段数，$1,$2,$3 $NF是最后一个字段     awk -F: '{print $0,NF}' /etc/passwd  浏览记录的域的个数，一条记录的字段的数目
+FS      #输入字段分隔符，默认空格        awk -F'[:\t]''{print $1,$2,$3}' /etc/passwd #指定分隔符多个 字段分隔符(默认是任何空格)
+                                       awk 'BEGIN{FS=&quot;:&quot;} {print $1,$3}' /etc/passwd
+OFS:    #输出字段分隔符 输出记录分隔符（输出换行符），输出时用指定的符号代替换行符
+                                        awk -F：'/alice/{print $1,$2,$3}' /etc/passwd
+                                        awk 'BEGIN{FS=&quot;:&quot;;OFS=&quot;+++&quot;}/^root/print{$1,$2,$3}' /etc/passwd
+RS      #the input record separator,by default a newline #awk -F: 'BEGIN{RS=&quot; &quot;} {print $0}' a.txt   #记录分隔符。默认换行符 记录分隔符(默认是一个换行符)
+ORS     #the output record separator ,by ddefault a newline      awk -F: 'BEGIN{ORS=&quot;&quot;} {print $0}' passwd # 输出记录分隔符(默认值是一个换行符)
+
+BEGIN{IGNORECASE=1} #忽略大小写
+
+#FS字段分隔符=6  默认空格，可以-F&quot;:&quot;进行赋初值
+#   |
+#$1 |$2
+root:x:0:/:root:/ \n   #整行就是$0
+
+bin:x:0:/:root:/ \n
+#                 |
+#                 RS记录分隔符
+#NR=2，默认是换行符
+#一行就是一个记录，一个记录有若干个字段
+
+
+</code></pre>
+
+<h3 id="lab1">lab1:</h3>
+
+<pre><code class="language-shell">        awk 'BEGIN{ORS=&quot; &quot;} {print $0}' /etc/passwd     #将文件的每行输出成一行
+        head -l /etc/passwd &gt; passwd1   #将文件里的一行输出到passwd1文件中
+</code></pre>
+
+<h3 id="格式化输出">格式化输出</h3>
+
+<ul>
+<li><p>print 函数</p>
+
+<pre><code class="language-shell">date |awk '{print &quot;Month&quot; $2 &quot;\nYear:&quot; $NF}'
+awk -F:'{print &quot;username is &quot;$1&quot;\t uid is:&quot;  $3}' /etc/hosts       #\t tab键
+awk -F:'{print &quot;\tusername and uid is:&quot;#1,$3 &quot;!&quot;}' /etc/hosts
+</code></pre></li>
+
+<li><p>printf 函数</p>
+
+<pre><code class="language-shell">awk -F: '{printf &quot;%-15s %-10s %-15s\n&quot;,$1,$2,%3}' /etc/hosts
+awk -F: '{printf &quot;|%-15s| %-10s |%-15s|\n&quot;,$1,$2,%3}' /etc/hosts        #输出好看
+%s 字符类型
+%d 数值类型
+%f 浮点型 
+占15字符
+-表示左对齐，默认是右对齐
+printf默认不会再行尾自动换行，加`\n`
+</code></pre></li>
+</ul>
+
+<h2 id="awk模式或动作">awk模式或动作</h2>
+
+<p>任何awk语句都由<strong>模式和动作</strong>组成，模式部分决定动作语句何时触发及触发事件。处理及对数据进行操作。如果省略模式部分，动作将时刻保持执行状态，模式可以是任何条件语句，复合语句，正则表达式，模式包括两个特殊字段，BEGIN和END。使用BEGIN语句设置计数和打印头，BEGIN语句使用在任何文本浏览动作之前，之后文本浏览动作依据输入文本开始执行，END语句用来在awk完成文本浏览动作后打印输出文本总是和结尾状态</p>
+
+<ul>
+<li>模式可以是：</li>
+</ul>
+
+<p>= =正则表达式：
+1. 匹配记录（整行）：</p>
+
+<pre><code class="language-shell">awk '/^alice/' /etc/passwd
+awk '$0~/^alice/' /etc/passwd
+awk '!/alice' passwd
+awk '$0!~/^alice/' /etc/passwd
+</code></pre>
+
+<ol>
+<li><p>匹配字段：匹配操作符（~ ！~） （想到与列处理），可以是单字符匹配成功就行</p>
+
+<pre><code class="language-shell">awk -F: '$1 ~/^alice/' /etc/passwd
+awk -F: '$NF !~/bash$/' /etc/passwd
+</code></pre></li>
+</ol>
+
+<p>= =比较表达式：</p>
+
+<p>比较表达式采用对文本进行比较，只有当条件为真，财智星指定的动作。比较表达式使用关系运算符，<strong>用于比较数字和字符串</strong>。</p>
+
+<p>= =关系运算符
+带<code>&quot; &quot;</code>表示字符串比较，不带如果是数字表示数字比大小</p>
+
+<pre><code class="language-shell">运算符          含义            实例
+&lt;               小于             x&lt;y
+&lt;=              小于等于        x&lt;=y
+==              等于            x==y
+！=             不等于          x!=y
+&gt;=              大于等于        x&gt;=y
+&gt;               大于            x&gt;y
+df -P |grep '/' |awk '$4 &gt; 25000'
+</code></pre>
+
+<p>= =条件表达式：</p>
+
+<pre><code class="language-shell">awk -F：'$3&gt;300 {print $0}' /etc/passwd
+awk -F：'{if($3&gt;300) print $0}' /etc/passwd # {最外面的表示要行处理}
+awk -F：'{if($3&gt;300) {print $0}}' /etc/passwd
+awk -F：'{if($3&gt;300) {print $0} else{print $1}}' /etc/passwd
+</code></pre>
+
+<p>= =算数运算：+ - * / %(模)^(幂2^3)</p>
+
+<p>可以在模式中执行计算，awk都将按浮点数方式执行算数运算</p>
+
+<pre><code class="language-shell">awk -F: '$3*10 &gt;500' /etc/passwd
+awk -F: '{if($3*10 &gt;500){print $0}}' /etc/passwd
+
+</code></pre>
+
+<p>= =逻辑操作符和复合模式</p>
+
+<p>&amp;&amp;      逻辑与      a&amp;&amp;b
+||      逻辑或      a||b
+!       逻辑非      ！a</p>
+
+<pre><code class="language-shell">awk -F: '$1~/root/ &amp;&amp; $3&lt;15' /etc/passwd #如果条件成立，打印整行
+</code></pre>
+
+<p>= =范围模式</p>
+
+<pre><code class="language-shell">awk '/Tom/,/Suzanne/' filename #从Tom到Suzanne
+</code></pre>
+
+<h2 id="awk使用实例">awk使用实例</h2>
+
+<pre><code class="language-shell">awk '/west/' datafile #匹配west ，并输出，这种是pattern的使用，匹配了pattern(这里是root)的行才会执行action(没有指定action，默认输出每行的内容)
+awk '/^west/' datafile  #匹配west开头的行，并输出
+awk '$3~/^west/' datafile #匹配$3以west开头的
+awk '/^(no|so)/' datafile
+awk '{print $3,$2}' datafile #加逗号默认两个输出之间有空格,不加默认挨在一起的
+
+awk '{print $3 $2}' datafile
+awk '{print $0}' datafile
+awk '{print &quot;number line of file is:&quot;NF}' datafile #每一行输出有几段
+
+awk '/northeast/{print $3 $2}' datafile #搜索datafiled有northeast关键字的所有行，并显示对应的shell，$3,$2
+awk '/E/' datafile #有E时打印
+
+awk '/^[ns]/{print $1}' datafile #以n或者s开头是打印$1
+
+awk '$5 ~/\.[7-9]+/' datafile # 判断$5匹配到.后跟[7-9],+表示前字符出现1-多个时，打印
+
+awk '$2 !~/E/{print $1,$2}' datafile
+
+awk '$3 ~/^jolel/{print $1 &quot;is a niec girl&quot;}' datafile
+
+awk '$8 ~/[0-9][0-9]$/{print $8}' datafile #以两个数字结尾的打印 第八列
+
+awk '$4 ~/chun$/{print&quot;is $&quot;$8&quot;.&quot;}' datafile #
+
+awk '/Tj/{print $0}' datafile
+
+awk '{print $1}' /etc/passwd #打印整行，分隔符为空格
+
+awk -F: '{print $1}' /etc/passwd #打印第一列。分隔符为：指定特定的分隔符，查询第一列
+
+awk '{print &quot;number is &quot;NF}' /etc/passwd #换行符为分隔符，所以打印1
+
+awk -F&quot;[ :]&quot;'{print NF}' /etc/passwd #这里有个空格还有冒号，[ :]+时可以有多个冒号，这时算一个 
+
+awk -F &quot;:&quot; '{print $NF}' /etc/passwd #指定特定的分隔符，查询最后一列
+
+awk '$7==5' datafile
+awk '$7==&quot;ct&quot;{print $1,$2}' datafile #如果$7==ct,输出
+awk '$7！=5' datafile
+
+awk -F: 'NR==2{print &quot;filename: &quot;FILENAME, $0}' /etc/passwd #打印/etc/passwd/的第二行信息
+
+ifconfig |grep eth* | awk -F '[ ]+' '{print $1}' 利用正则过滤多个空格
+
+</code></pre>
+
+<h2 id="awk脚本编程">awk脚本编程</h2>
+
+<h3 id="条件判断">条件判断</h3>
+
+<pre><code class="language-shell">#if语句
+awk -F: '{if(表达式){语句1；2；3} else if{语句1；2；3} if{语句1；2；3}}' #行处理要加最外面大括号
+awk -F: '{if($3&gt;0&amp;&amp;$3&lt;1000){cnt++} END{print cnt}}' #行处理要加最外面大括号
+awk 'BEGIN{i=1;while(i&lt;7){print i}}'
+
+cat b.txt
+
+111 222
+333 444 555
+666 777 888 999
+
+awk '{i=1;while(i&lt;NF){print $i;i++}}' b.txt #依次打印某一列
+111
+222
+333
+。。。
+999
+
+## 数组的处理
+</code></pre>
+
+<h3 id="数组的处理">数组的处理</h3>
+
+<pre><code class="language-shell">awk -F: '{username[++i]=$1} END {print unsername[1]}' /etc/datafile #将某一个字段赋值，i++从0开始，++i从1开始
+
+awk -F: '{username[j++]=$1} END {for(i in username){print i,unsername[i]} }' /etc/datafile #i里面是数组的索引
+
+</code></pre>
+
+<h3 id="脚本联系">脚本联系</h3>
+
+<pre><code class="language-shell">#统计shell类型,把统计的对象作为数组的索引---i，三次握手，4次挥手
+awk -F：'{{shells[$NF]++} END{ for(i in shells) { print i,shells[i]}  }} '
+
+#统计tcp连接状态,把统计的对象作为数组的索引---i,当前事实状态 netstat ；-ant，其中t表示tcp，可以是u，dup，也可以将netstat换成ss，状态会变成第二列
+ netstat -ant | grep :80 | awk '{shells[$NF]++} END{ for(i in shells) { print i,shells[i]}  }} ' | sort -k2 -n |head 
+ #输出：
+ #listen：1
+ #establish：20
+ #顺序排列-n,-nr为逆序排列从大到小,-k2表示表示第二列排序，head表示显示前十个，或者head -5 打印前五个
+</code></pre>
+
+<p><strong>总结，统计啥（某一字段），就把啥作为索引,然后++</strong></p>
+
+<pre><code class="language-shell">ss -an |grep :80 |awk -F: '!/LISTEN/{ips[$(NF-1)]++} END{for(i in ips){print i,ips{i}}}'|sort -k2 -nr |head
+#这里去掉了包含LISTEN行
+
+#统计某一天的pv量&lt;统计日志&gt;
+#
+
+grep '07/aug/2020' /etc/logfile |wc -l
+#wc
+#c或--bytes或--chars 只显示Bytes数。在默认的情况下，wc将计算指定文件的行数、字数，以及字节数
+#-l或--lines 只显示行数。
+#-w或--words 只显示字数。
+#--help 在线帮助。
+#--version 显示版本信息。
+#wc testfile           # testfile文件的统计信息 
+#3 92 598 testfile       # testfile文件的行数为3、单词数92、字节数598 
+
+
+#这里要转义一下某一字段的\好，先写结构
+awk '/22\/mar\/2001/{ips[$1]++} END{for(i in ips){print i ips[i]}' logfile
+
+</code></pre>
+
+<h3 id="awk内置函数">awk内置函数</h3>
+
+<pre><code class="language-shell">#统计用户名为4个字符的用户
+awk -F: '$1~/^....$/{cont++;print $1} END{print &quot;cnt is ：&quot;cont}' userfile
+
+##########这里用到了lenth函数
+awk -F 'lenth($1)==4{cont++;print $1} END{print &quot;cnt is ：&quot;cont}' userfile
+
+#awk使用外部变量
+
+##########sub只查找替换第一个，gsub是全局的
+var=&quot;hello&quot;
+echo &quot;hellp&quot; |awk 'gsub(/hellp/,$var)'#错 
+echo &quot;hellp&quot; |awk &quot;gsub(/hellp/,$var)&quot;#错
+#方法1，在双引号情况下使用
+echo &quot;hellp&quot; |awk &quot;gsub(/hellp/,\&quot;$var\&quot;)&quot;      #可以替换
+#方法2，在单引号情况下使用
+echo &quot;hellp&quot; |awk 'gsub(/hellp/,&quot;'&quot;$var&quot;'&quot;)'    #可以替换，'''$var'''也可以
+##########这里注意加了个int内置函数
+df -h |awk '{if(int($5)&gt;5){print $6:$5}}'
+
+########方法3，awk -v参数
+echo &quot;hellp&quot; |awk -v var=&quot;hello&quot; -F: 'gsub(/hellp/,var)'
+</code></pre>
+
+<h2 id="总结">总结</h2>
+
+<p>学完这个命令可以进行自我学习
+1. 获取网卡ip
+2. 获得内存使用情况
+3. 获得磁盘使用情况
+4. 清空本机的ARP缓存
+5. 打印出/etc/host文件的最后一个字段{按空格分隔}
+6. 打印指定目录下的目录名</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://luciferseva.github.io/tags/linux%E8%BF%90%E7%BB%B4/">linux运维</a>
+
+
+
+
+
+
+
+  
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%85%AD/" data-tooltip="linux运维 基础知识（六） ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Kris Wu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%85%AD/" data-tooltip="linux运维 基础知识（六） ">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#table-of-contents">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://luciferseva.github.io/images/icon.png" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Kris Wu</h4>
+    
+      <div id="about-card-bio">specializing in networking and communication</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        嵌入式，物联网工程师
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        珠海
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://luciferseva.github.io/images/cover-v1.2.0.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://luciferseva.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+  
+    <script src="https://luciferseva.github.io/js/clicklove.js"></script>
+  
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/luciferseva.github.io\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%83\/';
+          
+            this.page.identifier = '\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%83\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'valine';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

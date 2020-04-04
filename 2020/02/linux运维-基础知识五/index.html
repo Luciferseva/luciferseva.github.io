@@ -7,26 +7,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.58.3 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Kris Wu">
-<meta name="keywords" content="shell函数使用, shell内置命令">
-<meta name="description" content="shell函数使用,shell内置命令">
+<meta name="keywords" content="Re-正则表达式">
+<meta name="description" content="Re-正则表达式， 以及grep使用">
 
 
-<meta property="og:description" content="shell函数使用,shell内置命令">
+<meta property="og:description" content="Re-正则表达式， 以及grep使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux运维 基础知识（四） ">
-<meta name="twitter:title" content="linux运维 基础知识（四） ">
-<meta property="og:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/">
-<meta property="twitter:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/">
+<meta property="og:title" content="linux运维 基础知识（五） ">
+<meta name="twitter:title" content="linux运维 基础知识（五） ">
+<meta property="og:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94/">
+<meta property="twitter:url" content="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94/">
 <meta property="og:site_name" content="The way to be a master">
-<meta property="og:description" content="shell函数使用,shell内置命令">
-<meta name="twitter:description" content="shell函数使用,shell内置命令">
+<meta property="og:description" content="Re-正则表达式， 以及grep使用">
+<meta name="twitter:description" content="Re-正则表达式， 以及grep使用">
 <meta property="og:locale" content="zh-cn">
 
   
-    <meta property="article:published_time" content="2020-02-06T00:00:00">
+    <meta property="article:published_time" content="2020-02-07T00:00:00">
   
   
-    <meta property="article:modified_time" content="2020-02-06T00:00:00">
+    <meta property="article:modified_time" content="2020-02-07T00:00:00">
   
   
   
@@ -63,14 +63,14 @@
   <meta property="twitter:image" content="https://luciferseva.github.io/images/icon.png">
 
 
-    <title>linux运维 基础知识（四） </title>
+    <title>linux运维 基础知识（五） </title>
 
     <link rel="icon" href="images/cover.jpg">
     
 
     
 
-    <link rel="canonical" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/">
+    <link rel="canonical" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -208,19 +208,19 @@
       <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      linux运维 基础知识（四） 
+      linux运维 基础知识（五） 
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-02-06T00:00:00Z">
+      <time itemprop="datePublished" datetime="2020-02-07T00:00:00Z">
         
   
   
   
   
-    2020年2月6日
+    2020年2月7日
   
 
       </time>
@@ -251,314 +251,312 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>shell函数使用,shell内置命令</p>
+              <p>Re-正则表达式， 以及grep使用</p>
 
 <h1 id="table-of-contents">目录</h1><nav id="TableOfContents">
 <ul>
 <li><a href="#简介">简介</a>
 <ul>
 <li><a href="#函数格式">函数格式</a></li>
-<li><a href="#实例讲解">实例讲解</a>
+<li><a href="#元字符">元字符</a>
+<ul>
+<li><a href="#实例">实例</a>
 <ul>
 <li><a href="#shell1-sh">shell1.sh</a></li>
-<li><a href="#shell1-sh-1">shell1.sh</a></li>
-<li><a href="#shell2-sh-函数参数使用">shell2.sh 函数参数使用</a></li>
-<li><a href="#shell3-sh-函数参数使用数组">shell3.sh 函数参数使用数组</a></li>
-<li><a href="#shell4-sh-函数参数使用数组-返回数组">shell4.sh 函数参数使用数组,返回数组</a></li>
+<li><a href="#shell2-sh-元字符总结">shell2.sh 元字符总结</a></li>
+<li><a href="#shell3-sh-grep实战">shell3.sh grep实战</a></li>
 </ul></li>
-<li><a href="#函数的内置命令">函数的内置命令</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
 
 <h1 id="简介">简介</h1>
 
-<p>完成特定功能的代码片段</p>
+<p>正则表达式（RE），是一种字符<strong>模式</strong>，用于在查找过程中匹配执指定的字符。</p>
 
-<p>在shell中定义函数可以用代码模块化，便于复用代码</p>
+<p>在大多数程序里，正则表达式都被置于两个正斜杠之间；例如/I[oO]ve/就是由正斜杠界定的正则表达式，
+它将匹配被查找的行中任何位置出现的<strong>相同模式</strong>。在正则表达式中，<strong>元字符是最重要的概念</strong>。</p>
 
-<p>函数必须先定义才可以使用</p>
+<p>用在</p>
+
+<p>sed：文本处理</p>
+
+<p>awk：截取，过滤文本</p>
+
+<p>grep：截取，过滤文本</p>
+
+<p>大小写严格区分</p>
 
 <h2 id="函数格式">函数格式</h2>
 
-<p>传参 $1 $2</p>
+<p>^开头</p>
 
-<p>变量 local</p>
+<p>$结尾</p>
 
-<p>返回值 return $?</p>
+<p>+前面的对象出现一次或者多次</p>
 
-<ul>
-<li><p>方法1</p>
-
-<pre><code class="language-shell">    函数名(){
-            函数要实现的功能代码
-    }
-</code></pre></li>
-
-<li><p>方法2</p>
-
-<pre><code class="language-shell">    function 函数名(){
-            函数要实现的功能代码    
-    }
-</code></pre></li>
-</ul>
-
-<h2 id="实例讲解">实例讲解</h2>
-
-<h3 id="shell1-sh">shell1.sh</h3>
-
-<p>阶乘</p>
-
-<pre><code class="language-shell">#！/usr/bin/bash
-#! /bin/bash
-#! /bin/env bash 
-factorial(){
-factorial=1
-#下面是c风格的写法
-for((i=1;i&lt;=$sum;i++))
-do
-    factoral=${$factorial * $i}
-
-    echo &quot;$sum 的阶乘: $factorial&quot;
-done
-
-
-#执行函数
-factorial
-#或者
-#函数里面的位置变量是这个函数的，不是整个脚本的，需要在执行的时候连接起来
-factorial=1
-#for((i=1;i&lt;=$1;i++))
-#for((i=1;i&lt;=$1;i++))
-#也可以这样写
-for i in `seq $1`
-do
-    #factoral=${$factorial * $i}
-        #或者这样写
-        #let factoral*=*$i
-        let factoral=$factoral*$i
-    echo &quot;$1 的阶乘: $factorial&quot;
-done
-#执行函数时，调用了脚本的$1,函数的$1
-factorial $1
-#执行函数时，调用了脚本的$2,函数的$1,以此类推
-factorial $2
-}
-
-
-</code></pre>
-
-<h3 id="shell1-sh-1">shell1.sh</h3>
-
-<p>提示用户输入个值，然后返回</p>
-
-<pre><code class="language-shell">#！/usr/bin/bash
-#! /bin/bash
-#! /bin/env bash 
-fun2(){
-        read -p &quot;enter number: &quot; num
-        let 2*num
-
-}
-#函数的返回值是函数的最后一条命令执行的结果的返回值
-fun2
-echo &quot;return $?&quot; #返回0
-#------------------------------#
-fun2(){
-        read -p &quot;enter number: &quot; num
-        return $[2*$num] #小于等于255
-
-}
-#函数的返回值是函数的最后一条命令执行的结果的返回值
-fun2
-#echo &quot;return $?&quot; #返回0,shell返回值的大小不能超过255，会有错误的结果
-#
-#------------------------------#
-#返回大于255的数
-fun2(){
-        read -p &quot;enter number: &quot; num
-        echo $[2*$num] #小于等于255
-
-}
-#函数的返回值是函数的最后一条命令执行的结果的返回值
-result=`fun2`
-echo &quot;return $result&quot; #函数的输出
-
-</code></pre>
-
-<h3 id="shell2-sh-函数参数使用">shell2.sh 函数参数使用</h3>
-
-<pre><code class="language-shell">#!/bin/bash
-
-if [ $# -ne 3]; then
-        echo &quot;usage: `basename $0` pa1 pa2 pa3&quot;
-        exit
-fi
-fun3(){
-        echo &quot;$(($1*$2*$3))&quot;
-
-}
-result=`fun3 $1 $2 $3`
-echo &quot;resule: $result&quot;
-</code></pre>
-
-<h3 id="shell3-sh-函数参数使用数组">shell3.sh 函数参数使用数组</h3>
-
-<pre><code class="language-shell">#!/bin/bash
-#脚本执行所有参数
-#或者for i in $* 或&quot;$@&quot;
-for i
-do
-        let num+=$i
-done
-echo $num
-
-
-num =(1,2,3)
-echo &quot;${num[@]}&quot;
-
-array(){
-        farcty=1        #全局变量，函数外边可以使用
-        local farcty2=1        #局部变量
-        
-        for i in &quot;$@&quot; #获得所有参数，或者$* 或者 for i in ${num[*]}
-        do
-                #farcty*=$i
-                farcty=$[farcty*$i]
-        done
-}
-
-#array ${num[@]} #数组所有参数
-array ${num[*]} #数组所有参数
-
-
-</code></pre>
-
-<h3 id="shell4-sh-函数参数使用数组-返回数组">shell4.sh 函数参数使用数组,返回数组</h3>
-
-<p><strong><em>函数接收位置参数 $1 $2&hellip;$n</em></strong></p>
-
-<p>*<strong>函数接收数组变量 $* 或者 $@</strong>*</p>
-
-<p>***   参数个数 $#   ***</p>
-
-<p>*<strong>函数将接收到的所有参数赋值给数组 array=($*)</strong>*</p>
-
-<pre><code class="language-shell">#!/bin/bash
-#脚本执行所有参数
-#或者for i in $* 或&quot;$@&quot;
-
-num =(1,2,3)
-num2 =(1,2,3)
-echo &quot;${num[@]}&quot;
-
-array(){
-        echo &quot;all: $*&quot;
-        farcty=1        #全局变量，函数外边可以使用
-        local farcty3=()       #局部变量
-        local farcty2=1        #局部变量
-        local newarray=(`echo $*`) #创建新数组,或者newarray=（$*）
-        for((i=0;i&lt;$#;i++))     # $#接收参数的个数
-        do
-                outarry[$i]=$[ ${newarray[$i]} *5 ]
-                #或者outarry[$i]=$(( ${newarray[$i]} *5 ))
-        done
-        
-        echo &quot;${outarray[*]}&quot;
-}
-#函数通过 一下两种方式传所有
-#array ${num[@]} #数组所有参数
-#array ${num[*]} #数组所有参数
-result=`array ${num[*]}`
-
-echo &quot;{get $result[*]}&quot;
-
-
-
-
-#——————————————————————————————————————#
-
-num =(1,2,3)
-array(){
-       
-        #for((i=0;i&lt;$#;i++))     # $#接收参数的个数
-        local i
-        local j
-        local out=()
-        for i in $*    # 也可以这样写 
-                       #  for i 相当于 for i in $*
-                       #do
-                       #
-                       #done
-                       #
-        do
-                out[j++]=$[$i*5]
-        done
-        
-        echo &quot;${out[*]}&quot;
-}
-#函数通过 一下两种方式传所有
-#array ${num[@]} #数组所有参数
-#array ${num[*]} #数组所有参数
-result=`array ${num[*]}`        #在子shell中执行
-
-echo &quot;get ${result[*]}&quot;
-
-
-
-
-#——————————————————————————————————————————————————#
-
-</code></pre>
-
-<h2 id="函数的内置命令">函数的内置命令</h2>
-
-<p><code>：</code>返回一个真值
-* break，continue exit</p>
-
-<pre><code class="language-shell">#!/usr/bin/bash
-for i in {A..D}
-do
-        echo -n $i      #不换行
-        for j in {1...9}
-        do
-                if [ $j -eq 5 ];then
-                        break 2  #跳几层 #空行可用continue跳出 只作用于循环
-                fi
-
-                echo -n $j   #不换行
-        done
-        echo #换行
-done
-
-</code></pre>
+<p>.是任意多个字符</p>
 
 <ul>
-<li>shift使用</li>
+<li>匹配数字 <sup class="footnote-ref" id="fnref:0-9"><a href="#fn:0-9">1</a></sup>+$     123 456 #开头和中间只能有数字</li>
+<li>匹配mail [a-z0-9_]+@[a-z0-9]+.[a-z]+    yangsheng1123@126.com  .是任意多个字符</li>
+<li>匹配IP [1-9]{1,3}.[[:digit:]]{1,3}.[[:digit:]]{1,3}.[[:digit:]]{1,3}</li>
 </ul>
 
-<p>执行以下脚本 shell.sh 1 2 3</p>
+<h2 id="元字符">元字符</h2>
 
-<pre><code class="language-shell">#!/usr/bin/bash
-#for i in
-while [ $# -ne 0 ]
-do
-        let sum+=$i
-        shift 1 #位置参数向左移动一位
-done
-echo &quot;sum: $sum&quot;
+<p>跟shell中大部分不一样</p>
+
+<p>元字符是一类字符，他们搭配的都不是字面本身的含义</p>
+
+<ul>
+<li><p>shell中的元字符（也成通配符），由shell来解析</p></li>
+
+<li><p>正则表达式元字符 由各种执行匹配模式的程序来解析，比如vi 、grep、sed、awk、python</p></li>
+</ul>
+
+<p>shell：* 解析为任意多个字符</p>
+
+<p>*表示前面的字符出现零次或多次</p>
+
+<pre><code class="language-c">//元字符--------功能------------------实例
+
+^               行首定位符               ^love
+$               行末尾位定位符              love$
+.               匹配单个字符            l..e
+*               匹配前导符0到多次       ab*love         //这里匹配的是b
+.*              任意多个字符
+[]              匹配指定范围内的一个字符  [IL]ove
+[-]             匹配指定范围内的一个字符  [a-z0-9]ove
+[^]             匹配不在执行组内(都有)额字符    [^a-z0-9]ove
+\               用来转义元字符            love\. .将失去原有的作用。实现真实的love.
+\&lt;              词首定位符              \&lt;love
+\&gt;              词尾定位符                love\&gt;
+\(...\)         匹配稍后使用的字符的标签  :% s/192.168.0.1/192.168.0.2/ 传统查找
+                                        :% s/\(192.168.0.\)1/\15/     替换1处
+                                        :% s/\(192.\)\(16.\)\(130.\)1/\1\2\35/ 替换两处
+                                        :3,9 s/\(.*\)/#\1/      #3到9行 `.*`是整行 ，在前面加个#注释掉
+
+
+x\{m\}          字符x重复出现m次        o\{5\}
+
+x\{m,\}         字符x重复出现m次以上        o\{5,\}
+
+x\{m,n\}         字符x重复出现m到n次        o\{5,10\}
+
+//以上三种通过 grep执行加\或者通过egrep直接执行
+
+
+//用egrep执行   或者转义字符\+ ...来执行
+//++++++++++++++++++++++++++++++++++++++扩展正则表达式元字符
+
++               匹配一个或则多个前导字符        [a-z]+ove              
+?               匹配零个或者一个前导字符        lo？ve
+a|b             匹配a或者b                      love|hate
+()              组字符相当于字符组                          loveable|rs     love（able|rs）ov+(ov)+
+(..)(..)\1\2    标签匹配字符                    (love)able\1er
+x{m}            字符x重复m次                    o{5}
+x{m,}           字符x至少重复m次                o{5，}
+x{m,n}          字符x重复m到n次                 o{5，10}
+
+
+//++++++++++++++posix字符类++++++++++++++++++++++++
+表达式                  功能                            示例
+[:alnum:]               字母与数字字符                  [[:alnum:]]+
+[:alpha:]               字母字符（包括大小写字母）       [[:alpha:]]{4}
+[:blank:]               空格与制表符                    [[:blank:]]*
+[:digit:]               字母与数字字符                  [[:digit:]]？
+[:lower:]               小写字母                        [[:lower:]]{5，}
+[:upper:]               大写字母                        [[:upper:]]+
+[:punct:]               标点符号                        [[:punct:]]
+[:space:]               包括换行符，回车等在内的所有空白内容  [[:space:]]+
+
 </code></pre>
 
-<pre><code class="language-shell">#!/usr/bin/bash
-#for i in
-while [ $# -ne 0 ]
-do
-        useradd $1
-        echo &quot;$1 create &quot;
-        shift 1 #位置参数向左移动一位
-done
-echo &quot;sum: $sum&quot;
+<h3 id="实例">实例</h3>
+
+<h4 id="shell1-sh">shell1.sh</h4>
+
+<pre><code class="language-shell">
+grep 'b*love' /etc/local/passwd 
+vi 中执行：
+%s/192.168.0.1/192.168.0.2/     替换前者到后者
+%s/(192.168.0.)1/\12/     替换前者到后者,\1转义字符,代替前面的(192.168.0.)
+%s/\(192.168.0.\)1/\12/     替换前者到后者,\1转义字符,代替前面的\(192.168.0.\)，括号前后增加转义符
+#方便查看可以这样写
+# %s ###
+# %s #(192.168.0).1#\1.2#               或者
+# %s #\(192.168.0.\)1#\12#
+
+# %s #\(192.\)\(168.\)\(0.\)1#\1\2\32#
 </code></pre>
+
+<h4 id="shell2-sh-元字符总结">shell2.sh 元字符总结</h4>
+
+<pre><code class="language-shell">#!/user/bin/bash
+love*   0-n  
+love？  0-1
+love+   1-m
+love{2} 2
+#以上都是作用于字符e
+#匹配一个或则多个前导字符 
+lo(ve)*
+lo(ve)?
+lo(ve)+
+lo(ve){2}
+#以上都是作用于字符组ve
+
+/.*/    #整行
+/^$/    #回车行    
+/^[A-Z]..$/     #三字符，首字符大写字母
+/^[A-Z][a-z]*3[0-5]/ #在[A-Z]开头,[a-z]*，产生零到多个小写字母，3字符，[0-5]数字
+/[a-z]*\./      #[a-z]*，产生零到多个小写字母 再加一个点.
+/^ *[A-Z][a-z][a-z]$/#^ *，产生零到多个空格 [A-Z][a-z]产生两个字符，范围分别为[A-Z][a-z]，[a-z]$再以[a-z]中一个字符结尾
+/^[A-Za-z]*[^,][A-Za-z]*$/
+/\&lt;fourth\&gt;/    #找单词
+/\&lt;f.*th\&gt;/     #固定开头，固定结尾
+/5{2}2{3}\./    #5出现2此。2出现3此，在加上一个.
+
+#空行
+/^$/
+/^[\t]*$/       #零到多个tab建开头
+
+#注释行
+/^#/
+/^[\t]*#/       #零到多个tab建开头
+
+
+
+$ s/\(sa\) and \(as\)/\2 and \1/        #sa 与as互换位置
+
+\w 所有字母和数字，称之为字符           'l[a-z0-9A-z]*ve' 等价于'l\w*ve'
+\W 所有字母和数字之外的字符 成为非字符   'l[^a-z0-9A-z]+' 等价于'l\W+'
+\b 词边界                               '\&lt;love\&gt;'    等价于    '\blove\b'
+</code></pre>
+
+<h4 id="shell3-sh-grep实战">shell3.sh grep实战</h4>
+
+<p>grep： 在文件中全局查找指定的正则表达式，并打印所有包含该表达式的行 ^,$,.,*,[],[^],&lt;&gt;,(),{},|
+egrep： 扩展的egrep，支持更多的正则表达式元字符 或者 grep -E      ? ,+, {},|,()
+fgrep： 固定grep（fixed grep），又是也被乘坐靠偶素匹配，它按字面解释所有的字符</p>
+
+<ol>
+<li><p>格式命令
+grep [选项] pattern filename filename</p></li>
+
+<li><p>返回值</p></li>
+</ol>
+
+<p>0：找到
+1：没找到内容
+2：没找到文件</p>
+
+<ol>
+<li><p>选项</p>
+
+<pre><code class="language-c">-i      忽略大小写
+-l      只列出匹配行所在的文件名
+-n      在每一行前面加上它在文件中的相对行号  可用 vim /etc/passwd +50执行后进行编辑
+-c      显示成功匹配的行数
+-s      禁止显示文件不存在或文件不可读的错误信息
+-q      没有打印，静默
+-v      反向查找，只显示不匹配的行
+-R，-r  递归针对目录
+--color 颜色
+-o      只显示匹配的内容
+-B      print NUM lines of leading context 语境 前部-B2
+-A      print NUM lines of trailing context 语境 后部-B2
+-C      print NUM lines of output context 语境   输出的
+一般通过以下命令进行查看
+</code></pre>
+
+<p><strong><em>man find</em></strong></p></li>
+</ol>
+
+<p>然后输入/</p>
+
+<p>可以看到:变成/</p>
+
+<p>输入要查找的字符串</p>
+
+<p>-q</p>
+
+<p>按下回车</p>
+
+<p>可以看到高亮出了-p字符串，如果这样的字符串有很多，我们要搜索下一个字符串，按下n下一条，按下N（shift+n）上一条</p>
+
+<ol>
+<li><p>grep程序的输入可以来自标准输入或者管道，而不仅仅是文件，例如：</p>
+
+<pre><code class="language-shell">
+# grep 'tom'
+# ps aux |grep 'sshd'
+# ll |grep '^d'
+# grep 'alice' /etc/passwd /ect/group
+
+</code></pre>
+
+<pre><code class="language-shell">
+egrep 'NM' datafile #datafile在找文件有NW的行
+egrep 'nw' d*   #以d开头的所有文件中在找文件有NW的行
+egrep '^n' datafile #datafile在找文件有n开始的行
+egrep '4$' datafile     #datafile在找文件有4结尾的行
+
+egrep TB savage datafuke #在savage和datafuke文件中找到TB
+egrep 'TB savage' datafuke #在datafuke中找到TB savage的行
+
+egrep '5\..' datafuke #在datafuke中找到5.和任意字符（5.1之类的）的行
+egrep '\.5' datafuke #在datafuke中找到.5的行
+
+egrep '^[we]' datafuke #在datafuke中找到w或者e开头的行
+egrep '[^0-9]' datafuke #在datafuke中找到非数字的行
+
+egrep '[A-Z][A-Z] [A-Z]' datafuke #在datafuke中找到四个字符，分别是都是A到Z，A到Z，A到Z，空格，A到Z
+egrep 'ss*' datafuke #在datafuke中找到s及s*（0个或者多个s的行）的行,简写成s+
+
+egrep '[a-z]{9}' datafuke #在datafuke中找到[a-z]且连续出现9次的行
+egrep '\&lt;north' datafuke #在datafuke中找到north词首的行
+
+egrep '\&lt;north\&gt;' datafuke #在datafuke中找到north单词的行
+
+egrep '\&lt;[a-z].*n\&gt;' datafuke #在datafuke中找到[a-z]开头，中间任意个字符，n结尾的行
+
+egrep '^n\w*\W' datafuke #在datafuke中找到n开头，中间任意个字符，非字符结尾
+
+
+egrep '\bnorth\b' datafuke #在datafuke中找到north单词的行
+
+egrep 'nw|EA' datafuke #在datafuke中找到有nw或者EA单词的行
+
+egrep '3+' datafuke #在datafuke中找到有1个或者多个3的行
+
+egrep '2\.?[0-9]' datafuke #在datafuke中找到有z,有零个或者一个. ，再有一个数字的行
+
+
+egrep '(no)+' datafuke #在datafuke中找到有1个或者多个no的行
+
+
+egrep 'S(n|o)' datafuke #在datafuke中找到有sn或者so的行
+
+egrep 'Sn|o' datafuke #在datafuke中找到有sn或者o的行
+
+egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}' datafuke #在datafuke中找到有ip的行
+
+grep --help |grep '\-R'       #这里需要加反斜线\，要不然会当成个grep的选项
+
+grep --help |egrep -A5  '\-R'       #这里需要没有用到执行\
+
+</code></pre></li>
+</ol>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:0-9">0-9 <a class="footnote-return" href="#fnref:0-9"><sup>[return]</sup></a></li>
+</ol>
+</div>
               
             </div>
           </div>
@@ -591,7 +589,7 @@ echo &quot;sum: $sum&quot;
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94/" data-tooltip="linux运维 基础知识（五） ">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%85%AD/" data-tooltip="linux运维 基础知识（六） ">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -599,7 +597,7 @@ echo &quot;sum: $sum&quot;
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" data-tooltip="linux运维 基础知识（三） ">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/" data-tooltip="linux运维 基础知识（四） ">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -659,7 +657,7 @@ echo &quot;sum: $sum&quot;
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94/" data-tooltip="linux运维 基础知识（五） ">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%85%AD/" data-tooltip="linux运维 基础知识（六） ">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -667,7 +665,7 @@ echo &quot;sum: $sum&quot;
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%B8%89/" data-tooltip="linux运维 基础知识（三） ">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://luciferseva.github.io/2020/02/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B/" data-tooltip="linux运维 基础知识（四） ">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -799,9 +797,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/luciferseva.github.io\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B\/';
+          this.page.url = 'https:\/\/luciferseva.github.io\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94\/';
           
-            this.page.identifier = '\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%9B\/'
+            this.page.identifier = '\/2020\/02\/linux%E8%BF%90%E7%BB%B4-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E4%BA%94\/'
           
         };
         (function() {
